@@ -1,6 +1,5 @@
 <template>
   <div>
-    Hello from interactive Maps!!!
     <interactive-map
       :map=map
       v-on:occupy-change="onOccupyChange($event)"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Hello from interactive Map {{ map.name }}!!!
+    <h2>{{ map.name }}</h2>
   <div class="map-zone"><img class="map-zone-img" :src="map.bkg_file">
     <interactive-map-pin
           v-for="(pin) in map.places"
@@ -38,6 +38,9 @@ export default {
   position: relative;
   /*background-color: aqua;*/
   max-width: 100vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 .map-zone-img
 {
