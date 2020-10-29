@@ -66,11 +66,96 @@ class Api {
   }
 
   /* API ENDPOINTS */
-  getUser = async function () {
+  /* ENDPOINTS TO MANAGE CURRENT USER/CLIENT */
+  getCurrUser = async function () {
     return await this.get("/api/user");
   }
+  updateCurrUser = async function (user) {
+    return await this.put("/api/user", user);
+  }
+  getCurrClient = async function () {
+    return await this.get("/api/client");
+  }
+  updateCurrClient = async function (client) {
+    return await this.put("/api/client", client);
+  }
+  /* ENDPOINTS USERS */
   getUsers = async function () {
     return await this.get("/api/users");
+  }
+  createUser = async function (user) {
+    return await this.post("/api/users", user);
+  }
+  updateUser = async function (user) {
+    return await this.put("/api/users/" + user.id, user);
+  }
+  deleteUser = async function (id) {
+    return await this.delete("/api/users/" + id);
+  }
+  /* ENDPOINTS CLIENTS */
+  getClients = async function () {
+    return await this.get("/api/clients");
+  }
+  createClient = async function (client) {
+    return await this.post("/api/clients", client);
+  }
+  updateClient = async function (client) {
+    return await this.put("/api/clients/" + client.id, client);
+  }
+  deleteClient = async function (id) {
+    return await this.delete("/api/clients/" + id);
+  }
+  /* ENDPOINTS CARS */
+  getCars = async function () {
+    return await this.get("/api/cars");
+  }
+  createCar = async function (car) {
+    return await this.post("/api/cars", car);
+  }
+  updateCar = async function (car) {
+    return await this.put("/api/cars/" + car.id, car);
+  }
+  deleteCar = async function (id) {
+    return await this.delete("/api/cars/" + id);
+  }
+  /* ENDPOINTS PLACES */
+  getPlaces = async function () {
+    return await this.get("/api/places");
+  }
+  createPlace = async function (place) {
+    return await this.post("/api/places", place);
+  }
+  updatePlace = async function (place) {
+    return await this.put("/api/places/" + place.id, place);
+  }
+  deletePlace = async function (id) {
+    return await this.delete("/api/places/" + id);
+  }
+  /* ENDPOINTS ZONES */
+  getZones = async function () {
+    return await this.get("/api/zones");
+  }
+  createZone = async function (zone) {
+    return await this.post("/api/zones", zone);
+  }
+  updateZone = async function (zone) {
+    return await this.put("/api/zones/" + zone.id, zone);
+  }
+  deleteZone = async function (id) {
+    return await this.delete("/api/zones/" + id);
+    /* ENDPOINTS SUBSCRIPTIONS */
+  }
+  getSubscriptions = async function () {
+    return await this.get("/api/subscriptions");
+  }
+  createSubscription = async function (subscription) {
+    return await this.post("/api/subscriptions", subscription);
+  }
+  updateSubscription = async function (subscription) {
+    return await this.put("/api/subscriptions/" + subscription.id, subscription);
+  }
+  deleteSubscription = async function (id) {
+    return await this.delete("/api/subscriptions/" + id);
   }
 
   /* response handling */
