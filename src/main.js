@@ -14,9 +14,20 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
+/* API */
+import api from "./api";
 
+Vue.mixin({
+  data: function () {
+    return {
+      get api() {
+        return api;
+      }
+    }
+  }
+})
 new Vue({
   //router,
   store,
-  render: h => h(Carceres)
+  render: h => h(Carceres),
 }).$mount('#carceres')
