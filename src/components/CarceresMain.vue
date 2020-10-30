@@ -2,7 +2,7 @@
   <div class="carceres_main">
     <h1>Carceres</h1>
     <login-user
-      :authorized="api.auth.authorized"
+      :auth="api.auth"
       v-on:submit-login-data="on_login_user($event)"
       v-on:submit-logout="on_logout_user()"
     ></login-user>
@@ -24,13 +24,10 @@ export default {
   },
   methods: {
     on_login_user: function (data) {
-      this.loginUser(data.name, data.pass);
+      this.api.login(data.name, data.pass);
     },
     on_logout_user: function () {
       this.api.logout();
-    },
-    loginUser: async function (name, password) {
-      await this.api.login(name, password);
     },
   },
   mounted() {},

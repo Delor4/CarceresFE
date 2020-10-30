@@ -83,6 +83,9 @@ class Api {
   getUsers = async function () {
     return await this.get("/api/users");
   }
+  getUser = async function (id) {
+    return await this.get("/api/users/" + id);
+  }
   createUser = async function (user) {
     return await this.post("/api/users", user);
   }
@@ -95,6 +98,9 @@ class Api {
   /* ENDPOINTS CLIENTS */
   getClients = async function () {
     return await this.get("/api/clients");
+  }
+  getClient = async function (id) {
+    return await this.get("/api/clients/" + id);
   }
   createClient = async function (client) {
     return await this.post("/api/clients", client);
@@ -109,6 +115,9 @@ class Api {
   getCars = async function () {
     return await this.get("/api/cars");
   }
+  getCar= async function (id) {
+    return await this.get("/api/cars/" + id);
+  }
   createCar = async function (car) {
     return await this.post("/api/cars", car);
   }
@@ -121,6 +130,9 @@ class Api {
   /* ENDPOINTS PLACES */
   getPlaces = async function () {
     return await this.get("/api/places");
+  }
+  getPlace = async function (id) {
+    return await this.get("/api/places/" + id);
   }
   createPlace = async function (place) {
     return await this.post("/api/places", place);
@@ -135,6 +147,9 @@ class Api {
   getZones = async function () {
     return await this.get("/api/zones");
   }
+  getZone = async function (id) {
+    return await this.get("/api/zones/" + id);
+  }
   createZone = async function (zone) {
     return await this.post("/api/zones", zone);
   }
@@ -147,6 +162,9 @@ class Api {
   }
   getSubscriptions = async function () {
     return await this.get("/api/subscriptions");
+  }
+  getSubscription = async function (id) {
+    return await this.get("/api/subscriptions/" + id);
   }
   createSubscription = async function (subscription) {
     return await this.post("/api/subscriptions", subscription);
@@ -191,9 +209,11 @@ class Api {
 
   auth = {
     authorized: false,
+    user: null,
   }
-  _updateAuthorizedStatus() {
+  _updateAuthorizedStatus = async function () {
     this.auth.authorized = checkLocalStorageTokens()
+    this.auth.user = (this.auth.authorized ? await this.getCurrUser() : null);
   }
   _removeTokens() {
     removeLocalStorageTokens()
