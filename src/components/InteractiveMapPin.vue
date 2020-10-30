@@ -1,6 +1,6 @@
 <template>
   <div class="pin" 
-    :style="{'position' : 'absolute', 'left' : '' + pin.pos[0] + '%', 'top': '' + pin.pos[1] + '%'}"
+    :style="{'position' : 'absolute', 'left' : '' + pin.pos_x + '%', 'top': '' + pin.pos_y + '%'}"
     role="button"
     v-on:click="$emit('occupy-change', pin.id)"
   >

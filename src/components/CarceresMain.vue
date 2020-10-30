@@ -8,8 +8,6 @@
 <script>
 import IMaps from '@/components/InteractiveMaps.vue'
 
-//const axios = require('axios').default;
-
 export default {
    data: function() {
         return {
