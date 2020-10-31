@@ -26,9 +26,9 @@ export default {
       showed_card: "",
       shared_data: {},
       views: {
-        index: () => import("@/components/CarceresIndex.vue"),
-        map: () => import("@/components/InteractiveMaps.vue"),
-        admin: () => import("@/components/CarceresAdmin.vue"),
+        index: () => import("@/components/index/Index.vue"),
+        map: () => import("@/components/map/InteractiveMaps.vue"),
+        admin: () => import("@/components/admin/Admin.vue"),
       },
       nav_cards: {
         1: [

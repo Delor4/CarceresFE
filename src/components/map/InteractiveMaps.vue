@@ -10,8 +10,7 @@
 </template>
 
 <script>
-import IMap from '@/components/InteractiveMap.vue'
-import axios from 'axios';
+import IMap from '@/components/map/InteractiveMap.vue'
 
 export default {
    data: function() {
@@ -45,16 +44,17 @@ export default {
       
       this.curr_map = next_curr
       this.map = this.maps[this.curr_map]
+    },
+
+    async loadMaps(){
+      var zones = await this.api.getZones()
+      this.maps = zones.results
+     this.map = this.maps[this.curr_map];
     }
   },
 
   mounted () {
-   axios.get('http://127.0.0.1:43343/api/zones')
-    .then(response => {
-      this.maps = response.data
-      this.map = this.maps[this.curr_map];
-    })
-
+    this.loadMaps()
   },
   components: {
     'interactive-map': IMap,

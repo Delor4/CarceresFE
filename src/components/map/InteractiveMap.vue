@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import IPin from '@/components/InteractiveMapPin.vue'
+import IPin from '@/components/map/InteractiveMapPin.vue'
 
 export default {
    data: function() {
