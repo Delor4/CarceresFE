@@ -247,7 +247,7 @@ class Api {
       api._saveTokens(resp.data)
       /* rerun request with new token */
       err.config.headers['x-access-tokens'] = getAccessToken();
-      return api.api.request(err.config)
+      return api.api.request(err.config).then(api._getData)
     });
   }
 
