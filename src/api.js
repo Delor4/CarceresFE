@@ -19,6 +19,13 @@ function checkLocalStorageTokens() {
   return !(!getAccessToken() || !getRefreshToken())
 }
 
+const hasNext = function () {
+  return !!this.next
+};
+const hasPrevious = function () {
+  return !!this.previous
+};
+
 class Api {
   constructor() {
     this.api = Axios.create({
@@ -65,6 +72,43 @@ class Api {
     return await this.api.delete.apply(this.api, args).then(this._getData).catch(this._errorHandle);
   }
 
+  /* API LIST'S METHODS */
+  _getList = async function (...args) {
+    /* Gets axios args, returns list */
+    var resp = await this.get.apply(this, args);
+
+    //add methods to list
+    resp.hasNext = hasNext
+    resp.hasPrevious = hasPrevious
+
+    return resp
+  }
+  _getProps = async function (sort_by, page = 1, limit = 30, ...args) {
+    /* Gets pagination args and axios args, returns list */
+    //create args
+    var props = '?'
+    props += 'limit=' + limit
+    props += '&start=' + ((limit * (page - 1)) + 1)
+    if (sort_by) props += '&sort_by=' + sort_by
+
+    //add args to uri
+    args[0] += props
+    return await this._getList.apply(this, args);
+  }
+  getNext = async function (api_list) {
+    /* Returns next page from api list */
+    if (api_list && api_list.next)
+      return await this._getList.apply(this, [api_list.next]);
+
+    return Promise.reject("It's no api_list: ", api_list);
+  }
+  getPrevious = async function (api_list) {
+    /* Returns previous page from api list */
+    if (api_list && api_list.previous)
+      return await this._getList.apply(this, [api_list.previous]);
+
+    return Promise.reject("It's no api_list: ", api_list);
+  }
   /* API ENDPOINTS */
   /* ENDPOINTS TO MANAGE CURRENT USER/CLIENT */
   getCurrUser = async function () {
@@ -80,8 +124,8 @@ class Api {
     return await this.put("/api/client", client);
   }
   /* ENDPOINTS USERS */
-  getUsers = async function () {
-    return await this.get("/api/users");
+  getUsers = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/users");
   }
   getUser = async function (id) {
     return await this.get("/api/users/" + id);
@@ -96,8 +140,8 @@ class Api {
     return await this.delete("/api/users/" + id);
   }
   /* ENDPOINTS CLIENTS */
-  getClients = async function () {
-    return await this.get("/api/clients");
+  getClients = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/clients");
   }
   getClient = async function (id) {
     return await this.get("/api/clients/" + id);
@@ -112,10 +156,10 @@ class Api {
     return await this.delete("/api/clients/" + id);
   }
   /* ENDPOINTS CARS */
-  getCars = async function () {
-    return await this.get("/api/cars");
+  getCars = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/cars");
   }
-  getCar= async function (id) {
+  getCar = async function (id) {
     return await this.get("/api/cars/" + id);
   }
   createCar = async function (car) {
@@ -128,8 +172,8 @@ class Api {
     return await this.delete("/api/cars/" + id);
   }
   /* ENDPOINTS PLACES */
-  getPlaces = async function () {
-    return await this.get("/api/places");
+  getPlaces = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/places");
   }
   getPlace = async function (id) {
     return await this.get("/api/places/" + id);
@@ -144,8 +188,8 @@ class Api {
     return await this.delete("/api/places/" + id);
   }
   /* ENDPOINTS ZONES */
-  getZones = async function () {
-    return await this.get("/api/zones");
+  getZones = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/zones");
   }
   getZone = async function (id) {
     return await this.get("/api/zones/" + id);
@@ -160,8 +204,8 @@ class Api {
     return await this.delete("/api/zones/" + id);
     /* ENDPOINTS SUBSCRIPTIONS */
   }
-  getSubscriptions = async function () {
-    return await this.get("/api/subscriptions");
+  getSubscriptions = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/subscriptions");
   }
   getSubscription = async function (id) {
     return await this.get("/api/subscriptions/" + id);
