@@ -29,6 +29,7 @@ export default {
         index: () => import("@/components/index/Index.vue"),
         map: () => import("@/components/map/InteractiveMaps.vue"),
         admin: () => import("@/components/admin/Admin.vue"),
+        users_list: () => import("@/components/users/UsersList.vue"),
       },
       nav_cards: {
         1: [
@@ -44,6 +45,10 @@ export default {
           {
             name: "Admin",
             id: "admin",
+          },
+          {
+            name: "Użytkownicy",
+            id: "users_list",
           },
         ],
         2: [
