@@ -1,16 +1,21 @@
 <template>
   <div class="carceres_main">
     <h1>Carceres</h1>
-    <login-user
-      :auth="api.auth"
-      v-on:submit-login-data="on_login_user($event)"
-      v-on:submit-logout="on_logout_user()"
-    ></login-user>
+
+    <!--Menu-->
     <carceres-nav
       :user="api.auth.user"
       :nav_cards="nav_cards"
       v-on:showed-card-change="on_showed_card_change($event)"
     ></carceres-nav>
+
+    <!--Logowanie-->
+    <div class="login"><login-user
+      :auth="api.auth"
+      v-on:submit-login-data="on_login_user($event)"
+      v-on:submit-logout="on_logout_user()"
+    ></login-user></div>
+
     <div ref="subcomponent">.</div>
   </div>
 </template>
