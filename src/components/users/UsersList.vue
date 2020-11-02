@@ -7,7 +7,7 @@
           <span
             role="button"
             @click="onCreateModel"
-            :class="{ 'd-none': dialogFormVisible != false }"
+            :class="{ 'd-none': !!dialogFormVisible }"
           >
             <b-icon-plus-circle></b-icon-plus-circle>
             Nowy
@@ -15,7 +15,7 @@
         </b-card-sub-title>
         <user-dialog
           :model="formModel"
-          :modal_id="modal_id"
+          :modal_id="modal_dialog_id"
           v-on:cancel-edit="onCancelEdit()"
           v-on:submit-edit="onSubmitEdit($event)"
           v-on:hide-modal="resetDialog()"
@@ -45,7 +45,7 @@ export default {
       dialogFormVisible: false,
       loading: false,
       formModel: {},
-      modal_id: "user-dialog-modal",
+      modal_dialog_id: "user-dialog-modal",
     };
   },
   methods: {
@@ -68,14 +68,14 @@ export default {
     onCreateModel() {
       this.formModel = this._newModel();
       this.dialogFormVisible = true;
-      this.$bvModal.show(this.modal_id);
+      this.$bvModal.show(this.modal_dialog_id);
     },
     onEditModel(model_id) {
       this.formModel = this._cloneModel(
         this.models.find((x) => x.id === model_id)
       );
       this.dialogFormVisible = true;
-      this.$bvModal.show(this.modal_id);
+      this.$bvModal.show(this.modal_dialog_id);
     },
     onRemoveModel(model_id) {
       this.loading = true;
@@ -88,32 +88,27 @@ export default {
       this.loading = true;
       if (model.id != -1) this.updateModel(model);
       else this.saveModel(model);
-      this.resetDialog();
     },
     async saveModel(model) {
-      console.log("creating user:", model);
       /* Send new user's data to api */
       var created = await this.api.createUser(model);
-      console.log("created:", created);
       /* Add to list */
       this.models.push(created);
       this.loading = false;
+      this.resetDialog();
     },
     async updateModel(model) {
-      console.log("updating user:", model);
       /* Send new data of user to api */
       var updated = await this.api.updateUser(model);
-      console.log("updated:", updated);
       /* Update list */
       var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
       ~updatedIndex && this.$set(this.models, updatedIndex, updated);
       this.loading = false;
+      this.resetDialog();
     },
     async deleteModel(model_id) {
-      console.log("deleting user:", model_id);
       /* removing from api */
       await this.api.deleteUser(model_id);
-      console.log("user deleted");
       /* removing from list */
       var removeIndex = this.models.map((item) => item.id).indexOf(model_id);
       ~removeIndex && this.models.splice(removeIndex, 1);
