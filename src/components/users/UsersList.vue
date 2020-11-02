@@ -106,7 +106,7 @@ export default {
       console.log("updated:", updated);
       /* Update list */
       var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
-      ~updatedIndex && (this.models[updatedIndex] = updated);
+      ~updatedIndex && this.$set(this.models, updatedIndex, updated);
       this.loading = false;
     },
     async deleteModel(model_id) {
