@@ -1,22 +1,52 @@
 <template>
   <b-modal
     :id="modal_id"
-    :title="title"
+    :title="modalTitle"
     @backdrop="$emit('submit-edit', model)"
     @ok="$emit('submit-edit', model)"
     @hide="$emit('hide-modal', $event)"
   >
-    <form v-on:submit.prevent="ok()">
-      <div>Nazwa: <input v-model="model.name" /></div>
-      <div>Hasło: <input v-model="model.password" /></div>
-      <div>
-        Rola:
+    <b-form v-on:submit.prevent="ok()">
+      <b-form-group
+        id="input-group-login"
+        label="Login:"
+        label-for="input-login"
+        description="Nazwa użytkownika"
+      >
+        <b-form-input
+          id="input-login"
+          v-model="model.name"
+          type="text"
+          required
+          placeholder="Wpisz login"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-pass"
+        label="Hasło:"
+        label-for="input-pass"
+        description="Hasło"
+      >
+        <b-form-input
+          id="input-pass"
+          v-model="model.password"
+          type="password"
+          required
+          placeholder="Wpisz hasło"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-role" label="Rola:" label-for="input-role">
         <b-form-select
+          id="input-role"
           v-model="model.user_type"
           :options="user_types"
+          required
         ></b-form-select>
-      </div>
-    </form>
+      </b-form-group>
+    </b-form>
+
     <template #modal-footer="{ ok, cancel, hide }">
       <b-button
         :hidden="model.id == -1"
@@ -30,7 +60,7 @@
       </b-button>
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
       <b-button variant="success" @click="ok()">
-        {{ mode == "Edit" ? "Zapisz" : "Stwórz" }}
+        {{ model.id != -1 ? "Zapisz" : "Stwórz" }}
       </b-button>
     </template>
   </b-modal>
@@ -48,13 +78,18 @@ export default {
       ],
     };
   },
+  computed: {
+    modalTitle() {
+      return `${this.model.id == -1 ? "Tworzenie" : "Edycja"} użytkownika`;
+    },
+  },
   methods: {
     ok() {
       this.$emit("submit-edit", this.model);
       this.$bvModal.hide(this.modal_id);
     },
   },
-  props: ["title", "mode", "model", "modal_id"],
+  props: ["model", "modal_id"],
 };
 </script>
 

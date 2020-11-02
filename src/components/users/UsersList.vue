@@ -14,8 +14,6 @@
           </span>
         </b-card-sub-title>
         <user-dialog
-          :title="modalTitle"
-          :mode="mode"
           :model="formModel"
           :modal_id="modal_id"
           v-on:cancel-edit="on_cancel_edit()"
@@ -44,17 +42,11 @@ export default {
   data: function () {
     return {
       models: {},
-      mode: "",
       dialogFormVisible: false,
       loading: false,
       formModel: {},
       modal_id: "user-dialog-modal",
     };
-  },
-  computed: {
-    modalTitle() {
-      return `${this.mode == "Create" ? "Tworzenie" : "Edycja"} użytkownika`;
-    },
   },
   methods: {
     _new_model() {
@@ -74,13 +66,11 @@ export default {
       return _model;
     },
     on_create_model() {
-      this.mode = "Create";
       this.formModel = this._new_model();
       this.dialogFormVisible = true;
       this.$bvModal.show(this.modal_id);
     },
     on_edit_model(model_id) {
-      this.mode = "Edit";
       this.formModel = this.clone_model(
         this.models.find((x) => x.id === model_id)
       );
@@ -88,13 +78,15 @@ export default {
       this.$bvModal.show(this.modal_id);
     },
     on_remove_model(model_id) {
+      this.loading = true;
       this.delete_model(model_id);
     },
     on_cancel_edit() {
       this.reset_dialog();
     },
     on_submit_edit(model) {
-      if (this.mode == "Edit") this.update_model(model);
+      this.loading = true;
+      if (model.id != -1) this.update_model(model);
       else this.save_model(model);
       this.reset_dialog();
     },
@@ -105,6 +97,7 @@ export default {
       console.log("created:", created);
       /* Add to list */
       this.models.push(created);
+      this.loading = false;
     },
     async update_model(model) {
       console.log("updating user:", model);
@@ -114,6 +107,7 @@ export default {
       /* Update list */
       var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
       ~updatedIndex && (this.models[updatedIndex] = updated);
+      this.loading = false;
     },
     async delete_model(model_id) {
       console.log("deleting user:", model_id);
@@ -123,20 +117,21 @@ export default {
       /* removing from list */
       var removeIndex = this.models.map((item) => item.id).indexOf(model_id);
       ~removeIndex && this.models.splice(removeIndex, 1);
+      this.loading = false;
     },
     reset_dialog() {
-      this.mode = "";
+      this.formModel = this._new_model();
       this.dialogFormVisible = false;
-      this.loading = false;
     },
     async load_models() {
       this.models = await this.api.getAll(this.api.getUsers);
+      this.loading = false;
     },
   },
   mounted() {
-    this.reset_dialog();
-    this.formModel = this._new_model();
+    this.loading = true;
     this.load_models();
+    this.reset_dialog();
   },
 
   props: ["shared_data"],
