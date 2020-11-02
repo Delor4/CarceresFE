@@ -109,6 +109,16 @@ class Api {
 
     return Promise.reject("It's no api_list: ", api_list);
   }
+  getAll = async function (get_list_method) {
+    /* Returns all objects from endpoint. In: reference to method (from api.get<List>) */
+    var page = await get_list_method.apply(this, []);
+    var pages = page.results;
+    while (page.hasNext()) {
+      page = await this.api.getNext(page);
+      pages.push(...page.results);
+    }
+    return pages
+  }
   /* API ENDPOINTS */
   /* ENDPOINTS TO MANAGE CURRENT USER/CLIENT */
   getCurrUser = async function () {
