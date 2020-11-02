@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <ul>
-      <li
+    <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
+      <li class="nav-item"
         v-for="(card, index) in nav_cards[current_access_rights]"
         v-bind:key="index"
         @click="$emit('showed-card-change', card.id)"

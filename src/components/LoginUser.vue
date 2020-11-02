@@ -10,7 +10,7 @@
     <span :hidden="!auth.authorized">Witaj {{ user_name }}.</span>
     <b-button
       :hidden="!auth.authorized"
-      variant="warning"
+      pill variant="warning"
       @click="$emit('submit-logout')"
       >Wyloguj</b-button
     >
