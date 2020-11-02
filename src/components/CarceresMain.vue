@@ -3,13 +3,13 @@
     <h1>Carceres</h1>
     <login-user
       :auth="api.auth"
-      v-on:submit-login-data="on_login_user($event)"
-      v-on:submit-logout="on_logout_user()"
+      v-on:submit-login-data="onLoginUser($event)"
+      v-on:submit-logout="onLogoutUser()"
     ></login-user>
     <carceres-nav
       :user="api.auth.user"
       :nav_cards="nav_cards"
-      v-on:showed-card-change="on_showed_card_change($event)"
+      v-on:showed-card-change="onShowedCardChange($event)"
     ></carceres-nav>
     <div ref="subcomponent">.</div>
   </div>
@@ -84,7 +84,7 @@ export default {
     };
   },
   methods: {
-    check_id_accessibility(id) {
+    checkIdAaccessibility(id) {
       var current_access_rights = this.api.auth.user
         ? this.api.auth.user.user_type
         : 4;
@@ -94,8 +94,8 @@ export default {
       });
       return ret;
     },
-    set_card: async function (id) {
-      if (!this.check_id_accessibility(id)) id = "index";
+    setCard: async function (id) {
+      if (!this.checkIdAaccessibility(id)) id = "index";
       if (id === this.showed_card) return;
 
       this.showed_card = id;
@@ -110,20 +110,20 @@ export default {
         this.$refs.subcomponent.firstChild
       );
     },
-    on_login_user: function (data) {
+    onLoginUser: function (data) {
       this.api.login(data.name, data.pass);
       this.set_card(this.showed_card);
     },
-    on_logout_user: function () {
+    onLogoutUser: function () {
       this.api.logout();
-      this.set_card(this.showed_card);
+      this.setCard(this.showed_card);
     },
-    on_showed_card_change: function (id) {
-      this.set_card(id);
+    onShowedCardChange: function (id) {
+      this.setCard(id);
     },
   },
   mounted() {
-    this.set_card("index");
+    this.setCard("index");
   },
   components: {
     "login-user": LoginUser,

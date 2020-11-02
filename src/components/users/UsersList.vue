@@ -6,7 +6,7 @@
         <b-card-sub-title>
           <span
             role="button"
-            @click="on_create_model"
+            @click="onCreateModel"
             :class="{ 'd-none': dialogFormVisible != false }"
           >
             <b-icon-plus-circle></b-icon-plus-circle>
@@ -16,13 +16,13 @@
         <user-dialog
           :model="formModel"
           :modal_id="modal_id"
-          v-on:cancel-edit="on_cancel_edit()"
-          v-on:submit-edit="on_submit_edit($event)"
-          v-on:hide-modal="reset_dialog()"
-          v-on:remove-model="on_remove_model($event)"
+          v-on:cancel-edit="onCancelEdit()"
+          v-on:submit-edit="onSubmitEdit($event)"
+          v-on:hide-modal="resetDialog()"
+          v-on:remove-model="onRemoveModel($event)"
         ></user-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
-          <span role="button" @click.prevent="on_edit_model(model.id)">
+          <span role="button" @click.prevent="onEditModel(model.id)">
             <b-icon-caret-right></b-icon-caret-right>
             {{ model.name }}
           </span>
@@ -49,7 +49,7 @@ export default {
     };
   },
   methods: {
-    _new_model() {
+    _newModel() {
       return {
         id: -1,
         name: "",
@@ -57,40 +57,40 @@ export default {
         user_type: 4,
       };
     },
-    clone_model(model) {
-      var _model = this._new_model();
+    _cloneModel(model) {
+      var _model = this._newModel();
       _model.id = model.id;
       _model.name = model.name;
       _model.password = model.password;
       _model.user_type = model.user_type;
       return _model;
     },
-    on_create_model() {
-      this.formModel = this._new_model();
+    onCreateModel() {
+      this.formModel = this._newModel();
       this.dialogFormVisible = true;
       this.$bvModal.show(this.modal_id);
     },
-    on_edit_model(model_id) {
-      this.formModel = this.clone_model(
+    onEditModel(model_id) {
+      this.formModel = this._cloneModel(
         this.models.find((x) => x.id === model_id)
       );
       this.dialogFormVisible = true;
       this.$bvModal.show(this.modal_id);
     },
-    on_remove_model(model_id) {
+    onRemoveModel(model_id) {
       this.loading = true;
-      this.delete_model(model_id);
+      this.deleteModel(model_id);
     },
-    on_cancel_edit() {
-      this.reset_dialog();
+    onCancelEdit() {
+      this.resetDialog();
     },
-    on_submit_edit(model) {
+    onSubmitEdit(model) {
       this.loading = true;
-      if (model.id != -1) this.update_model(model);
-      else this.save_model(model);
-      this.reset_dialog();
+      if (model.id != -1) this.updateModel(model);
+      else this.saveModel(model);
+      this.resetDialog();
     },
-    async save_model(model) {
+    async saveModel(model) {
       console.log("creating user:", model);
       /* Send new user's data to api */
       var created = await this.api.createUser(model);
@@ -99,7 +99,7 @@ export default {
       this.models.push(created);
       this.loading = false;
     },
-    async update_model(model) {
+    async updateModel(model) {
       console.log("updating user:", model);
       /* Send new data of user to api */
       var updated = await this.api.updateUser(model);
@@ -109,7 +109,7 @@ export default {
       ~updatedIndex && (this.models[updatedIndex] = updated);
       this.loading = false;
     },
-    async delete_model(model_id) {
+    async deleteModel(model_id) {
       console.log("deleting user:", model_id);
       /* removing from api */
       await this.api.deleteUser(model_id);
@@ -119,19 +119,19 @@ export default {
       ~removeIndex && this.models.splice(removeIndex, 1);
       this.loading = false;
     },
-    reset_dialog() {
-      this.formModel = this._new_model();
+    resetDialog() {
+      this.formModel = this._newModel();
       this.dialogFormVisible = false;
     },
-    async load_models() {
+    async loadModels() {
       this.models = await this.api.getAll(this.api.getUsers);
       this.loading = false;
     },
   },
   mounted() {
     this.loading = true;
-    this.load_models();
-    this.reset_dialog();
+    this.loadModels();
+    this.resetDialog();
   },
 
   props: ["shared_data"],
