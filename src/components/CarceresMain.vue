@@ -35,6 +35,8 @@ export default {
         map: () => import("@/components/map/InteractiveMaps.vue"),
         admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
+        reservations_list: () =>
+          import("@/components/reservation/ReservationList.vue"),
       },
       nav_cards: {
         1: [
@@ -55,6 +57,10 @@ export default {
             name: "Użytkownicy",
             id: "users_list",
           },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_list",
+          },
         ],
         2: [
           // MOD
@@ -66,6 +72,10 @@ export default {
             name: "Mapa",
             id: "map",
           },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_list",
+          },
         ],
         3: [
           // CLIENT
@@ -76,6 +86,10 @@ export default {
           {
             name: "Mapa",
             id: "map",
+          },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_list",
           },
         ],
         4: [
