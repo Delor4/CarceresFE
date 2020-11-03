@@ -172,6 +172,9 @@ class Api {
   getCar = async function (id) {
     return await this.get("/api/cars/" + id);
   }
+  getOwnCars = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/client/cars");
+  }
   createCar = async function (car) {
     return await this.post("/api/cars", car);
   }

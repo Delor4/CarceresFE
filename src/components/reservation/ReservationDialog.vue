@@ -2,12 +2,59 @@
   <b-modal
     :id="modal_id"
     :title="modalTitle"
-    @backdrop="$emit('submit-edit', model)"
-    @ok="$emit('submit-edit', model)"
+    @backdrop="ok()"
+    @ok="ok()"
     @hide="$emit('hide-modal', $event)"
+    @show="onShow()"
   >
     <b-form v-on:submit.prevent="ok()">
-        <!-- TODO: fields -->
+      <b-form-group
+        id="input-group-car"
+        label="Samochód:"
+        label-for="input-car"
+      >
+        <b-form-select
+          id="input-car"
+          v-model="model.car_id"
+          :options="cars"
+          value-field="id"
+          text-field="plate"
+          required
+        ></b-form-select>
+      </b-form-group>
+      <b-form-group
+        id="input-group-place"
+        label="Miejsce:"
+        label-for="input-place"
+      >
+        <b-form-select id="input-place" v-model="model.place_id" required>
+          <b-form-select-option :value="null">
+            Wybierz miejsce:
+          </b-form-select-option>
+          <b-form-select-option-group
+            v-for="zone in zones"
+            v-bind:key="zone.id"
+            :label="zone.name"
+          >
+            <b-form-select-option
+              v-for="place in zone.places"
+              v-bind:key="place.id"
+              :value="place.id"
+              :disabled="place.occupied"
+            >
+              Miejsce nr {{ place.nr }} {{ place.name }} {{ place.occupied ? "(niedostępne)": "" }}
+            </b-form-select-option>
+          </b-form-select-option-group>
+        </b-form-select>
+      </b-form-group>
+      <b-form-group
+      id="input-group-datetime"
+        label="Rezerwacja do:"
+        label-for="input-place">
+        <b-form-datepicker v-model="date" :min="min" locale="pl"></b-form-datepicker>
+        <b-form-timepicker v-model="time" locale="pl"></b-form-timepicker>
+        <!-- TODO: validate timepicker -->
+      </b-form-group>
     </b-form>
 
     <template #modal-footer="{ ok, cancel, hide }">
@@ -32,8 +79,15 @@
 <script>
 export default {
   data: function () {
+    const now = new Date()
     return {
-          };
+      cars: {},
+      zones: {},
+      loading: false,
+      min: now,
+      date: null,
+      time: null,
+    };
   },
   computed: {
     modalTitle() {
@@ -42,9 +96,32 @@ export default {
   },
   methods: {
     ok() {
+      // TODO: set model.end field (maked from this.date and this.time) before emit event
       this.$emit("submit-edit", this.model);
       this.$bvModal.hide(this.modal_id);
     },
+    async onShow() {
+      if (this.cars.length > 0) {
+        this.$set(this.model, "car_id", this.cars[0].id);
+      }
+      await this.loadPlaces();
+    },
+    async loadCars() {
+      this.cars = await this.api.getAll(this.api.getOwnCars);
+    },
+    async loadPlaces() {
+      this.zones = await this.api.getAll(this.api.getZones);
+    },
+    async loadResources() {
+      this.loading = true;
+
+      await this.loadCars();
+
+      this.loading = false;
+    },
+  },
+  mounted() {
+    this.loadResources();
   },
   props: ["model", "modal_id"],
 };
