@@ -229,6 +229,9 @@ class Api {
   createSubscription = async function (subscription) {
     return await this.post("/api/subscriptions", subscription);
   }
+  createOwnSubscription = async function (subscription) {
+    return await this.post("/api/client/subscriptions", subscription);
+  }
   updateSubscription = async function (subscription) {
     return await this.put("/api/subscriptions/" + subscription.id, subscription);
   }

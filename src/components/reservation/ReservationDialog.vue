@@ -42,18 +42,23 @@
               :value="place.id"
               :disabled="place.occupied"
             >
-              Miejsce nr {{ place.nr }} {{ place.name }} {{ place.occupied ? "(niedostępne)": "" }}
+              Miejsce nr {{ place.nr }} {{ place.name }}
+              {{ place.occupied ? "(niedostępne)" : "" }}
             </b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
       </b-form-group>
       <b-form-group
-      id="input-group-datetime"
+        id="input-group-datetime"
         label="Rezerwacja do:"
-        label-for="input-place">
-        <b-form-datepicker v-model="date" :min="min" locale="pl"></b-form-datepicker>
-        <b-form-timepicker v-model="time" locale="pl"></b-form-timepicker>
-        <!-- TODO: validate timepicker -->
+        label-for="input-enddate"
+      >
+        <datetime
+          id="input-enddate"
+          format="YYYY-MM-DD H:i"
+          width="300px"
+          v-model="model.end"
+        ></datetime>
       </b-form-group>
     </b-form>
 
@@ -77,16 +82,15 @@
 </template>
 
 <script>
+import datetime from "vuejs-datetimepicker";
+
 export default {
+  components: { datetime },
   data: function () {
-    const now = new Date()
     return {
       cars: {},
       zones: {},
       loading: false,
-      min: now,
-      date: null,
-      time: null,
     };
   },
   computed: {
@@ -96,7 +100,6 @@ export default {
   },
   methods: {
     ok() {
-      // TODO: set model.end field (maked from this.date and this.time) before emit event
       this.$emit("submit-edit", this.model);
       this.$bvModal.hide(this.modal_id);
     },

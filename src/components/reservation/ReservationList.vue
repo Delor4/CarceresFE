@@ -24,11 +24,8 @@
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span role="button" @click.prevent="onEditModel(model.id)">
             <b-icon-caret-right></b-icon-caret-right>
-            Miejsce: {{ model.place_id }}
-            Samochód: {{ model.car_id }}
-            Start: {{ model.start }}
-            End: {{ model.end }}
-            Typ: {{ model.type }}
+            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
+            {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
           </span>
         </b-list-group-item>
       </b-card>
@@ -79,8 +76,8 @@ export default {
       this.$bvModal.show(this.modal_dialog_id);
     },
     onEditModel() {
-     /* edit not possible */
-     // TODO: show msg to user
+      /* edit not possible */
+      // TODO: show msg to user
     },
     onRemoveModel(model_id) {
       this.loading = true;
@@ -96,7 +93,9 @@ export default {
     },
     async saveModel(model) {
       /* Send new client's data to api */
-      var created = await this.api.createSubscription(model); //TODO: change to createOwnSubscription
+      model.start = null;
+      model.end = new Date(Date.parse(model.end)).toISOString();
+      var created = await this.api.createOwnSubscription(model);
       /* Add to list */
       this.models.push(created);
       this.loading = false;
