@@ -36,7 +36,7 @@ export default {
         admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
         reservations_own: () =>
-          import("@/components/reservation/ReservationList.vue"),
+          import("@/components/reservation_own/OwnReservationList.vue"),
         reservations_list: () =>
           import("@/components/reservations/ReservationsList.vue"),
       },

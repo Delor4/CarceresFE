@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import ReservationDialog from "@/components/reservation/ReservationDialog.vue";
+import OwnReservationDialog from "@/components/reservation_own/OwnReservationDialog.vue";
 
 export default {
   components: {
-    "reservation-dialog": ReservationDialog,
+    "reservation-dialog": OwnReservationDialog,
   },
   data: function () {
     return {
