@@ -35,8 +35,10 @@ export default {
         map: () => import("@/components/map/InteractiveMaps.vue"),
         admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
-        reservations_list: () =>
+        reservations_own: () =>
           import("@/components/reservation/ReservationList.vue"),
+        reservations_list: () =>
+          import("@/components/reservations/ReservationsList.vue"),
       },
       nav_cards: {
         1: [
@@ -58,8 +60,12 @@ export default {
             id: "users_list",
           },
           {
-            name: "Moje rezerwacje",
+            name: "Rezerwacje",
             id: "reservations_list",
+          },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_own",
           },
         ],
         2: [
@@ -73,8 +79,12 @@ export default {
             id: "map",
           },
           {
-            name: "Moje rezerwacje",
+            name: "Rezerwacje",
             id: "reservations_list",
+          },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_own",
           },
         ],
         3: [
@@ -89,7 +99,7 @@ export default {
           },
           {
             name: "Moje rezerwacje",
-            id: "reservations_list",
+            id: "reservations_own",
           },
         ],
         4: [
@@ -97,6 +107,10 @@ export default {
           {
             name: "index",
             id: "index",
+          },
+          {
+            name: "Mapa",
+            id: "map",
           },
         ],
       },
