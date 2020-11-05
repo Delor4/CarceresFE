@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="carceres_list">
     <b-card-group deck>
       <b-card class="reservation_list">
         <b-card-title>Rezerwacje</b-card-title>
@@ -117,7 +117,7 @@ export default {
     },
     async loadModels() {
       this.clients = await this.api.getAll(this.api.getClients);
-      var page = await this.api.getSubscriptions('desc(end)');
+      var page = await this.api.getSubscriptions("desc(end)");
       var pages = page.results;
       while (page.hasNext()) {
         page = await this.api.getNext(page);

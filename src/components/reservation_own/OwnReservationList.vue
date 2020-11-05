@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="carceres_list">
     <b-card-group deck>
       <b-card class="reservation_list">
         <b-card-title>Rezerwacje</b-card-title>
