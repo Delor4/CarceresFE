@@ -35,6 +35,7 @@ export default {
         map: () => import("@/components/map/InteractiveMaps.vue"),
         admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
+        clients_list: () => import("@/components/clients/ClientsList.vue"),
         cars_list: () => import("@/components/cars/CarsList.vue"),
         reservations_own: () =>
           import("@/components/reservation_own/OwnReservationList.vue"),
@@ -61,6 +62,10 @@ export default {
             id: "users_list",
           },
           {
+            name: "Klienci",
+            id: "clients_list",
+          },
+          {
             name: "Samochody",
             id: "cars_list",
           },
@@ -82,6 +87,10 @@ export default {
           {
             name: "Mapa",
             id: "map",
+          },
+           {
+            name: "Klienci",
+            id: "clients_list",
           },
           {
             name: "Samochody",
