@@ -10,7 +10,7 @@
     ></carceres-nav>
 
     <!--Logowanie-->
-    <div class="login"><login-user
+    <div><login-user
       :auth="api.auth"
       v-on:submit-login-data="onLoginUser($event)"
       v-on:submit-logout="onLogoutUser()"
