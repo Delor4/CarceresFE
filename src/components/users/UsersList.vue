@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div>
     <b-card-group deck>
       <b-card class="users_list">
         <b-card-title>Użytkownicy</b-card-title>

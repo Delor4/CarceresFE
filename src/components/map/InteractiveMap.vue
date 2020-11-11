@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div>
     <h2 role="button" v-on:click="$emit('zone-change')">{{ map.name }}</h2>
   <div class="map-zone"><img class="map-zone-img" :src="map.bkg_file">
     <interactive-map-pin

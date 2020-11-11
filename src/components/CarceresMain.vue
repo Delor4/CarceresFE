@@ -18,7 +18,7 @@
       v-on:submit-logout="onLogoutUser()"
     ></login-user></div>
 
-    <div ref="subcomponent">.</div>
+    <div ref="subcomponent" class="container-fluid">.</div>
   </div>
 </template>
 
