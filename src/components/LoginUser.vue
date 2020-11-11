@@ -10,7 +10,7 @@
       </b-form>
       <span :hidden="!auth.authorized">Witaj {{ user_name }}.</span>
     </div>
-    <div>
+    <div class="login_btn">
       <b-button
         :hidden="!auth.authorized"
         pill variant="warning"
