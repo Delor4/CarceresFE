@@ -19,7 +19,6 @@ h1 {
 .carceres_main {
   background-color: #e5e5e5;
   text-align: center;
-  /* overflow: auto; */
 }
 
 .container-fluid {
@@ -54,27 +53,12 @@ li:hover {
   padding-left: 20px;
 }
 
-/* .content {
-  color: #000000;
-  background-color: #ffffff;
-  width: 80%;
-  position: absolute;
-  float: right;
-  top: 100px;
-  border: 1px solid black;
-  margin-left: 20%;
-} */
-
 .user_login {
   position: absolute;
   width: auto;
   height: 100px;;
-  /* background-color: #e5e5e5; */
   padding: 0;
   margin: 0;
-  /*border-radius: 25px;*/
-  /*border: 1px solid #14213d;*/
-  /* float: right; */
   color: #000000;
   text-align: center;
   right: 0px;
@@ -115,5 +99,12 @@ input.pass {
   position: absolute;
   right: 0;
   padding-right: 25px;
-  /* right: 0px; */
+}
+
+.user_notify {
+  color: #e5e5e5;
+  position: absolute;
+  right: 120px;
+  top: 35px;
+  width: auto;
 }

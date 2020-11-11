@@ -8,7 +8,7 @@
         <b-form-input type="password" v-model="pass" placeholder="Hasło" class="pass" />
         <div class="login_btn"><b-button pill variant="success" @click="login()"> Zaloguj </b-button></div>
       </b-form>
-      <span :hidden="!auth.authorized">Witaj {{ user_name }}.</span>
+      <span :hidden="!auth.authorized" class="user_notify">Witaj {{ user_name }}.</span>
     </div>
     <div class="login_btn">
       <b-button
