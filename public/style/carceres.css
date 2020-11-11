@@ -108,3 +108,14 @@ input.pass {
   top: 35px;
   width: auto;
 }
+
+.users_list:hover {
+  background-color: #fca311;
+  text-decoration: underline;
+  width: 100%;
+  color: #14213d;
+}
+
+.new_user:hover {
+  font-weight: bold;
+}

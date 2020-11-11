@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-card-group deck>
-      <b-card class="users_list">
+      <b-card>
         <b-card-title>Użytkownicy</b-card-title>
         <b-card-sub-title>
-          <span
+          <span class="new_user"
             role="button"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
@@ -21,7 +21,7 @@
           v-on:hide-modal="resetDialog()"
           v-on:remove-model="onRemoveModel($event)"
         ></user-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id">
+        <b-list-group-item v-for="model in models" v-bind:key="model.id" class="users_list">
           <span role="button" @click.prevent="onEditModel(model.id)">
             <b-icon-caret-right></b-icon-caret-right>
             {{ model.name }}

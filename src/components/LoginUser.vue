@@ -6,14 +6,14 @@
       <b-form v-on:submit.prevent="login()" :hidden="auth.authorized" class="login_form">
         <b-form-input type="text" v-model="name" placeholder="Login" class="login" />
         <b-form-input type="password" v-model="pass" placeholder="Hasło" class="pass" />
-        <div class="login_btn"><b-button pill variant="success" @click="login()"> Zaloguj </b-button></div>
+        <div class="login_btn"><b-button variant="success" @click="login()"> Zaloguj </b-button></div>
       </b-form>
       <span :hidden="!auth.authorized" class="user_notify">Witaj {{ user_name }}.</span>
     </div>
     <div class="login_btn">
       <b-button
         :hidden="!auth.authorized"
-        pill variant="warning"
+        variant="warning"
         @click="$emit('submit-logout')"
         >Wyloguj</b-button>
     </div>
