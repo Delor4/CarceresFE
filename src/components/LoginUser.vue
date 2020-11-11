@@ -2,12 +2,14 @@
 
   <!--Logowanie-->
   <div class="user_login">
-    <b-form v-on:submit.prevent="login()" :hidden="auth.authorized" class="login_form">
-      <b-form-input type="text" v-model="name" placeholder="Login" class="login" />
-      <b-form-input type="password" v-model="pass" placeholder="Hasło" class="pass" />
-      <b-button pill variant="success" @click="login()" style="margin-top: 30px;"> Zaloguj </b-button>
-    </b-form>
-    <span :hidden="!auth.authorized">Witaj {{ user_name }}.</span>
+    <div class="input_forms_group">
+      <b-form v-on:submit.prevent="login()" :hidden="auth.authorized" class="login_form">
+        <b-form-input type="text" v-model="name" placeholder="Login" class="login" />
+        <b-form-input type="password" v-model="pass" placeholder="Hasło" class="pass" />
+        <b-button pill variant="success" @click="login()" class="login_btn"> Zaloguj </b-button>
+      </b-form>
+      <span :hidden="!auth.authorized">Witaj {{ user_name }}.</span>
+    </div>
     <b-button
       :hidden="!auth.authorized"
       pill variant="warning"

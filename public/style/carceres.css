@@ -9,6 +9,7 @@ header {
   width: 100%;
   padding: 10px;
   margin: 0;
+  overflow: auto;
 }
 
 h1 {
@@ -20,6 +21,7 @@ h1 {
 .carceres_main {
   background-color: #e5e5e5;
   text-align: center;
+  /* overflow: auto; */
 }
 
 .container-fluid {
@@ -70,15 +72,24 @@ li:hover {
   margin: 0;
   /*border-radius: 25px;*/
   /*border: 1px solid #14213d;*/
-  float: right;
+  /* float: right; */
   color: #000000;
   text-align: center;
   right: 0px;
   top: 0;
+  overflow: auto;
+}
+
+.input_forms_group {
+  left: 0px;
+  float: left;
+  clear: both;
+  text-align: left;
 }
 
 .login_form {
-  width: 200px;
+  width: auto;
+  margin: 0px 20px 0px 20px;
 }
 
 input.login {
@@ -93,4 +104,11 @@ input.pass {
   float: right;
   border: 1px solid #14213d;
   border-radius: 10px;
+}
+
+.login_btn {
+  float: right;
+  clear: both;
+  text-align: right;
+  right: 0px;
 }
