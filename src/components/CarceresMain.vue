@@ -1,6 +1,8 @@
 <template>
   <div class="carceres_main">
-    <h1>Carceres</h1>
+    <header>
+      <h1>Carceres</h1>
+    </header>
 
     <!--Menu-->
     <carceres-nav
