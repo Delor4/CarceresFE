@@ -1,7 +1,7 @@
 <template>
 
   <!--Logowanie-->
-  <div style="width: 40%; background-color:#ffffff; padding: 30px 0px 30px 0px; margin: 0 auto; border-color: #14213d; border-radius: 25px;">
+  <div class="user_login">
     <b-form v-on:submit.prevent="login()" :hidden="auth.authorized">
       <b-form-input type="text" v-model="name" placeholder="Login" style="border-radius: 0;"/>
       <b-form-input type="password" v-model="pass" placeholder="Hasło" style="border-radius: 0;"/>
@@ -12,8 +12,7 @@
       :hidden="!auth.authorized"
       pill variant="warning"
       @click="$emit('submit-logout')"
-      >Wyloguj</b-button
-    >
+      >Wyloguj</b-button>
   </div>
 </template>
 
