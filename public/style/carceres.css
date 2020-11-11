@@ -13,8 +13,6 @@ header {
 }
 
 h1 {
-  height: 100px;
-  width: auto;
   text-align: left;
 }
 
@@ -27,6 +25,8 @@ h1 {
 .container-fluid {
   background-color: #ffffff;
   color: #000000;
+  min-height: calc(100vh - 102px);
+  border-top: 5px solid #e5e5e5;
 }
 
 nav {
@@ -35,9 +35,11 @@ nav {
   color: #ffffff;
   width: 20%;
   height: auto;
-  border-top: 5px solid #ffffff;
+  border-top: 5px solid #e5e5e5;
+  border-right: 5px solid #e5e5e5;
   text-align: left;
   float: left;
+  min-height: calc(100vh - 102px);
 }
 
 li {
@@ -65,9 +67,9 @@ li:hover {
 
 .user_login {
   position: absolute;
-  width: 25%;
+  width: auto;
   height: 100px;;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
   padding: 0;
   margin: 0;
   /*border-radius: 25px;*/
@@ -82,33 +84,36 @@ li:hover {
 
 .input_forms_group {
   left: 0px;
+  width: 300px;
   float: left;
-  clear: both;
+  clear: right;
   text-align: left;
+  padding-right: 95px;
+  overflow: auto;
 }
 
-.login_form {
+form.login_form {
   width: auto;
+  height: auto;
   margin: 0px 20px 0px 20px;
 }
 
 input.login {
   float: left;
   clear: both;
-  border: 1px solid #14213d;
-  border-radius: 10px;
-  margin-top: 7px;
+  margin-top: 10px;
 }
 
 input.pass {
   float: right;
-  border: 1px solid #14213d;
-  border-radius: 10px;
 }
 
 .login_btn {
-  float: right;
-  clear: both;
   text-align: right;
-  right: 0px;
+  width: auto;
+  top: 30px;
+  position: absolute;
+  right: 0;
+  padding-right: 25px;
+  /* right: 0px; */
 }
