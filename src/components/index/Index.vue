@@ -1,5 +1,5 @@
 <template>
-  <div>Główny widok</div>
+  <div class="content">Główny widok</div>
 </template>
 
 <script>

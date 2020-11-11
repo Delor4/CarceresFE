@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
+    <ul class="navbar-nav">
       <li class="nav-item" role="button"
         v-for="(card, index) in nav_cards[current_access_rights]"
         v-bind:key="index"
