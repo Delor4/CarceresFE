@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <interactive-map
       :map="map"
       v-on:occupy-change="onOccupyChange($event)"

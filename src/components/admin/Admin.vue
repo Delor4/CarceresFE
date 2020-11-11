@@ -1,5 +1,5 @@
 <template>
-  <div>Główny widok Admina.</div>
+  <div class="content">Główny widok Admina.</div>
 </template>
 
 <script>

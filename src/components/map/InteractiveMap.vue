@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <h2 role="button" v-on:click="$emit('zone-change')">{{ map.name }}</h2>
   <div class="map-zone"><img class="map-zone-img" :src="map.bkg_file">
     <interactive-map-pin
@@ -18,7 +18,7 @@ import IPin from '@/components/map/InteractiveMapPin.vue'
 export default {
    data: function() {
         return {
-            
+
         };
     },
   props: ['map'],
@@ -44,7 +44,7 @@ export default {
 }
 .map-zone-img
 {
-  width: 100%; 
+  width: 100%;
   height: auto
 }
 </style>
