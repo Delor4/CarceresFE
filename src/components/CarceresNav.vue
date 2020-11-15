@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <ul>
-      <li
+    <ul class="navbar-nav">
+      <li class="nav-item" role="button"
         v-for="(card, index) in nav_cards[current_access_rights]"
         v-bind:key="index"
         @click="$emit('showed-card-change', card.id)"

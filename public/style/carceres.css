@@ -1,0 +1,121 @@
+body.main {
+  background-color: #e5e5e5;
+  margin: 0 auto;
+}
+
+header {
+  background-color: #14213d;
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  overflow: auto;
+}
+
+h1 {
+  text-align: left;
+}
+
+.carceres_main {
+  background-color: #e5e5e5;
+  text-align: center;
+}
+
+.container-fluid {
+  background-color: #ffffff;
+  color: #000000;
+  min-height: calc(100vh - 102px);
+  border-top: 5px solid #e5e5e5;
+}
+
+nav {
+  background-color: #14213d;
+  text-align: center;
+  color: #ffffff;
+  width: 20%;
+  height: auto;
+  border-top: 5px solid #e5e5e5;
+  border-right: 5px solid #e5e5e5;
+  text-align: left;
+  float: left;
+  min-height: calc(100vh - 102px);
+}
+
+li {
+  padding: 10px 10px 10px 10px;
+}
+
+li:hover {
+  background-color: #fca311;
+  text-decoration: underline;
+  width: 100%;
+  color: #14213d;
+  padding-left: 20px;
+}
+
+.user_login {
+  position: absolute;
+  width: auto;
+  height: 100px;;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  text-align: center;
+  right: 0px;
+  top: 0;
+  overflow: auto;
+}
+
+.input_forms_group {
+  left: 0px;
+  width: 300px;
+  float: left;
+  clear: right;
+  text-align: left;
+  padding-right: 95px;
+  overflow: auto;
+}
+
+form.login_form {
+  width: auto;
+  height: auto;
+  margin: 0px 20px 0px 20px;
+}
+
+input.login {
+  float: left;
+  clear: both;
+  margin-top: 10px;
+}
+
+input.pass {
+  float: right;
+}
+
+.login_btn {
+  text-align: right;
+  width: auto;
+  top: 30px;
+  position: absolute;
+  right: 0;
+  padding-right: 25px;
+}
+
+.user_notify {
+  color: #e5e5e5;
+  position: absolute;
+  right: 120px;
+  top: 35px;
+  width: auto;
+}
+
+.users_list:hover {
+  background-color: #fca311;
+  text-decoration: underline;
+  width: 100%;
+  color: #14213d;
+}
+
+.new_user:hover {
+  font-weight: bold;
+}

@@ -18,7 +18,7 @@ import IPin from '@/components/map/InteractiveMapPin.vue'
 export default {
    data: function() {
         return {
-            
+
         };
     },
   props: ['map'],
@@ -44,7 +44,7 @@ export default {
 }
 .map-zone-img
 {
-  width: 100%; 
+  width: 100%;
   height: auto
 }
 </style>

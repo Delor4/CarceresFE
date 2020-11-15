@@ -1,6 +1,8 @@
 <template>
   <div class="carceres_main">
-    <h1>Carceres</h1>
+    <header>
+      <h1>Carceres</h1>
+    </header>
 
     <!--Menu-->
     <carceres-nav
@@ -10,13 +12,13 @@
     ></carceres-nav>
 
     <!--Logowanie-->
-    <div class="login"><login-user
+    <div><login-user
       :auth="api.auth"
       v-on:submit-login-data="onLoginUser($event)"
       v-on:submit-logout="onLogoutUser()"
     ></login-user></div>
 
-    <div class="content" ref="subcomponent">.</div>
+    <div ref="subcomponent" class="container-fluid">.</div>
   </div>
 </template>
 
