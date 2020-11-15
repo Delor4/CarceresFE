@@ -37,6 +37,12 @@ export default {
         map: () => import("@/components/map/InteractiveMaps.vue"),
         admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
+        clients_list: () => import("@/components/clients/ClientsList.vue"),
+        cars_list: () => import("@/components/cars/CarsList.vue"),
+        reservations_own: () =>
+          import("@/components/reservation_own/OwnReservationList.vue"),
+        reservations_list: () =>
+          import("@/components/reservations/ReservationsList.vue"),
       },
       nav_cards: {
         1: [
@@ -57,6 +63,22 @@ export default {
             name: "Użytkownicy",
             id: "users_list",
           },
+          {
+            name: "Klienci",
+            id: "clients_list",
+          },
+          {
+            name: "Samochody",
+            id: "cars_list",
+          },
+          {
+            name: "Rezerwacje",
+            id: "reservations_list",
+          },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_own",
+          },
         ],
         2: [
           // MOD
@@ -67,6 +89,22 @@ export default {
           {
             name: "Mapa",
             id: "map",
+          },
+           {
+            name: "Klienci",
+            id: "clients_list",
+          },
+          {
+            name: "Samochody",
+            id: "cars_list",
+          },
+          {
+            name: "Rezerwacje",
+            id: "reservations_list",
+          },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_own",
           },
         ],
         3: [
@@ -79,12 +117,20 @@ export default {
             name: "Mapa",
             id: "map",
           },
+          {
+            name: "Moje rezerwacje",
+            id: "reservations_own",
+          },
         ],
         4: [
           // BOT
           {
             name: "index",
             id: "index",
+          },
+          {
+            name: "Mapa",
+            id: "map",
           },
         ],
       },

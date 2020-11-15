@@ -1,10 +1,10 @@
 <template>
   <div class="carceres_list">
     <b-card-group deck>
-      <b-card>
-        <b-card-title>Użytkownicy</b-card-title>
+      <b-card class="reservation_list">
+        <b-card-title>Rezerwacje</b-card-title>
         <b-card-sub-title>
-          <span class="new_user"
+          <span
             role="button"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
@@ -13,18 +13,19 @@
             Nowy
           </span>
         </b-card-sub-title>
-        <user-dialog
+        <reservations-dialog
           :model="formModel"
           :modal_id="modal_dialog_id"
           v-on:cancel-edit="onCancelEdit()"
           v-on:submit-edit="onSubmitEdit($event)"
           v-on:hide-modal="resetDialog()"
           v-on:remove-model="onRemoveModel($event)"
-        ></user-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id" class="users_list">
+        ></reservations-dialog>
+        <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span role="button" @click.prevent="onEditModel(model.id)">
             <b-icon-caret-right></b-icon-caret-right>
-            {{ model.name }}
+            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
+            {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
           </span>
         </b-list-group-item>
       </b-card>
@@ -33,11 +34,11 @@
 </template>
 
 <script>
-import UserDialog from "@/components/users/UserDialog.vue";
+import ReservationsDialog from "@/components/reservations/ReservationsDialog.vue";
 
 export default {
   components: {
-    "user-dialog": UserDialog,
+    "reservations-dialog": ReservationsDialog,
   },
   data: function () {
     return {
@@ -45,24 +46,29 @@ export default {
       dialogFormVisible: false,
       loading: false,
       formModel: {},
-      modal_dialog_id: "user-dialog-modal",
+      modal_dialog_id: "reservations-dialog-modal",
+      clients: {},
     };
   },
   methods: {
     _newModel() {
       return {
         id: -1,
-        name: "",
-        password: "",
-        user_type: 4,
+        start: "",
+        end: "",
+        type: 1,
+        car_id: -1,
+        place_id: -1,
       };
     },
     _cloneModel(model) {
       var _model = this._newModel();
       _model.id = model.id;
-      _model.name = model.name;
-      _model.password = model.password;
-      _model.user_type = model.user_type;
+      _model.start = model.start;
+      _model.end = model.end;
+      _model.type = model.type;
+      _model.car_id = model.car_id;
+      _model.place_id = model.place_id;
       return _model;
     },
     onCreateModel() {
@@ -70,12 +76,9 @@ export default {
       this.dialogFormVisible = true;
       this.$bvModal.show(this.modal_dialog_id);
     },
-    onEditModel(model_id) {
-      this.formModel = this._cloneModel(
-        this.models.find((x) => x.id === model_id)
-      );
-      this.dialogFormVisible = true;
-      this.$bvModal.show(this.modal_dialog_id);
+    onEditModel() {
+      /* TODO: implementing this */
+      // TODO: show msg to user
     },
     onRemoveModel(model_id) {
       this.loading = true;
@@ -90,28 +93,22 @@ export default {
       else this.saveModel(model);
     },
     async saveModel(model) {
-      /* Send new user's data to api */
-      var created = await this.api.createUser(model);
+      /* Send new client's data to api */
+      model.start = null;
+      model.end = new Date(Date.parse(model.end)).toISOString();
+      var created = await this.api.createSubscription(model);
       /* Add to list */
       this.models.push(created);
       this.loading = false;
       this.resetDialog();
     },
-    async updateModel(model) {
-      /* Send new data of user to api */
-      var updated = await this.api.updateUser(model);
-      /* Update list */
-      var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
-      ~updatedIndex && this.$set(this.models, updatedIndex, updated);
+    async updateModel() {
+      /* TODO: implementing this */
       this.loading = false;
       this.resetDialog();
     },
-    async deleteModel(model_id) {
-      /* removing from api */
-      await this.api.deleteUser(model_id);
-      /* removing from list */
-      var removeIndex = this.models.map((item) => item.id).indexOf(model_id);
-      ~removeIndex && this.models.splice(removeIndex, 1);
+    async deleteModel() {
+      /* removing not possible */
       this.loading = false;
     },
     resetDialog() {
@@ -119,7 +116,15 @@ export default {
       this.dialogFormVisible = false;
     },
     async loadModels() {
-      this.models = await this.api.getAll(this.api.getUsers);
+      this.clients = await this.api.getAll(this.api.getClients);
+      var page = await this.api.getSubscriptions("desc(end)");
+      var pages = page.results;
+      while (page.hasNext()) {
+        page = await this.api.getNext(page);
+        pages.push(...page.results);
+      }
+      this.models = pages;
+
       this.loading = false;
     },
   },

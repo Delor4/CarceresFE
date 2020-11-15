@@ -1,10 +1,10 @@
 <template>
   <div class="carceres_list">
     <b-card-group deck>
-      <b-card>
-        <b-card-title>Użytkownicy</b-card-title>
+      <b-card class="clients_list">
+        <b-card-title>Klienci</b-card-title>
         <b-card-sub-title>
-          <span class="new_user"
+          <span
             role="button"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
@@ -13,18 +13,18 @@
             Nowy
           </span>
         </b-card-sub-title>
-        <user-dialog
+        <client-dialog
           :model="formModel"
           :modal_id="modal_dialog_id"
           v-on:cancel-edit="onCancelEdit()"
           v-on:submit-edit="onSubmitEdit($event)"
           v-on:hide-modal="resetDialog()"
           v-on:remove-model="onRemoveModel($event)"
-        ></user-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id" class="users_list">
+        ></client-dialog>
+        <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span role="button" @click.prevent="onEditModel(model.id)">
             <b-icon-caret-right></b-icon-caret-right>
-            {{ model.name }}
+            {{ model.name }} {{ model.surname }}
           </span>
         </b-list-group-item>
       </b-card>
@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import UserDialog from "@/components/users/UserDialog.vue";
+import ClientDialog from "@/components/clients/ClientDialog.vue";
 
 export default {
   components: {
-    "user-dialog": UserDialog,
+    "client-dialog": ClientDialog,
   },
   data: function () {
     return {
@@ -45,7 +45,7 @@ export default {
       dialogFormVisible: false,
       loading: false,
       formModel: {},
-      modal_dialog_id: "user-dialog-modal",
+      modal_dialog_id: "client-dialog-modal",
     };
   },
   methods: {
@@ -53,16 +53,20 @@ export default {
       return {
         id: -1,
         name: "",
-        password: "",
-        user_type: 4,
+        surname: "",
+        address: "",
+        phone: "",
+        user_id: null,
       };
     },
     _cloneModel(model) {
       var _model = this._newModel();
       _model.id = model.id;
       _model.name = model.name;
-      _model.password = model.password;
-      _model.user_type = model.user_type;
+      _model.surname = model.surname;
+      _model.address = model.address;
+      _model.phone = model.phone;
+      _model.user_id = model.user_id;
       return _model;
     },
     onCreateModel() {
@@ -91,7 +95,7 @@ export default {
     },
     async saveModel(model) {
       /* Send new user's data to api */
-      var created = await this.api.createUser(model);
+      var created = await this.api.createClient(model);
       /* Add to list */
       this.models.push(created);
       this.loading = false;
@@ -99,7 +103,7 @@ export default {
     },
     async updateModel(model) {
       /* Send new data of user to api */
-      var updated = await this.api.updateUser(model);
+      var updated = await this.api.updateClient(model);
       /* Update list */
       var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
       ~updatedIndex && this.$set(this.models, updatedIndex, updated);
@@ -108,7 +112,7 @@ export default {
     },
     async deleteModel(model_id) {
       /* removing from api */
-      await this.api.deleteUser(model_id);
+      await this.api.deleteClient(model_id);
       /* removing from list */
       var removeIndex = this.models.map((item) => item.id).indexOf(model_id);
       ~removeIndex && this.models.splice(removeIndex, 1);
@@ -119,7 +123,7 @@ export default {
       this.dialogFormVisible = false;
     },
     async loadModels() {
-      this.models = await this.api.getAll(this.api.getUsers);
+      this.models = await this.api.getAll(this.api.getClients);
       this.loading = false;
     },
   },

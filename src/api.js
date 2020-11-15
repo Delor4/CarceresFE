@@ -172,6 +172,9 @@ class Api {
   getCar = async function (id) {
     return await this.get("/api/cars/" + id);
   }
+  getOwnCars = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/client/cars");
+  }
   createCar = async function (car) {
     return await this.post("/api/cars", car);
   }
@@ -220,8 +223,14 @@ class Api {
   getSubscription = async function (id) {
     return await this.get("/api/subscriptions/" + id);
   }
+  getOwnSubscriptions = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/client/subscriptions");
+  }
   createSubscription = async function (subscription) {
     return await this.post("/api/subscriptions", subscription);
+  }
+  createOwnSubscription = async function (subscription) {
+    return await this.post("/api/client/subscriptions", subscription);
   }
   updateSubscription = async function (subscription) {
     return await this.put("/api/subscriptions/" + subscription.id, subscription);
