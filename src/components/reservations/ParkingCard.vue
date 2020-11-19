@@ -18,6 +18,13 @@
       <section slot="pdf-content">
         <section class="pdf-item">
           <h4>Karta parkingowa</h4>
+          <div>
+            <qrcode-vue
+              :value="qrcode_value"
+              :size="qrcode_size"
+              level="H"
+            ></qrcode-vue>
+          </div>
         </section>
         <div class="html2pdf__page-break" />
       </section>
@@ -27,6 +34,7 @@
 
 <script>
 import VueHtml2pdf from "vue-html2pdf";
+import QrcodeVue from "qrcode.vue";
 
 export default {
   data: function () {
@@ -39,6 +47,7 @@ export default {
           quality: 0.98,
         },
       },
+      qrcode_size: 300,
     };
   },
   methods: {
@@ -56,9 +65,14 @@ export default {
   mounted() {},
   components: {
     VueHtml2pdf,
+    "qrcode-vue": QrcodeVue,
   },
   props: ["card"],
-  computed: {},
+  computed: {
+    qrcode_value() {
+      return "https://www.youtube.com/watch?v=RalyhEjVNuk#" + this.card.subscription.id;
+    },
+  },
 };
 </script>
 

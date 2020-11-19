@@ -68,7 +68,15 @@ export default {
       formModel: {},
       modal_dialog_id: "reservations-dialog-modal",
       clients: {},
-      card: {},
+      card: {
+        subscription: {
+          id: -1,
+        },
+        car: {
+          id: -1,
+          plate: "",
+        },
+      },
     };
   },
   methods: {
