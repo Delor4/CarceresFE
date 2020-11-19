@@ -73,6 +73,13 @@ export default {
           id: -1,
           plate: "",
         },
+        place: {
+          nr: -1,
+          name: "",
+        },
+        zone: {
+          name: "",
+        },
       },
     };
   },
@@ -122,6 +129,10 @@ export default {
       this.card.subscription = model;
       this.card.car = await this.api.getOwnCar(this.card.subscription.car_id);
       this.card.client = this.api.auth.user.client;
+      this.card.place = await this.api.getPlace(
+        this.card.subscription.place_id
+      );
+      this.card.zone = await this.api.getZone(this.card.place.zone_id);
       this.$refs.parking_card_pdf.generateReport();
     },
     async saveModel(model) {

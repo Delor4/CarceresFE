@@ -18,6 +18,16 @@
       <section slot="pdf-content">
         <section class="pdf-item">
           <h4>Karta parkingowa</h4>
+          <div>Nr rej.: {{ card.car.plate }}</div>
+          <div>Parking: {{ card.zone.name }}</div>
+          <div>
+            Miejsce: {{ card.place.nr }}
+            {{ card.place.name ? "(" + card.place.name + ")" : "" }}
+          </div>
+          <div>
+            Ważność: {{ convDate(card.subscription.end) }}
+            {{ convTime(card.subscription.end) }}
+          </div>
           <div>
             <qrcode-vue
               :value="qrcode_value"
@@ -61,6 +71,13 @@ export default {
       var newDate = new Date(d.getTime() - offset * 60 * 1000);
       return newDate.toISOString().split("T")[0];
     },
+    convTime(d) {
+      if (!d) return "";
+      d = new Date(d);
+      const offset = d.getTimezoneOffset();
+      var newDate = new Date(d.getTime() - offset * 60 * 1000);
+      return newDate.toISOString().split("T")[1].split(".")[0];
+    },
   },
   mounted() {},
   components: {
@@ -70,7 +87,10 @@ export default {
   props: ["card"],
   computed: {
     qrcode_value() {
-      return "https://www.youtube.com/watch?v=RalyhEjVNuk#" + this.card.subscription.id;
+      return (
+        "https://www.youtube.com/watch?v=RalyhEjVNuk#" +
+        this.card.subscription.id
+      );
     },
   },
 };
