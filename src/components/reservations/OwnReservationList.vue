@@ -110,7 +110,7 @@ export default {
     },
     async onShowParkingCard(model) {
       this.card.subscription = model;
-      /*this.card.car = await this.api.getCar(this.card.subscription.car_id);*/
+      this.card.car = await this.api.getOwnCar(this.card.subscription.car_id);
       this.card.client = this.api.auth.user.client
       this.$refs.parking_card_pdf.generateReport();
     },
