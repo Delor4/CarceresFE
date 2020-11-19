@@ -109,6 +109,14 @@ class Api {
 
     return Promise.reject("It's no api_list: ", api_list);
   }
+  getRest = async function (api_list) {
+    var pages = api_list.results;
+    while (api_list.hasNext()) {
+      api_list = await this.api.getNext(api_list);
+      pages.push(...api_list.results);
+    }
+    return pages;
+  }
   getAll = async function (get_list_method) {
     /* Returns all objects from endpoint. In: reference to method (from api.get<List>) */
     var page = await get_list_method.apply(this, []);
