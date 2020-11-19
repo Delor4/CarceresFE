@@ -43,6 +43,8 @@ export default {
           import("@/components/reservation_own/OwnReservationList.vue"),
         reservations_list: () =>
           import("@/components/reservations/ReservationsList.vue"),
+        payments_list: () =>
+          import("@/components/payments/PaymentsList.vue"),
       },
       nav_cards: {
         1: [
@@ -76,6 +78,10 @@ export default {
             id: "reservations_list",
           },
           {
+            name: "Płatności",
+            id: "payments_list",
+          },
+          {
             name: "Moje rezerwacje",
             id: "reservations_own",
           },
@@ -101,6 +107,10 @@ export default {
           {
             name: "Rezerwacje",
             id: "reservations_list",
+          },
+          {
+            name: "Płatności",
+            id: "payments_list",
           },
           {
             name: "Moje rezerwacje",
