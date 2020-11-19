@@ -37,7 +37,6 @@ export default {
       views: {
         index: () => import("@/components/index/Index.vue"),
         map: () => import("@/components/map/InteractiveMaps.vue"),
-        admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
         clients_list: () => import("@/components/clients/ClientsList.vue"),
         cars_list: () => import("@/components/cars/CarsList.vue"),
@@ -58,10 +57,6 @@ export default {
           {
             name: "Mapa",
             id: "map",
-          },
-          {
-            name: "Admin",
-            id: "admin",
           },
           {
             name: "Użytkownicy",

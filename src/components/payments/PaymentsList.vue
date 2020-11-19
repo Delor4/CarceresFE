@@ -62,9 +62,9 @@ export default {
       subscriptions: {},
       receipt: {
         payment: {
-          price : -1,
+          price: -1,
           tax: -1,
-          value : -1,
+          value: -1,
         },
         subscription: {},
         car: {},
@@ -76,11 +76,11 @@ export default {
     _newModel() {
       return {
         id: -1,
-        paid_date: null,
+        paid_date: "",
         paid_type: 0,
         price: 0,
         value: 0,
-        sale_date: null,
+        sale_date: "",
         subscription_id: -1,
         tax: 0,
       };

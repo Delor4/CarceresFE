@@ -8,9 +8,9 @@
     @show="onShow()"
   >
     <b-form v-on:submit.prevent="ok()">
-      <p>Netto: {{model.price/100}}zł</p>
-      <p>Podatek: {{model.tax}}%</p>
-      <p>Brutto: {{model.value/100}}zł</p>
+      <p>Netto: {{ model.price / 100 }}zł</p>
+      <p>Podatek: {{ model.tax }}%</p>
+      <p>Brutto: {{ model.value / 100 }}zł</p>
     </b-form>
     <template #modal-footer="{ ok, cancel, hide }">
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
@@ -25,6 +25,7 @@
         Nieopłacono
       </b-button>
       <b-button variant="success" @click="ok()">
+        <b-icon-cash></b-icon-cash>
         {{ model.id != -1 ? "Opłacono" : "Stwórz" }}
       </b-button>
     </template>

@@ -26,12 +26,14 @@
             <b-icon-caret-right></b-icon-caret-right>
             Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
             {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
-            <span :class="{ 'd-none': (model.payment && model.payment.paid)}">
+            <span :class="{ 'd-none': model.payment && model.payment.paid }">
               Do zapłaty
-              {{ model.payment ? "" + model.payment.value / 100 + "zł": "(?)"}}
+              {{
+                model.payment ? "" + model.payment.value / 100 + "zł" : "(?)"
+              }}
             </span>
           </span>
-                    <span
+          <span
             v-if="
               model.payment && model.payment.paid && isDateInFuture(model.end)
             "
@@ -43,7 +45,7 @@
         </b-list-group-item>
       </b-card>
     </b-card-group>
-     <parking-card ref="parking_card_pdf" :card="card"></parking-card>
+    <parking-card ref="parking_card_pdf" :card="card"></parking-card>
   </div>
 </template>
 
@@ -111,7 +113,7 @@ export default {
     async onShowParkingCard(model) {
       this.card.subscription = model;
       this.card.car = await this.api.getOwnCar(this.card.subscription.car_id);
-      this.card.client = this.api.auth.user.client
+      this.card.client = this.api.auth.user.client;
       this.$refs.parking_card_pdf.generateReport();
     },
     async saveModel(model) {

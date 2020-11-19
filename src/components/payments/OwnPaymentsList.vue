@@ -21,9 +21,13 @@
             }"
           >
             <b-icon-caret-right></b-icon-caret-right>
-            Miejsce: {{ subscriptions[model.subscription_id].place_id }} Samochód: {{ subscriptions[model.subscription_id].car_id }}
-            Start: {{ subscriptions[model.subscription_id].start }} End: {{ subscriptions[model.subscription_id].end }}
-            {{ model.value / 100 + "zł" }} {{ "(netto: " + model.price / 100 + "zł)" }}
+            Miejsce:
+            {{ subscriptions[model.subscription_id].place_id }} Samochód:
+            {{ subscriptions[model.subscription_id].car_id }} Start:
+            {{ subscriptions[model.subscription_id].start }} End:
+            {{ subscriptions[model.subscription_id].end }}
+            {{ model.value / 100 + "zł" }}
+            {{ "(netto: " + model.price / 100 + "zł)" }}
           </span>
           <span
             v-if="model.paid"
@@ -58,9 +62,9 @@ export default {
       subscriptions: {},
       receipt: {
         payment: {
-          price : -1,
+          price: -1,
           tax: -1,
-          value : -1,
+          value: -1,
         },
         subscription: {},
         car: {},
@@ -99,7 +103,7 @@ export default {
       this.$bvModal.show(this.modal_dialog_id);
     },
     onEditModel(model_id) {
-       this.formModel = this._cloneModel(
+      this.formModel = this._cloneModel(
         this.models.find((x) => x.id === model_id)
       );
       this.dialogFormVisible = true;
@@ -155,8 +159,8 @@ export default {
     },
     async loadModels() {
       var subscriptions = await this.api.getAll(this.api.getOwnSubscriptions);
-      for(var subs of subscriptions){
-          this.subscriptions[subs.id] = subs
+      for (var subs of subscriptions) {
+        this.subscriptions[subs.id] = subs;
       }
       var page = await this.api.getOwnPayments("paid_type");
       this.models = await this.api.getRest(page);
