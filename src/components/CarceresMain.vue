@@ -43,6 +43,8 @@ export default {
           import("@/components/reservation_own/OwnReservationList.vue"),
         reservations_list: () =>
           import("@/components/reservations/ReservationsList.vue"),
+        payments_own: () =>
+          import("@/components/payments/OwnPaymentsList.vue"),
         payments_list: () =>
           import("@/components/payments/PaymentsList.vue"),
       },
@@ -85,6 +87,10 @@ export default {
             name: "Moje rezerwacje",
             id: "reservations_own",
           },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
+          },
         ],
         2: [
           // MOD
@@ -116,6 +122,10 @@ export default {
             name: "Moje rezerwacje",
             id: "reservations_own",
           },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
+          },
         ],
         3: [
           // CLIENT
@@ -130,6 +140,10 @@ export default {
           {
             name: "Moje rezerwacje",
             id: "reservations_own",
+          },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
           },
         ],
         4: [

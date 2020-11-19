@@ -3,14 +3,14 @@
     <b-card-group deck>
       <b-card class="payments_list">
         <b-card-title>Płatności</b-card-title>
-        <payments-dialog
+        <own-payments-dialog
           :model="formModel"
           :modal_id="modal_dialog_id"
           v-on:cancel-edit="onCancelEdit()"
           v-on:submit-edit="onSubmitEdit($event)"
           v-on:hide-modal="resetDialog()"
           v-on:unpaid-model="onUnpaidModel($event)"
-        ></payments-dialog>
+        ></own-payments-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span
             role="button"
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import PaymentsDialog from "@/components/payments/PaymentsDialog.vue";
+import OwnPaymentsDialog from "@/components/payments/OwnPaymentsDialog.vue";
 
 export default {
   components: {
-    "payments-dialog": PaymentsDialog,
+    "own-payments-dialog": OwnPaymentsDialog,
   },
   data: function () {
     return {
@@ -44,7 +44,7 @@ export default {
       dialogFormVisible: false,
       loading: false,
       formModel: {},
-      modal_dialog_id: "payments-dialog-modal",
+      modal_dialog_id: "own-payments-dialog-modal",
       subscriptions: {},
     };
   },
@@ -86,6 +86,7 @@ export default {
       this.$bvModal.show(this.modal_dialog_id);
     },
     onUnpaidModel(model) {
+      /* Not allowed. */
       this.loading = true;
       this.unpaidModel(model);
     },
@@ -103,23 +104,17 @@ export default {
       this.resetDialog();
     },
     async updateModel(model) {
-      /* Set direct paid and update api */
-      model.paid_type = 1;
-      var updated = await this.api.updatePayment(model);
+      /* Set online paid and update api */
+      model.paid_type = 2;
+      var updated = await this.api.updateOwnPayment(model);
       /* Update list */
       var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
       ~updatedIndex && this.$set(this.models, updatedIndex, updated);
       this.loading = false;
       this.resetDialog();
     },
-    async unpaidModel(model) {
-      /* Set not paid and update api */
-      model.paid_type = 0;
-      model.paid_date = null;
-      var updated = await this.api.updatePayment(model);
-      /* Update list */
-      var updatedIndex = this.models.map((item) => item.id).indexOf(model.id);
-      ~updatedIndex && this.$set(this.models, updatedIndex, updated);
+    async unpaidModel() {
+      /* Not allowed */
       this.loading = false;
       this.resetDialog();
     },
@@ -128,11 +123,11 @@ export default {
       this.dialogFormVisible = false;
     },
     async loadModels() {
-      var subscriptions = await this.api.getAll(this.api.getSubscriptions);
+      var subscriptions = await this.api.getAll(this.api.getOwnSubscriptions);
       for(var subs of subscriptions){
           this.subscriptions[subs.id] = subs
       }
-      var page = await this.api.getPayments("paid_type");
+      var page = await this.api.getOwnPayments("paid_type");
       this.models = await this.api.getRest(page);
       this.loading = false;
     },
