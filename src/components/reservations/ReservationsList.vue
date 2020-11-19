@@ -26,6 +26,13 @@
             <b-icon-caret-right></b-icon-caret-right>
             Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
             {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
+            <span :class="{
+              'subs-paid': (model.payment && model.payment.paid),
+              'subs-unpaid': !(model.payment && model.payment.paid)
+            }"
+            >
+              {{ model.payment ? model.payment.value / 100 + "zł": "?"}}
+            </span>
           </span>
         </b-list-group-item>
       </b-card>
@@ -138,4 +145,11 @@ export default {
 };
 </script>
 <style scoped>
+.subs-paid {
+  background-color: greenyellow;
+}
+.subs-unpaid {
+  background-color: #f77;
+}
+
 </style>

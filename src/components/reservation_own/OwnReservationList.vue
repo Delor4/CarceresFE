@@ -26,6 +26,10 @@
             <b-icon-caret-right></b-icon-caret-right>
             Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
             {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
+            <span :class="{ 'd-none': (model.payment && model.payment.paid)}">
+              Do zapłaty
+              {{ model.payment ? "" + model.payment.value / 100 + "zł": "(?)"}}
+            </span>
           </span>
         </b-list-group-item>
       </b-card>
