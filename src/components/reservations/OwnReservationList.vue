@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import OwnReservationDialog from "@/components/reservation_own/OwnReservationDialog.vue";
+import OwnReservationDialog from "@/components/reservations/OwnReservationDialog.vue";
 
 export default {
   components: {

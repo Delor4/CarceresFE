@@ -12,11 +12,13 @@
     ></carceres-nav>
 
     <!--Logowanie-->
-    <div><login-user
-      :auth="api.auth"
-      v-on:submit-login-data="onLoginUser($event)"
-      v-on:submit-logout="onLogoutUser()"
-    ></login-user></div>
+    <div>
+      <login-user
+        :auth="api.auth"
+        v-on:submit-login-data="onLoginUser($event)"
+        v-on:submit-logout="onLogoutUser()"
+      ></login-user>
+    </div>
 
     <div ref="subcomponent" class="container-fluid">.</div>
   </div>
@@ -40,13 +42,11 @@ export default {
         clients_list: () => import("@/components/clients/ClientsList.vue"),
         cars_list: () => import("@/components/cars/CarsList.vue"),
         reservations_own: () =>
-          import("@/components/reservation_own/OwnReservationList.vue"),
+          import("@/components/reservations/OwnReservationList.vue"),
         reservations_list: () =>
           import("@/components/reservations/ReservationsList.vue"),
-        payments_own: () =>
-          import("@/components/payments/OwnPaymentsList.vue"),
-        payments_list: () =>
-          import("@/components/payments/PaymentsList.vue"),
+        payments_own: () => import("@/components/payments/OwnPaymentsList.vue"),
+        payments_list: () => import("@/components/payments/PaymentsList.vue"),
       },
       nav_cards: {
         1: [
@@ -102,7 +102,7 @@ export default {
             name: "Mapa",
             id: "map",
           },
-           {
+          {
             name: "Klienci",
             id: "clients_list",
           },
