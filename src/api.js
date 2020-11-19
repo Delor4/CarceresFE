@@ -238,6 +238,32 @@ class Api {
   deleteSubscription = async function (id) {
     return await this.delete("/api/subscriptions/" + id);
   }
+  /* ENDPOINTS PAYMENTS */
+
+  getPayments = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/payments");
+  }
+  getPayment = async function (id) {
+    return await this.get("/api/payments/" + id);
+  }
+  getOwnPayments = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/client/payments");
+  }
+  getOwnPayment = async function (id) {
+    return await this.get("/api/client/payments/" + id);
+  }
+  createPayment = async function (payment) {
+    return await this.post("/api/payments", payment);
+  }
+  updateOwnPayment = async function (payment) {
+    return await this.put("/api/client/payments/" + payment.id, payment);
+  }
+  updatePayment = async function (payment) {
+    return await this.put("/api/payments/" + payment.id, payment);
+  }
+  deletePayment = async function (id) {
+    return await this.delete("/api/payments/" + id);
+  }
 
   /* response handling */
   /* Response to methods this.get(), this.post(), ... */
