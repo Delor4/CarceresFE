@@ -122,7 +122,6 @@ export default {
       else this.saveModel(model);
     },
     async onShowReceipt(model) {
-      console.log(model.id);
       this.receipt.payment = model;
       this.receipt.subscription = await this.api.getSubscription(
         model.subscription_id

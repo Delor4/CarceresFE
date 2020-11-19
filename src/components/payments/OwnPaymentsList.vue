@@ -25,18 +25,28 @@
             Start: {{ subscriptions[model.subscription_id].start }} End: {{ subscriptions[model.subscription_id].end }}
             {{ model.value / 100 + "zł" }} {{ "(netto: " + model.price / 100 + "zł)" }}
           </span>
+          <span
+            v-if="model.paid"
+            role="button"
+            @click.prevent="onShowReceipt(model)"
+          >
+            <b-icon-file-earmark-text></b-icon-file-earmark-text>
+          </span>
         </b-list-group-item>
       </b-card>
     </b-card-group>
+    <payment-receipt ref="payment_pdf" :receipt="receipt"></payment-receipt>
   </div>
 </template>
 
 <script>
 import OwnPaymentsDialog from "@/components/payments/OwnPaymentsDialog.vue";
+import PaymentReceipt from "@/components/payments/PaymentReceipt.vue";
 
 export default {
   components: {
     "own-payments-dialog": OwnPaymentsDialog,
+    "payment-receipt": PaymentReceipt,
   },
   data: function () {
     return {
@@ -46,6 +56,16 @@ export default {
       formModel: {},
       modal_dialog_id: "own-payments-dialog-modal",
       subscriptions: {},
+      receipt: {
+        payment: {
+          price : -1,
+          tax: -1,
+          value : -1,
+        },
+        subscription: {},
+        car: {},
+        client: {},
+      },
     };
   },
   methods: {
@@ -97,6 +117,17 @@ export default {
       this.loading = true;
       if (model.id != -1) this.updateModel(model);
       else this.saveModel(model);
+    },
+    async onShowReceipt(model) {
+      this.receipt.payment = model;
+      this.receipt.subscription = await this.api.getOwnSubscription(
+        model.subscription_id
+      );
+      /*this.receipt.car = await this.api.getOwnCar(
+        this.receipt.subscription.car_id
+      );*/
+      this.receipt.client = this.api.auth.user.client;
+      this.$refs.payment_pdf.generateReport();
     },
     async saveModel() {
       /* adding new - not possible */

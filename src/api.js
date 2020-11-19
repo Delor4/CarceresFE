@@ -234,6 +234,9 @@ class Api {
   getOwnSubscriptions = async function (sort_by, page, limit) {
     return await this._getProps(sort_by, page, limit, "/api/client/subscriptions");
   }
+  getOwnSubscription = async function (id) {
+    return await this.get("/api/client/subscriptions/" + id);
+  }
   createSubscription = async function (subscription) {
     return await this.post("/api/subscriptions", subscription);
   }
