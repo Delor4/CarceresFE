@@ -26,26 +26,39 @@
             <b-icon-caret-right></b-icon-caret-right>
             Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
             {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
-            <span :class="{
-              'subs-paid': (model.payment && model.payment.paid),
-              'subs-unpaid': !(model.payment && model.payment.paid)
-            }"
+            <span
+              :class="{
+                'subs-paid': model.payment && model.payment.paid,
+                'subs-unpaid': !(model.payment && model.payment.paid),
+              }"
             >
-              {{ model.payment ? model.payment.value / 100 + "zł": "?"}}
+              {{ model.payment ? model.payment.value / 100 + "zł" : "?" }}
             </span>
+          </span>
+          <span
+            v-if="
+              model.payment && model.payment.paid && isDateInFuture(model.end)
+            "
+            role="button"
+            @click.prevent="onShowParkingCard(model)"
+          >
+            <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </span>
         </b-list-group-item>
       </b-card>
     </b-card-group>
+    <parking-card ref="parking_card_pdf" :card="card"></parking-card>
   </div>
 </template>
 
 <script>
 import ReservationsDialog from "@/components/reservations/ReservationsDialog.vue";
+import ParkingCard from "@/components/reservations/ParkingCard.vue";
 
 export default {
   components: {
     "reservations-dialog": ReservationsDialog,
+    "parking-card": ParkingCard,
   },
   data: function () {
     return {
@@ -55,6 +68,7 @@ export default {
       formModel: {},
       modal_dialog_id: "reservations-dialog-modal",
       clients: {},
+      card: {},
     };
   },
   methods: {
@@ -99,6 +113,12 @@ export default {
       if (model.id != -1) this.updateModel(model);
       else this.saveModel(model);
     },
+    async onShowParkingCard(model) {
+      this.card.subscription = model;
+      this.card.car = await this.api.getCar(this.card.subscription.car_id);
+      this.card.client = await this.api.getClient(this.card.car.client_id);
+      this.$refs.parking_card_pdf.generateReport();
+    },
     async saveModel(model) {
       /* Send new client's data to api */
       model.start = null;
@@ -134,6 +154,9 @@ export default {
 
       this.loading = false;
     },
+    isDateInFuture(d) {
+      return new Date(Date.parse(d)).getTime() - new Date().getTime() > 0;
+    },
   },
   mounted() {
     this.loading = true;
@@ -151,5 +174,4 @@ export default {
 .subs-unpaid {
   background-color: #f77;
 }
-
 </style>
