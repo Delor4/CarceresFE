@@ -21,22 +21,36 @@
             }"
           >
             <b-icon-caret-right></b-icon-caret-right>
-            Miejsce: {{ subscriptions[model.subscription_id].place_id }} Samochód: {{ subscriptions[model.subscription_id].car_id }}
-            Start: {{ subscriptions[model.subscription_id].start }} End: {{ subscriptions[model.subscription_id].end }}
-            {{ model.value / 100 + "zł" }} {{ "(netto: " + model.price / 100 + "zł)" }}
+            Miejsce:
+            {{ subscriptions[model.subscription_id].place_id }} Samochód:
+            {{ subscriptions[model.subscription_id].car_id }} Start:
+            {{ subscriptions[model.subscription_id].start }} End:
+            {{ subscriptions[model.subscription_id].end }}
+            {{ model.value / 100 + "zł" }}
+            {{ "(netto: " + model.price / 100 + "zł)" }}
+          </span>
+          <span
+            v-if="model.paid"
+            role="button"
+            @click.prevent="onShowReceipt(model)"
+          >
+            <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </span>
         </b-list-group-item>
       </b-card>
     </b-card-group>
+    <payment-receipt ref="payment_pdf" :receipt="receipt"></payment-receipt>
   </div>
 </template>
 
 <script>
 import PaymentsDialog from "@/components/payments/PaymentsDialog.vue";
+import PaymentReceipt from "@/components/payments/PaymentReceipt.vue";
 
 export default {
   components: {
     "payments-dialog": PaymentsDialog,
+    "payment-receipt": PaymentReceipt,
   },
   data: function () {
     return {
@@ -46,6 +60,16 @@ export default {
       formModel: {},
       modal_dialog_id: "payments-dialog-modal",
       subscriptions: {},
+      receipt: {
+        payment: {
+          price : -1,
+          tax: -1,
+          value : -1,
+        },
+        subscription: {},
+        car: {},
+        client: {},
+      },
     };
   },
   methods: {
@@ -79,7 +103,7 @@ export default {
       this.$bvModal.show(this.modal_dialog_id);
     },
     onEditModel(model_id) {
-       this.formModel = this._cloneModel(
+      this.formModel = this._cloneModel(
         this.models.find((x) => x.id === model_id)
       );
       this.dialogFormVisible = true;
@@ -96,6 +120,20 @@ export default {
       this.loading = true;
       if (model.id != -1) this.updateModel(model);
       else this.saveModel(model);
+    },
+    async onShowReceipt(model) {
+      console.log(model.id);
+      this.receipt.payment = model;
+      this.receipt.subscription = await this.api.getSubscription(
+        model.subscription_id
+      );
+      this.receipt.car = await this.api.getCar(
+        this.receipt.subscription.car_id
+      );
+      this.receipt.client = await this.api.getClient(
+        this.receipt.car.client_id
+      );
+      this.$refs.payment_pdf.generateReport();
     },
     async saveModel() {
       /* adding new - not possible */
@@ -129,8 +167,8 @@ export default {
     },
     async loadModels() {
       var subscriptions = await this.api.getAll(this.api.getSubscriptions);
-      for(var subs of subscriptions){
-          this.subscriptions[subs.id] = subs
+      for (var subs of subscriptions) {
+        this.subscriptions[subs.id] = subs;
       }
       var page = await this.api.getPayments("paid_type");
       this.models = await this.api.getRest(page);

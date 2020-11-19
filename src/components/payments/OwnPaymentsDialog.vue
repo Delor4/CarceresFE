@@ -16,7 +16,7 @@
     <template #modal-footer="{ ok, cancel }">
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
       <b-button variant="success" @click="ok()">
-        {{ model.id != -1 ? "Opłać" : "Stwórz" }}
+        {{ model.id != -1 ? "Opłać" : "Stwórz" }}<b-icon-credit-card></b-icon-credit-card>
       </b-button>
     </template>
   </b-modal>
