@@ -9,7 +9,7 @@
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
           >
-            <b-icon-plus-circle></b-icon-plus-circle>
+            <b-icon-person-plus></b-icon-person-plus>
             Nowy
           </span>
         </b-card-sub-title>

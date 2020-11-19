@@ -112,10 +112,11 @@
           hide();
         "
       >
-        Usuń
+        <b-icon-person-x></b-icon-person-x> Usuń
       </b-button>
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
       <b-button variant="success" @click="ok()">
+        <b-icon-person-plus></b-icon-person-plus>
         {{ model.id != -1 ? "Zapisz" : "Stwórz" }}
       </b-button>
     </template>

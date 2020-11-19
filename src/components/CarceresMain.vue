@@ -12,11 +12,13 @@
     ></carceres-nav>
 
     <!--Logowanie-->
-    <div><login-user
-      :auth="api.auth"
-      v-on:submit-login-data="onLoginUser($event)"
-      v-on:submit-logout="onLogoutUser()"
-    ></login-user></div>
+    <div>
+      <login-user
+        :auth="api.auth"
+        v-on:submit-login-data="onLoginUser($event)"
+        v-on:submit-logout="onLogoutUser()"
+      ></login-user>
+    </div>
 
     <div ref="subcomponent" class="container-fluid">.</div>
   </div>
@@ -35,14 +37,15 @@ export default {
       views: {
         index: () => import("@/components/index/Index.vue"),
         map: () => import("@/components/map/InteractiveMaps.vue"),
-        admin: () => import("@/components/admin/Admin.vue"),
         users_list: () => import("@/components/users/UsersList.vue"),
         clients_list: () => import("@/components/clients/ClientsList.vue"),
         cars_list: () => import("@/components/cars/CarsList.vue"),
         reservations_own: () =>
-          import("@/components/reservation_own/OwnReservationList.vue"),
+          import("@/components/reservations/OwnReservationList.vue"),
         reservations_list: () =>
           import("@/components/reservations/ReservationsList.vue"),
+        payments_own: () => import("@/components/payments/OwnPaymentsList.vue"),
+        payments_list: () => import("@/components/payments/PaymentsList.vue"),
       },
       nav_cards: {
         1: [
@@ -54,10 +57,6 @@ export default {
           {
             name: "Mapa",
             id: "map",
-          },
-          {
-            name: "Admin",
-            id: "admin",
           },
           {
             name: "Użytkownicy",
@@ -76,8 +75,16 @@ export default {
             id: "reservations_list",
           },
           {
+            name: "Płatności",
+            id: "payments_list",
+          },
+          {
             name: "Moje rezerwacje",
             id: "reservations_own",
+          },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
           },
         ],
         2: [
@@ -90,7 +97,7 @@ export default {
             name: "Mapa",
             id: "map",
           },
-           {
+          {
             name: "Klienci",
             id: "clients_list",
           },
@@ -103,8 +110,16 @@ export default {
             id: "reservations_list",
           },
           {
+            name: "Płatności",
+            id: "payments_list",
+          },
+          {
             name: "Moje rezerwacje",
             id: "reservations_own",
+          },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
           },
         ],
         3: [
@@ -120,6 +135,10 @@ export default {
           {
             name: "Moje rezerwacje",
             id: "reservations_own",
+          },
+          {
+            name: "Moje płatności",
+            id: "payments_own",
           },
         ],
         4: [

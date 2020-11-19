@@ -109,6 +109,14 @@ class Api {
 
     return Promise.reject("It's no api_list: ", api_list);
   }
+  getRest = async function (api_list) {
+    var pages = api_list.results;
+    while (api_list.hasNext()) {
+      api_list = await this.api.getNext(api_list);
+      pages.push(...api_list.results);
+    }
+    return pages;
+  }
   getAll = async function (get_list_method) {
     /* Returns all objects from endpoint. In: reference to method (from api.get<List>) */
     var page = await get_list_method.apply(this, []);
@@ -175,6 +183,9 @@ class Api {
   getOwnCars = async function (sort_by, page, limit) {
     return await this._getProps(sort_by, page, limit, "/api/client/cars");
   }
+  getOwnCar = async function (id) {
+    return await this.get("/api/client/cars/" + id);
+  }
   createCar = async function (car) {
     return await this.post("/api/cars", car);
   }
@@ -226,6 +237,9 @@ class Api {
   getOwnSubscriptions = async function (sort_by, page, limit) {
     return await this._getProps(sort_by, page, limit, "/api/client/subscriptions");
   }
+  getOwnSubscription = async function (id) {
+    return await this.get("/api/client/subscriptions/" + id);
+  }
   createSubscription = async function (subscription) {
     return await this.post("/api/subscriptions", subscription);
   }
@@ -237,6 +251,32 @@ class Api {
   }
   deleteSubscription = async function (id) {
     return await this.delete("/api/subscriptions/" + id);
+  }
+  /* ENDPOINTS PAYMENTS */
+
+  getPayments = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/payments");
+  }
+  getPayment = async function (id) {
+    return await this.get("/api/payments/" + id);
+  }
+  getOwnPayments = async function (sort_by, page, limit) {
+    return await this._getProps(sort_by, page, limit, "/api/client/payments");
+  }
+  getOwnPayment = async function (id) {
+    return await this.get("/api/client/payments/" + id);
+  }
+  createPayment = async function (payment) {
+    return await this.post("/api/payments", payment);
+  }
+  updateOwnPayment = async function (payment) {
+    return await this.put("/api/client/payments/" + payment.id, payment);
+  }
+  updatePayment = async function (payment) {
+    return await this.put("/api/payments/" + payment.id, payment);
+  }
+  deletePayment = async function (id) {
+    return await this.delete("/api/payments/" + id);
   }
 
   /* response handling */
