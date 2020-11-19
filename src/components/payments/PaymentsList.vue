@@ -76,11 +76,11 @@ export default {
     _newModel() {
       return {
         id: -1,
-        paid_date: "",
+        paid_date: null,
         paid_type: 0,
         price: 0,
         value: 0,
-        sale_date: "",
+        sale_date: null,
         subscription_id: -1,
         tax: 0,
       };

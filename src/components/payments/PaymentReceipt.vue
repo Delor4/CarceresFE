@@ -3,7 +3,7 @@
     <vue-html2pdf
       :show-layout="false"
       :float-layout="true"
-      :enable-download="true"
+      :enable-download="false"
       :preview-modal="true"
       :paginate-elements-by-height="1400"
       filename="Receipt"
@@ -12,20 +12,45 @@
       pdf-format="a4"
       pdf-orientation="landscape"
       pdf-content-width="800px"
-      @beforeDownload="beforeDownload($event)"
+      :html-to-pdf-options="htmlOptions"
       ref="html2Pdf"
     >
       <section slot="pdf-content">
         <section class="pdf-item">
-        <h4>
-            Paragon niefiskalny
-        </h4>
+          <h4>Paragon niefiskalny</h4>
 
-        <div><span>Opłata parkingowa</span><span>1 * {{receipt.payment.price / 100}}</span></div>
-        <div><span>tax: {{receipt.payment.tax}}%</span></div>
-        <div><span>Suma PLN: {{receipt.payment.value/100}}</span></div>
+          <div>
+            Data sprzedaży:
+            <span>{{ convDate(receipt.payment.sale_date) }}</span>
+          </div>
+          <div>
+            <span>Opłata parkingowa</span>
+            <span>1 * {{ receipt.payment.price / 100 }}</span>
+          </div>
+          <div>
+            <span>tax: {{ receipt.payment.tax }}%</span>
+          </div>
+          <div>
+            <span>Suma PLN: {{ receipt.payment.value / 100 }}</span>
+          </div>
+          <div>
+            <span
+              >{{
+                receipt.payment.paid_type == 1
+                  ? "Gotówka"
+                  : receipt.payment.paid_type == 2
+                  ? "Przelew zewnętrzny"
+                  : "Inna wpłata"
+              }}
+              PLN: {{ receipt.payment.value / 100 }}</span
+            >
+          </div>
+          <div>
+            Data transakcji:
+            <span>{{ convDate(receipt.payment.paid_date) }}</span>
+          </div>
         </section>
-        <div class="html2pdf__page-break"/>
+        <div class="html2pdf__page-break" />
       </section>
     </vue-html2pdf>
   </div>
@@ -36,26 +61,27 @@ import VueHtml2pdf from "vue-html2pdf";
 
 export default {
   data: function () {
-    return {};
+    return {
+      htmlOptions: {
+        margin: 2.5,
+        filename: "Receipt.pdf",
+        image: {
+          type: "jpeg",
+          quality: 0.98,
+        },
+      },
+    };
   },
   methods: {
-    /*
-            Generate Report using refs and calling the
-            refs function generatePdf()
-        */
-       async beforeDownload ({ html2pdf, options, pdfContent }) {
-            await html2pdf().set(options).from(pdfContent).toPdf().get('pdf').then((pdf) => {
-                const totalPages = pdf.internal.getNumberOfPages()
-                for (let i = 1; i <= totalPages; i++) {
-                    pdf.setPage(i)
-                    pdf.setFontSize(10)
-                    pdf.setTextColor(150)
-                    pdf.text('Page ' + i + ' of ' + totalPages, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3))
-                } 
-            }).save()
-        },
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
+    },
+    convDate(d) {
+      if (!d) return "";
+      d = new Date(d);
+      const offset = d.getTimezoneOffset();
+      var newDate = new Date(d.getTime() - offset * 60 * 1000);
+      return newDate.toISOString().split("T")[0];
     },
   },
   mounted() {},
