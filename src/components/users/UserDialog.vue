@@ -60,8 +60,8 @@
       </b-button>
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
       <b-button variant="success" @click="ok()">
-        <b-icon-person-plus v-if="(model.id == -1)"></b-icon-person-plus>
-        <b-icon-person-check v-if="(model.id != -1)"></b-icon-person-check>
+        <b-icon-person-plus v-if="model.id == -1"></b-icon-person-plus>
+        <b-icon-person-check v-if="model.id != -1"></b-icon-person-check>
         {{ model.id != -1 ? "Zapisz" : "Stwórz" }}
       </b-button>
     </template>
@@ -71,14 +71,7 @@
 <script>
 export default {
   data: function () {
-    return {
-      user_types: [
-        { value: "1", text: "Administrator" },
-        { value: "2", text: "Moderator" },
-        { value: "3", text: "Klient" },
-        { value: "4", text: "Bot" },
-      ],
-    };
+    return {};
   },
   computed: {
     modalTitle() {
@@ -91,7 +84,7 @@ export default {
       this.$bvModal.hide(this.modal_id);
     },
   },
-  props: ["model", "modal_id"],
+  props: ["model", "modal_id", "user_types"],
 };
 </script>
 

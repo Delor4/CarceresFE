@@ -119,3 +119,8 @@ input.pass {
 .new_user:hover {
   font-weight: bold;
 }
+
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+  display: none !important;
+}

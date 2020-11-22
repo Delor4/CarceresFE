@@ -194,8 +194,4 @@ export default {
 };
 </script>
 <style scoped>
-.collapsed > .when-open,
-.not-collapsed > .when-closed {
-  display: none;
-}
 </style>

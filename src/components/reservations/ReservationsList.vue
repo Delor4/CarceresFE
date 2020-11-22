@@ -203,8 +203,4 @@ export default {
 .subs-unpaid {
   background-color: #f77;
 }
-.collapsed > .when-open,
-.not-collapsed > .when-closed {
-  display: none;
-}
 </style>

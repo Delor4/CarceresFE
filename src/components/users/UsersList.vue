@@ -4,7 +4,8 @@
       <b-card>
         <b-card-title>Użytkownicy</b-card-title>
         <b-card-sub-title>
-          <span class="new_user"
+          <span
+            class="new_user"
             role="button"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
@@ -16,15 +17,29 @@
         <user-dialog
           :model="formModel"
           :modal_id="modal_dialog_id"
+          :user_types="user_types"
           v-on:cancel-edit="onCancelEdit()"
           v-on:submit-edit="onSubmitEdit($event)"
           v-on:hide-modal="resetDialog()"
           v-on:remove-model="onRemoveModel($event)"
         ></user-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id" class="users_list">
+        <b-list-group-item
+          v-for="model in models"
+          v-bind:key="model.id"
+          class="users_list"
+        >
+          <span v-b-toggle="collapse_id(model.id)">
+            <b-icon-caret-down class="when-open"></b-icon-caret-down>
+            <b-icon-caret-right class="when-closed"></b-icon-caret-right>
+          </span>
           <span role="button" @click.prevent="onEditModel(model.id)">
-            <b-icon-caret-right></b-icon-caret-right>
             {{ model.name }}
+            <b-collapse :id="collapse_id(model.id)">
+              <b-card>
+                Rola:
+                {{ user_types.find((x) => x.value == model.user_type).text }}
+              </b-card>
+            </b-collapse>
           </span>
         </b-list-group-item>
       </b-card>
@@ -46,9 +61,18 @@ export default {
       loading: false,
       formModel: {},
       modal_dialog_id: "user-dialog-modal",
+      user_types: [
+        { value: 1, text: "Administrator" },
+        { value: 2, text: "Moderator" },
+        { value: 3, text: "Klient" },
+        { value: 4, text: "Bot" },
+      ],
     };
   },
   methods: {
+    collapse_id(id) {
+      return "collapse-" + id;
+    },
     _newModel() {
       return {
         id: -1,
