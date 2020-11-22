@@ -34,6 +34,7 @@
               :size="qrcode_size"
               level="H"
             ></qrcode-vue>
+            <barcode :value="barcode_value" width="3"> #number </barcode>
           </div>
         </section>
         <div class="html2pdf__page-break" />
@@ -45,6 +46,7 @@
 <script>
 import VueHtml2pdf from "vue-html2pdf";
 import QrcodeVue from "qrcode.vue";
+import VueBarcode from "vue-barcode";
 
 export default {
   data: function () {
@@ -83,6 +85,7 @@ export default {
   components: {
     VueHtml2pdf,
     "qrcode-vue": QrcodeVue,
+    barcode: VueBarcode,
   },
   props: ["card"],
   computed: {
@@ -91,6 +94,9 @@ export default {
         "https://www.youtube.com/watch?v=RalyhEjVNuk#" +
         this.card.subscription.id
       );
+    },
+    barcode_value() {
+      return "#" + this.card.subscription.id;
     },
   },
 };
