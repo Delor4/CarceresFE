@@ -60,7 +60,8 @@
       </b-button>
       <b-button variant="secondary" @click="cancel()"> Anuluj </b-button>
       <b-button variant="success" @click="ok()">
-        <b-icon-person-plus></b-icon-person-plus>
+        <b-icon-person-plus v-if="(model.id == -1)"></b-icon-person-plus>
+        <b-icon-person-check v-if="(model.id != -1)"></b-icon-person-check>
         {{ model.id != -1 ? "Zapisz" : "Stwórz" }}
       </b-button>
     </template>
