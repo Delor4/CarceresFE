@@ -23,9 +23,11 @@
         ></reservations-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span role="button" @click.prevent="onEditModel(model.id)">
-            <b-icon-caret-right></b-icon-caret-right>
-            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
-            {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
+            <span v-b-toggle="collapse_id(model.id)">
+              <b-icon-caret-down class="when-open"></b-icon-caret-down>
+              <b-icon-caret-right class="when-closed"></b-icon-caret-right>
+            </span>
+            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }}
             <span
               :class="{
                 'subs-paid': model.payment && model.payment.paid,
@@ -34,15 +36,21 @@
             >
               {{ model.payment ? model.payment.value / 100 + "zł" : "?" }}
             </span>
-          </span>
-          <span
-            v-if="
-              model.payment && model.payment.paid && isDateInFuture(model.end)
-            "
-            role="button"
-            @click.prevent="onShowParkingCard(model)"
-          >
-            <b-icon-file-earmark-text></b-icon-file-earmark-text>
+            <span
+              v-if="
+                model.payment && model.payment.paid && isDateInFuture(model.end)
+              "
+              role="button"
+              @click.prevent="onShowParkingCard(model)"
+            >
+              <b-icon-file-earmark-text></b-icon-file-earmark-text>
+            </span>
+            <b-collapse :id="collapse_id(model.id)">
+              <b-card>
+                Start: {{ model.start }} End: {{ model.end }} Typ:
+                {{ model.type }}
+              </b-card>
+            </b-collapse>
           </span>
         </b-list-group-item>
       </b-card>
@@ -87,6 +95,9 @@ export default {
     };
   },
   methods: {
+    collapse_id(id) {
+      return "collapse-" + id;
+    },
     _newModel() {
       return {
         id: -1,
@@ -132,7 +143,9 @@ export default {
       this.card.subscription = model;
       this.card.car = await this.api.getCar(this.card.subscription.car_id);
       this.card.client = await this.api.getClient(this.card.car.client_id);
-      this.card.place = await this.api.getPlace(this.card.subscription.place_id);
+      this.card.place = await this.api.getPlace(
+        this.card.subscription.place_id
+      );
       this.card.zone = await this.api.getZone(this.card.place.zone_id);
       this.$refs.parking_card_pdf.generateReport();
     },
@@ -180,7 +193,6 @@ export default {
     this.loadModels();
     this.resetDialog();
   },
-
   props: ["shared_data"],
 };
 </script>
@@ -190,5 +202,9 @@ export default {
 }
 .subs-unpaid {
   background-color: #f77;
+}
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+  display: none;
 }
 </style>

@@ -23,9 +23,11 @@
         ></reservation-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
           <span role="button" @click.prevent="onEditModel(model.id)">
-            <b-icon-caret-right></b-icon-caret-right>
-            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }} Start:
-            {{ model.start }} End: {{ model.end }} Typ: {{ model.type }}
+            <span v-b-toggle="collapse_id(model.id)">
+              <b-icon-caret-down class="when-open"></b-icon-caret-down>
+              <b-icon-caret-right class="when-closed"></b-icon-caret-right>
+            </span>
+            Miejsce: {{ model.place_id }} Samochód: {{ model.car_id }}
             <span :class="{ 'd-none': model.payment && model.payment.paid }">
               Do zapłaty
               {{
@@ -42,6 +44,12 @@
           >
             <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </span>
+          <b-collapse :id="collapse_id(model.id)">
+            <b-card>
+              Start: {{ model.start }} End: {{ model.end }} Typ:
+              {{ model.type }}
+            </b-card>
+          </b-collapse>
         </b-list-group-item>
       </b-card>
     </b-card-group>
@@ -84,6 +92,9 @@ export default {
     };
   },
   methods: {
+    collapse_id(id) {
+      return "collapse-" + id;
+    },
     _newModel() {
       return {
         id: -1,
@@ -183,4 +194,8 @@ export default {
 };
 </script>
 <style scoped>
+.collapsed > .when-open,
+.not-collapsed > .when-closed {
+  display: none;
+}
 </style>
