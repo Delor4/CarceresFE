@@ -1,27 +1,32 @@
 <template>
-  <div class="pin" 
-    :style="{'position' : 'absolute', 'left' : '' + pin.pos_x + '%', 'top': '' + pin.pos_y + '%'}"
+  <div
+    class="pin"
+    :style="{
+      position: 'absolute',
+      left: '' + pin.pos_x + '%',
+      top: '' + pin.pos_y + '%',
+    }"
     role="button"
+    v-b-tooltip.hover
+    :title="'Nr: ' + pin.nr + (pin.name ? ' (' + pin.name + ')' : '')"
     v-on:click="$emit('occupy-change', pin.id)"
   >
-    <img v-if="pin.occupied" src="pin_red.png"><img v-else src="pin_green.png">
+    <img v-if="pin.occupied" src="pin_red.png" /><img
+      v-else
+      src="pin_green.png"
+    />
   </div>
 </template>
 
 <script>
-
 export default {
-   data: function() {
-        return {           
-        };
-    },
-  props: ['pin'],
-  methods: {
+  data: function () {
+    return {};
   },
-  mounted () {
-  },
-  components: {
-  },
+  props: ["pin"],
+  methods: {},
+  mounted() {},
+  components: {},
 };
 </script>
 
