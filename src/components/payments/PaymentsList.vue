@@ -16,19 +16,19 @@
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
           </span>
-          <span
-            role="button"
-            @click.prevent="onEditModel(model.id)"
-            :class="{
-              'payment-paid': model.paid,
-              'payment-unpaid': !model.paid,
-            }"
-          >
+          <span role="button" @click.prevent="onEditModel(model.id)">
             Miejsce:
             {{ subscriptions[model.subscription_id].place_id }} Samochód:
             {{ subscriptions[model.subscription_id].car_id }}
-            {{ model.value / 100 + "zł" }}
-            {{ "(netto: " + model.price / 100 + "zł)" }}
+            <span
+              :class="{
+                'payment-paid': model.paid,
+                'payment-unpaid': !model.paid,
+              }"
+            >
+              {{ model.value / 100 + "zł" }}
+              {{ "(netto: " + model.price / 100 + "zł)" }}
+            </span>
           </span>
           <span
             v-if="model.paid"

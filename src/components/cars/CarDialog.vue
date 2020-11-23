@@ -23,6 +23,21 @@
       </b-form-group>
 
       <b-form-group
+        id="input-group-brand"
+        label="Marka:"
+        label-for="input-brand"
+        description="Marka/model samochodu"
+      >
+        <b-form-input
+          id="input-brand"
+          v-model="model.brand"
+          type="text"
+          required
+          placeholder="Wpisz markę samochodu"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
         id="input-group-client"
         label="Klient:"
         label-for="input-client"

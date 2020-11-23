@@ -30,7 +30,7 @@
             {{ model.plate }}
           </span>
           <b-collapse :id="collapse_id(model.id)">
-            <b-card> Klient: {{ model.client.name }} </b-card>
+            <b-card> Marka: {{model.brand}} Klient: {{ model.client.name }} </b-card>
           </b-collapse>
         </b-list-group-item>
       </b-card>
@@ -62,6 +62,7 @@ export default {
       return {
         id: -1,
         plate: "",
+        brand: null,
         client_id: -1,
       };
     },
@@ -69,6 +70,7 @@ export default {
       var _model = this._newModel();
       _model.id = model.id;
       _model.plate = model.plate;
+      _model.brand = model.brand;
       _model.client_id = model.client_id;
       return _model;
     },
