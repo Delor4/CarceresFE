@@ -12,6 +12,10 @@
           v-on:unpaid-model="onUnpaidModel($event)"
         ></own-payments-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
+          <span v-b-toggle="collapse_id(model.id)">
+            <b-icon-caret-down class="when-open"></b-icon-caret-down>
+            <b-icon-caret-right class="when-closed"></b-icon-caret-right>
+          </span>
           <span
             role="button"
             @click.prevent="onEditModel(model.id)"
@@ -20,12 +24,9 @@
               'payment-unpaid': !model.paid,
             }"
           >
-            <b-icon-caret-right></b-icon-caret-right>
             Miejsce:
             {{ subscriptions[model.subscription_id].place_id }} Samochód:
-            {{ subscriptions[model.subscription_id].car_id }} Start:
-            {{ subscriptions[model.subscription_id].start }} End:
-            {{ subscriptions[model.subscription_id].end }}
+            {{ subscriptions[model.subscription_id].car_id }}
             {{ model.value / 100 + "zł" }}
             {{ "(netto: " + model.price / 100 + "zł)" }}
           </span>
@@ -36,6 +37,12 @@
           >
             <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </span>
+          <b-collapse :id="collapse_id(model.id)">
+            <b-card>
+              Start: {{ subscriptions[model.subscription_id].start }} End:
+              {{ subscriptions[model.subscription_id].end }}
+            </b-card>
+          </b-collapse>
         </b-list-group-item>
       </b-card>
     </b-card-group>
@@ -73,6 +80,9 @@ export default {
     };
   },
   methods: {
+    collapse_id(id) {
+      return "collapse-" + id;
+    },
     _newModel() {
       return {
         id: -1,

@@ -22,10 +22,19 @@
           v-on:remove-model="onRemoveModel($event)"
         ></client-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
+          <span v-b-toggle="collapse_id(model.id)">
+            <b-icon-caret-down class="when-open"></b-icon-caret-down>
+            <b-icon-caret-right class="when-closed"></b-icon-caret-right>
+          </span>
           <span role="button" @click.prevent="onEditModel(model.id)">
-            <b-icon-caret-right></b-icon-caret-right>
             {{ model.name }} {{ model.surname }}
           </span>
+          <b-collapse :id="collapse_id(model.id)">
+            <b-card>
+              Adres: {{ model.address || "-" }} Miasto: {{ model.city || "-" }}
+              Tel: {{ model.phone || "(Brak)"}}
+            </b-card>
+          </b-collapse>
         </b-list-group-item>
       </b-card>
     </b-card-group>
@@ -49,6 +58,9 @@ export default {
     };
   },
   methods: {
+    collapse_id(id) {
+      return "collapse-" + id;
+    },
     _newModel() {
       return {
         id: -1,
