@@ -24,7 +24,7 @@
               v-bind:key="car.id"
               :value="car.id"
             >
-              {{ car.plate }}
+              {{car.brand}} ({{ car.plate }})
             </b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
