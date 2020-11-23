@@ -4,14 +4,15 @@
       <b-card class="cars_list">
         <b-card-title>Samochody</b-card-title>
         <b-card-sub-title>
-          <span
+          <b-button
             role="button"
+            class="new_model"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
           >
             <b-icon-plus-circle></b-icon-plus-circle>
             Nowy
-          </span>
+          </b-button>
         </b-card-sub-title>
         <car-dialog
           :model="formModel"

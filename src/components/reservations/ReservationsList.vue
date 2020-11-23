@@ -4,14 +4,15 @@
       <b-card class="reservation_list">
         <b-card-title>Rezerwacje</b-card-title>
         <b-card-sub-title>
-          <span
+          <b-button
             role="button"
+            class="new_model"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
           >
             <b-icon-plus-circle></b-icon-plus-circle>
             Nowy
-          </span>
+          </b-button>
         </b-card-sub-title>
         <reservations-dialog
           :model="formModel"

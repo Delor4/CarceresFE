@@ -4,15 +4,15 @@
       <b-card>
         <b-card-title>Użytkownicy</b-card-title>
         <b-card-sub-title>
-          <span
-            class="new_user"
+          <b-button
+            class="new_model"
             role="button"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
           >
             <b-icon-person-plus></b-icon-person-plus>
             Nowy
-          </span>
+          </b-button>
         </b-card-sub-title>
         <user-dialog
           :model="formModel"

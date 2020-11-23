@@ -4,14 +4,15 @@
       <b-card class="clients_list">
         <b-card-title>Klienci</b-card-title>
         <b-card-sub-title>
-          <span
+          <b-button
             role="button"
+            class="new_model"
             @click="onCreateModel"
             :class="{ 'd-none': !!dialogFormVisible }"
           >
             <b-icon-person-plus></b-icon-person-plus>
             Nowy
-          </span>
+          </b-button>
         </b-card-sub-title>
         <client-dialog
           :model="formModel"
