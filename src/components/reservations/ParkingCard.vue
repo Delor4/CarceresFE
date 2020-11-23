@@ -24,17 +24,16 @@
             Miejsce: {{ card.place.nr }}
             {{ card.place.name ? "(" + card.place.name + ")" : "" }}
           </div>
-          <div>
-            Ważność: {{ convDate(card.subscription.end) }}
-            {{ convTime(card.subscription.end) }}
-          </div>
+          <div>Ważność: {{ convDateTime(card.subscription.end) }}</div>
           <div>
             <qrcode-vue
               :value="qrcode_value"
               :size="qrcode_size"
               level="H"
             ></qrcode-vue>
-            <barcode :value="barcode_value" width="3"> #number </barcode>
+            <barcode :value="barcode_value" width="3">
+              {{ "#" + barcode_value }}
+            </barcode>
           </div>
         </section>
         <div class="html2pdf__page-break" />
@@ -65,20 +64,6 @@ export default {
   methods: {
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
-    },
-    convDate(d) {
-      if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      return newDate.toISOString().split("T")[0];
-    },
-    convTime(d) {
-      if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      return newDate.toISOString().split("T")[1].split(".")[0];
     },
   },
   mounted() {},

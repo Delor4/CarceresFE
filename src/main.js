@@ -22,8 +22,32 @@ Vue.mixin({
     return {
       get api() {
         return api;
-      }
+      },
     }
+  },
+  methods: {
+    convDate: function (d) {
+      if (!d) return "";
+      d = new Date(d);
+      const offset = d.getTimezoneOffset();
+      var newDate = new Date(d.getTime() - offset * 60 * 1000);
+      return newDate.toISOString().split("T")[0];
+    },
+    convTime: function (d) {
+      if (!d) return "";
+      d = new Date(d);
+      const offset = d.getTimezoneOffset();
+      var newDate = new Date(d.getTime() - offset * 60 * 1000);
+      return newDate.toISOString().split("T")[1].split(".")[0];
+    },
+    convDateTime: function (d) {
+      if (!d) return "";
+      d = new Date(d);
+      const offset = d.getTimezoneOffset();
+      var newDate = new Date(d.getTime() - offset * 60 * 1000);
+      var newD = newDate.toISOString().split("T");
+      return newD[0] + ' ' + newD[1].split(".")[0]
+    },
   }
 })
 new Vue({

@@ -18,8 +18,10 @@
           </span>
           <span role="button" @click.prevent="onEditModel(model.id)">
             Miejsce:
-            {{ subscriptions[model.subscription_id].place_id }} Samochód:
-            {{ subscriptions[model.subscription_id].car_id }}
+            {{ subscriptions[model.subscription_id].place.zone.name }}/{{
+              subscriptions[model.subscription_id].place.nr
+            }},Samochód:
+            {{ subscriptions[model.subscription_id].car.brand }}
             <span
               :class="{
                 'payment-paid': model.paid,
@@ -39,8 +41,9 @@
           </span>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
-              Start: {{ subscriptions[model.subscription_id].start }} End:
-              {{ subscriptions[model.subscription_id].end }}
+              Start:
+              {{ convDateTime(subscriptions[model.subscription_id].start) }}
+              End: {{ convDateTime(subscriptions[model.subscription_id].end) }}
             </b-card>
           </b-collapse>
         </b-list-group-item>

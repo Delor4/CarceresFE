@@ -76,13 +76,6 @@ export default {
     generateReport() {
       this.$refs.html2Pdf.generatePdf();
     },
-    convDate(d) {
-      if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      return newDate.toISOString().split("T")[0];
-    },
   },
   mounted() {},
   components: {

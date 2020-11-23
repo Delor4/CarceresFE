@@ -13,14 +13,15 @@
         label="Samochód:"
         label-for="input-car"
       >
-        <b-form-select
-          id="input-car"
-          v-model="model.car_id"
-          :options="cars"
-          value-field="id"
-          text-field="plate"
-          required
-        ></b-form-select>
+        <b-form-select id="input-car" v-model="model.car_id" required>
+          <b-form-select-option
+            v-for="car in cars"
+            v-bind:key="car.id"
+            :value="car.id"
+          >
+            {{ car.brand }} ({{ car.plate }})
+          </b-form-select-option>
+        </b-form-select>
       </b-form-group>
       <b-form-group
         id="input-group-place"
