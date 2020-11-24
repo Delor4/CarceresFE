@@ -6,7 +6,6 @@
           v-for="(pin) in map.places"
           v-bind:key="pin.id"
           v-bind:pin="pin"
-          v-on:occupy-change="$emit('occupy-change', $event)"
     ></interactive-map-pin>
   </div>
   </div>

@@ -2,7 +2,6 @@
   <div>
     <interactive-map
       :map="map"
-      v-on:occupy-change="onOccupyChange($event)"
       v-on:zone-change="onZoneChange()"
     ></interactive-map>
   </div>
@@ -21,10 +20,6 @@ export default {
   },
 
   methods: {
-    onOccupyChange(id) {
-      this.map.places[id].occupied = !this.map.places[id].occupied;
-    },
-
     onZoneChange() {
       this.maps[this.curr_map] = this.map;
       var next_curr = -1;

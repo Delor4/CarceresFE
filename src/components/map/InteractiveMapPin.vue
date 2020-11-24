@@ -9,7 +9,6 @@
     role="button"
     v-b-tooltip.hover
     :title="'Nr: ' + pin.nr + (pin.name ? ' (' + pin.name + ')' : '')"
-    v-on:click="$emit('occupy-change', pin.id)"
   >
     <img v-if="pin.occupied" src="pin_red.png" /><img
       v-else
