@@ -51,10 +51,6 @@ export default {
         1: [
           // ADMIN
           {
-            name: "index",
-            id: "index",
-          },
-          {
             name: "Mapa",
             id: "map",
           },
@@ -86,13 +82,13 @@ export default {
             name: "Moje płatności",
             id: "payments_own",
           },
+          {
+            name: "Informacje",
+            id: "index",
+          },
         ],
         2: [
           // MOD
-          {
-            name: "index",
-            id: "index",
-          },
           {
             name: "Mapa",
             id: "map",
@@ -121,13 +117,13 @@ export default {
             name: "Moje płatności",
             id: "payments_own",
           },
+          {
+            name: "Informacje",
+            id: "index",
+          },
         ],
         3: [
           // CLIENT
-          {
-            name: "index",
-            id: "index",
-          },
           {
             name: "Mapa",
             id: "map",
@@ -140,16 +136,20 @@ export default {
             name: "Moje płatności",
             id: "payments_own",
           },
+          {
+            name: "Informacje",
+            id: "index",
+          },
         ],
         4: [
           // BOT
           {
-            name: "index",
-            id: "index",
-          },
-          {
             name: "Mapa",
             id: "map",
+          },
+          {
+            name: "Informacje",
+            id: "index",
           },
         ],
       },
@@ -167,7 +167,7 @@ export default {
       return ret;
     },
     setCard: async function (id) {
-      if (!this.checkIdAaccessibility(id)) id = "index";
+      if (!this.checkIdAaccessibility(id)) id = "map";
       if (id === this.showed_card) return;
 
       this.showed_card = id;
@@ -195,7 +195,7 @@ export default {
     },
   },
   mounted() {
-    this.setCard("index");
+    this.setCard("map");
   },
   components: {
     "login-user": LoginUser,
