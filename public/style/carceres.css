@@ -5,6 +5,7 @@ body.main {
 
 header {
   background-color: #14213d;
+  color: #ffffff;
   height: 100px;
   width: 100%;
   padding: 10px;
@@ -21,11 +22,16 @@ h1 {
   text-align: center;
 }
 
-.container-fluid {
+.container-wrapper {
   background-color: #ffffff;
   color: #000000;
   min-height: calc(100vh - 102px);
   border-top: 5px solid #e5e5e5;
+  margin-left: calc(20% + 5px);
+}
+
+.container-wrapper > * {
+  min-height: calc(100vh - 102px);
 }
 
 nav {
@@ -41,11 +47,11 @@ nav {
   min-height: calc(100vh - 102px);
 }
 
-li {
+nav li {
   padding: 10px 10px 10px 10px;
 }
 
-li:hover {
+nav li:hover {
   background-color: #fca311;
   text-decoration: underline;
   width: 100%;
@@ -115,7 +121,9 @@ input.pass {
   width: 100%;
   color: #14213d;
 }
-
+button.close, button.close:hover {
+  color: #ffffff;
+}
 .new_model:hover {
   font-weight: bold;
 }
@@ -123,4 +131,11 @@ input.pass {
 .collapsed > .when-open,
 .not-collapsed > .when-closed {
   display: none !important;
+}
+
+.payment-paid, .subs-paid {
+  background-color: greenyellow;
+}
+.payment-unpaid, .subs-unpaid {
+  background-color: #f77;
 }

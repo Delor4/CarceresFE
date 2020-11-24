@@ -21,7 +21,9 @@
             {{ subscriptions[model.subscription_id].place.zone.name }}/{{
               subscriptions[model.subscription_id].place.nr
             }}, Samochód:
-            {{ subscriptions[model.subscription_id].car.brand }}
+            {{ subscriptions[model.subscription_id].car.brand || "-" }} ({{
+              subscriptions[model.subscription_id].car.plate
+            }}),
             <span
               :class="{
                 'payment-paid': model.paid,
@@ -41,9 +43,14 @@
           </span>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
-              Start:
-              {{ convDateTime(subscriptions[model.subscription_id].start) }}
-              End: {{ convDateTime(subscriptions[model.subscription_id].end) }}
+              <div>
+                Start:
+                {{ convDateTime(subscriptions[model.subscription_id].start) }}
+              </div>
+              <div>
+                Koniec:
+                {{ convDateTime(subscriptions[model.subscription_id].end) }}
+              </div>
             </b-card>
           </b-collapse>
         </b-list-group-item>
@@ -197,10 +204,4 @@ export default {
 };
 </script>
 <style scoped>
-.payment-paid {
-  background-color: greenyellow;
-}
-.payment-unpaid {
-  background-color: #f77;
-}
 </style>

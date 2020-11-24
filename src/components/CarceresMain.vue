@@ -20,7 +20,7 @@
       ></login-user>
     </div>
 
-    <div ref="subcomponent" class="container-fluid">.</div>
+    <div ref="subcomponent" class="container-wrapper">.</div>
   </div>
 </template>
 
@@ -205,9 +205,4 @@ export default {
 </script>
 
 <style>
-.carceres_main {
-  background-color: #202020;
-  color: #e0e0e0;
-  text-align: center;
-}
 </style>

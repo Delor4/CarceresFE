@@ -36,7 +36,6 @@ export default {
 .map-zone
 {
   position: relative;
-  /*background-color: aqua;*/
   max-width: 100vh;
   display: block;
   margin-left: auto;

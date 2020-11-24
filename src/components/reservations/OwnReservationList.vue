@@ -29,12 +29,13 @@
               <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             </span>
             Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
-            {{ model.car.brand }}
+            {{ model.car.brand || "-" }} ({{ model.car.plate }}),
             <span :class="{ 'd-none': model.payment && model.payment.paid }">
               Do zapłaty
               {{
                 model.payment ? "" + model.payment.value / 100 + "zł" : "(?)"
               }}
+              {{ "(netto: " + model.payment.price / 100 + "zł)" }}
             </span>
           </span>
           <span
@@ -48,9 +49,8 @@
           </span>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
-              Start: {{ convDateTime(model.start) }} End:
-              {{ convDateTime(model.end) }} Typ:
-              {{ model.type }}
+              <div>Start: {{ convDateTime(model.start) }}</div>
+              <div>Koniec: {{ convDateTime(model.end) }}</div>
             </b-card>
           </b-collapse>
         </b-list-group-item>

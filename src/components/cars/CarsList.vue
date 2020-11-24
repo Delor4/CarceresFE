@@ -31,7 +31,10 @@
             {{ model.plate }}
           </span>
           <b-collapse :id="collapse_id(model.id)">
-            <b-card> Marka: {{model.brand}} Klient: {{ model.client.name }} </b-card>
+            <b-card>
+              <div>Marka: {{ model.brand || "-"}}</div>
+              <div>Klient: {{ model.client.name }}</div>
+            </b-card>
           </b-collapse>
         </b-list-group-item>
       </b-card>

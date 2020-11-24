@@ -29,7 +29,7 @@
               <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             </span>
             Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
-            {{ model.car.brand }}
+            {{ model.car.brand || "-" }} ({{ model.car.plate }}),
             <span
               :class="{
                 'subs-paid': model.payment && model.payment.paid,
@@ -37,6 +37,7 @@
               }"
             >
               {{ model.payment ? model.payment.value / 100 + "zł" : "?" }}
+              {{ "(netto: " + model.payment.price / 100 + "zł)" }}
             </span>
             <span
               v-if="
@@ -49,9 +50,8 @@
             </span>
             <b-collapse :id="collapse_id(model.id)">
               <b-card>
-                Start: {{ convDateTime(model.start) }} End:
-                {{ convDateTime(model.end) }} Typ:
-                {{ model.type }}
+                <div>Start: {{ convDateTime(model.start) }}</div>
+                <div>Koniec: {{ convDateTime(model.end) }}</div>
               </b-card>
             </b-collapse>
           </span>
@@ -200,10 +200,4 @@ export default {
 };
 </script>
 <style scoped>
-.subs-paid {
-  background-color: greenyellow;
-}
-.subs-unpaid {
-  background-color: #f77;
-}
 </style>
