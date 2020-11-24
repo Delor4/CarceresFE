@@ -29,7 +29,7 @@
         label-for="input-place"
       >
         <b-form-select id="input-place" v-model="model.place_id" required>
-          <b-form-select-option :value="null">
+          <b-form-select-option :value="null" disabled>
             Wybierz miejsce:
           </b-form-select-option>
           <b-form-select-option-group
