@@ -5,11 +5,7 @@
     </header>
 
     <!--Menu-->
-    <carceres-nav
-      :user="api.auth.user"
-      :nav_links="nav_links"
-      v-on:showed-card-change="onShowedCardChange($event)"
-    ></carceres-nav>
+    <carceres-nav :user="api.auth.user"></carceres-nav>
 
     <!--Logowanie-->
     <div>
@@ -32,56 +28,7 @@ import CarceresNav from "@/components/CarceresNav.vue";
 
 export default {
   data: function () {
-    return {
-      shared_data: {},
-      nav_links: [
-        {
-          name: "Mapa",
-          path: "/map",
-          min_rights: 4,
-        },
-        {
-          name: "Użytkownicy",
-          path: "/users",
-          min_rights: 1,
-        },
-        {
-          name: "Klienci",
-          path: "/clients",
-          min_rights: 2,
-        },
-        {
-          name: "Samochody",
-          path: "/cars",
-          min_rights: 2,
-        },
-        {
-          name: "Rezerwacje",
-          path: "/reservations",
-          min_rights: 2,
-        },
-        {
-          name: "Płatności",
-          path: "/payments",
-          min_rights: 2,
-        },
-        {
-          name: "Moje rezerwacje",
-          path: "/ownreservations",
-          min_rights: 3,
-        },
-        {
-          name: "Moje płatności",
-          path: "/ownpayments",
-          min_rights: 3,
-        },
-        {
-          name: "Informacje",
-          path: "/",
-          min_rights: 4,
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     onLoginUser: function (data) {
