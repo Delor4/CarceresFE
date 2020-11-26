@@ -47,11 +47,14 @@ nav {
   min-height: calc(100vh - 102px);
 }
 
-nav li {
+nav a {
+  display: block;
   padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  color: #fff;
 }
 
-nav li:hover {
+nav a:hover {
   background-color: #fca311;
   text-decoration: underline;
   width: 100%;
