@@ -59,7 +59,7 @@ export default {
         },
         {
           name: "Informacje",
-          path: "/",
+          path: "/main",
           min_rights: 4,
         },
       ],
