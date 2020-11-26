@@ -1,14 +1,14 @@
 <template>
   <nav>
-    <ul class="navbar-nav">
-      <li class="nav-item" role="button"
-        v-for="(card, index) in nav_cards[current_access_rights]"
-        v-bind:key="index"
-        @click="$emit('showed-card-change', card.id)"
-      >
-        {{ card.name }}
-      </li>
-    </ul>
+    <router-link
+      v-for="(card, index) in allowed_nav_links"
+      v-bind:key="index"
+      :to="card.path"
+      class="nav-item"
+      role="button"
+    >
+      {{ card.name }}
+    </router-link>
   </nav>
 </template>
 
@@ -20,11 +20,13 @@ export default {
   methods: {},
   mounted() {},
   components: {},
-  props: ["user", "nav_cards"],
+  props: ["user", "nav_links"],
   computed: {
-    current_access_rights() {
-      var current_access_rights = this.user ? this.user.user_type : 4;
-      return current_access_rights;
+    allowed_nav_links() {
+      const current_access_rights = this.user ? this.user.user_type : 4;
+      return this.nav_links.filter(function (el) {
+        return el.min_rights >= current_access_rights;
+      });
     },
   },
 };

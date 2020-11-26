@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Carceres from '@/components/CarceresMain.vue'
-//import router from './router'
+import router from './router'
 import store from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -51,7 +51,7 @@ Vue.mixin({
   }
 })
 new Vue({
-  //router,
+  router,
   store,
   render: h => h(Carceres),
 }).$mount('#carceres')

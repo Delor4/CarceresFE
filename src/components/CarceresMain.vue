@@ -7,7 +7,7 @@
     <!--Menu-->
     <carceres-nav
       :user="api.auth.user"
-      :nav_cards="nav_cards"
+      :nav_links="nav_links"
       v-on:showed-card-change="onShowedCardChange($event)"
     ></carceres-nav>
 
@@ -20,7 +20,9 @@
       ></login-user>
     </div>
 
-    <div ref="subcomponent" class="container-wrapper">.</div>
+    <div ref="subcomponent" class="container-wrapper">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -32,127 +34,54 @@ import CarceresNav from "@/components/CarceresNav.vue";
 export default {
   data: function () {
     return {
-      showed_card: "",
       shared_data: {},
-      views: {
-        index: () => import("@/components/index/Index.vue"),
-        map: () => import("@/components/map/InteractiveMaps.vue"),
-        users_list: () => import("@/components/users/UsersList.vue"),
-        clients_list: () => import("@/components/clients/ClientsList.vue"),
-        cars_list: () => import("@/components/cars/CarsList.vue"),
-        reservations_own: () =>
-          import("@/components/reservations/OwnReservationList.vue"),
-        reservations_list: () =>
-          import("@/components/reservations/ReservationsList.vue"),
-        payments_own: () => import("@/components/payments/OwnPaymentsList.vue"),
-        payments_list: () => import("@/components/payments/PaymentsList.vue"),
-      },
-      nav_cards: {
-        1: [
-          // ADMIN
-          {
-            name: "Mapa",
-            id: "map",
-          },
-          {
-            name: "Użytkownicy",
-            id: "users_list",
-          },
-          {
-            name: "Klienci",
-            id: "clients_list",
-          },
-          {
-            name: "Samochody",
-            id: "cars_list",
-          },
-          {
-            name: "Rezerwacje",
-            id: "reservations_list",
-          },
-          {
-            name: "Płatności",
-            id: "payments_list",
-          },
-          {
-            name: "Moje rezerwacje",
-            id: "reservations_own",
-          },
-          {
-            name: "Moje płatności",
-            id: "payments_own",
-          },
-          {
-            name: "Informacje",
-            id: "index",
-          },
-        ],
-        2: [
-          // MOD
-          {
-            name: "Mapa",
-            id: "map",
-          },
-          {
-            name: "Klienci",
-            id: "clients_list",
-          },
-          {
-            name: "Samochody",
-            id: "cars_list",
-          },
-          {
-            name: "Rezerwacje",
-            id: "reservations_list",
-          },
-          {
-            name: "Płatności",
-            id: "payments_list",
-          },
-          {
-            name: "Moje rezerwacje",
-            id: "reservations_own",
-          },
-          {
-            name: "Moje płatności",
-            id: "payments_own",
-          },
-          {
-            name: "Informacje",
-            id: "index",
-          },
-        ],
-        3: [
-          // CLIENT
-          {
-            name: "Mapa",
-            id: "map",
-          },
-          {
-            name: "Moje rezerwacje",
-            id: "reservations_own",
-          },
-          {
-            name: "Moje płatności",
-            id: "payments_own",
-          },
-          {
-            name: "Informacje",
-            id: "index",
-          },
-        ],
-        4: [
-          // BOT
-          {
-            name: "Mapa",
-            id: "map",
-          },
-          {
-            name: "Informacje",
-            id: "index",
-          },
-        ],
-      },
+      nav_links: [
+        {
+          name: "Mapa",
+          path: "/map",
+          min_rights: 4,
+        },
+        {
+          name: "Użytkownicy",
+          path: "/users",
+          min_rights: 1,
+        },
+        {
+          name: "Klienci",
+          path: "/clients",
+          min_rights: 2,
+        },
+        {
+          name: "Samochody",
+          path: "/cars",
+          min_rights: 2,
+        },
+        {
+          name: "Rezerwacje",
+          path: "/reservations",
+          min_rights: 2,
+        },
+        {
+          name: "Płatności",
+          path: "/payments",
+          min_rights: 2,
+        },
+        {
+          name: "Moje rezerwacje",
+          path: "/ownreservations",
+          min_rights: 3,
+        },
+        {
+          name: "Moje płatności",
+          path: "/ownpayments",
+          min_rights: 3,
+        },
+        {
+          name: "Informacje",
+          path: "/",
+          min_rights: 4,
+        },
+      ],
     };
   },
   methods: {
@@ -184,18 +113,18 @@ export default {
     },
     onLoginUser: function (data) {
       this.api.login(data.name, data.pass);
-      this.setCard(this.showed_card);
+      //this.setCard(this.showed_card);
     },
     onLogoutUser: function () {
       this.api.logout();
-      this.setCard(this.showed_card);
+      //this.setCard(this.showed_card);
     },
-    onShowedCardChange: function (id) {
-      this.setCard(id);
+    onShowedCardChange: function () {
+      //this.setCard(id);
     },
   },
   mounted() {
-    this.setCard("map");
+    //this.setCard("map");
   },
   components: {
     "login-user": LoginUser,
