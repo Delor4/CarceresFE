@@ -40,9 +40,7 @@ export default {
       this.$router.push({ path: "/" });
     },
   },
-  mounted() {
-    this.$router.replace({ path: "/" });
-  },
+  mounted() {},
   components: {
     "login-user": LoginUser,
     "carceres-nav": CarceresNav,
