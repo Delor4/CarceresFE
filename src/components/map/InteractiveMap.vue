@@ -6,6 +6,7 @@
           v-for="(pin) in map.places"
           v-bind:key="pin.id"
           v-bind:pin="pin"
+          v-bind:subscriptions="subscriptions"
     ></interactive-map-pin>
   </div>
   </div>
@@ -17,13 +18,18 @@ import IPin from '@/components/map/InteractiveMapPin.vue'
 export default {
    data: function() {
         return {
-
+          subscriptions : null
         };
     },
   props: ['map'],
   methods: {
+        async loadData(){
+        this.subscriptions = await this.api.getSubscription(1)
+      
+    }
   },
   mounted () {
+    this.loadData()
   },
   components: {
     'interactive-map-pin': IPin,
