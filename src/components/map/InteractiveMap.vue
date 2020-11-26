@@ -24,7 +24,7 @@ export default {
   props: ['map'],
   methods: {
         async loadData(){
-        this.subscriptions = await this.api.getSubscription(1)
+        this.subscriptions = await this.api.getSubscriptions("desc(end)")
       
     }
   },

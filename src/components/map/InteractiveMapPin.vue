@@ -27,12 +27,20 @@ export default {
   props: ["pin","subscriptions"],
   methods: {
     tooltipText(number){
+      var out = '<strong>Nr: ' + number
+      var dane = this.subscriptions.results;
+      var dataKonca;
+      dane.map(dana => {
+        let place = dana.place_id;
+        if(place == number){
+          dataKonca = dana.end
+        }
+      })    
       if(this.pin.occupied){
-        return '<strong>Nr: ' + number + '</strong><br/>Zarezerowany do:<br/>' + '<strong>' + this.convDate(this.subscriptions.end) + '</strong>'
-
+        return out + '</strong><br/>Zarezerowany do:<br/>' + '<strong>' + this.convDate(dataKonca) + '</strong>'
       }
       else{
-        return '<strong>Nr: ' + number + '<br/>Wolny</strong>'
+        return out +  '<br/>Wolny</strong>'
       }
     },
   },
