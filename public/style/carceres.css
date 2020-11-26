@@ -142,3 +142,11 @@ button.close, button.close:hover {
 .payment-unpaid, .subs-unpaid {
   background-color: #f77;
 }
+
+router-link-active {
+  background-color: #fca311;
+  text-decoration: underline;
+  width: 100%;
+  color: #14213d;
+  padding-left: 20px;
+}
