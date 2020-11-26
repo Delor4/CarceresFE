@@ -51,6 +51,11 @@ const routes = [
     name: 'OwnPayments',
     component: () => import(/* webpackChunkName: "ownpayments" */ "@/components/payments/OwnPaymentsList.vue"),
   },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import(/* webpackChunkName: "settings" */ "@/components/settings/Settings.vue"),
+  },
 ]
 
 const router = new VueRouter({

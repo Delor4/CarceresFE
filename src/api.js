@@ -57,7 +57,19 @@ class Api {
   logout = function () {
     api._removeTokens()
   }
+  checkPass = async function (password) {
+    return await this.api.get(`/api/login`, {
+      auth: {
+        username: this.auth.user.name,
+        password: password
+      }
+    }).then(() => {
+      return true;
+    }).catch(() => {
+      return false;
+    })
 
+  }
   /* METHODS */
   get = async function (...args) {
     return await this.api.get.apply(this.api, args).then(this._getData).catch(this._errorHandle);
