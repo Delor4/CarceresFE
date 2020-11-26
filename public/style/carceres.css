@@ -150,3 +150,31 @@ nav a.router-link-active {
   color: #14213d;
   padding-left: 20px;
 }
+
+.user_settings {
+  width: 50%;
+  float: left;
+  text-align: left;
+}
+
+div.user_settings span {
+  display: block;
+  margin-left: 30px;
+}
+
+div.user_settings span.user_data {
+  display: inline-block;
+  /* padding-left: 30px; */
+}
+
+.user_password {
+  width: 50%;
+  float:right;
+  text-align: left;
+}
+
+form.user_password input{
+  display: block;
+  margin-right: 30px;
+  text-align: left;
+}
