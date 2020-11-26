@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import LoginUser from "@/components/LoginUser.vue";
 import CarceresNav from "@/components/CarceresNav.vue";
 
@@ -85,46 +84,17 @@ export default {
     };
   },
   methods: {
-    checkIdAaccessibility(id) {
-      var current_access_rights = this.api.auth.user
-        ? this.api.auth.user.user_type
-        : 4;
-      var ret = false;
-      this.nav_cards[current_access_rights].forEach((card) => {
-        if (id == card.id) ret = true;
-      });
-      return ret;
-    },
-    setCard: async function (id) {
-      if (!this.checkIdAaccessibility(id)) id = "map";
-      if (id === this.showed_card) return;
-
-      this.showed_card = id;
-      var comp = await this.views[this.showed_card]();
-      var ComponentClass = Vue.extend(comp.default);
-      var instance = new ComponentClass({
-        propsData: { shared_data: this.shared_data },
-      });
-      instance.$mount();
-      this.$refs.subcomponent.replaceChild(
-        instance.$el,
-        this.$refs.subcomponent.firstChild
-      );
-    },
     onLoginUser: function (data) {
       this.api.login(data.name, data.pass);
-      //this.setCard(this.showed_card);
+      this.$router.push({ path: "/" });
     },
     onLogoutUser: function () {
       this.api.logout();
-      //this.setCard(this.showed_card);
-    },
-    onShowedCardChange: function () {
-      //this.setCard(id);
+      this.$router.push({ path: "/" });
     },
   },
   mounted() {
-    //this.setCard("map");
+    this.$router.replace({ path: "/" });
   },
   components: {
     "login-user": LoginUser,
