@@ -2,38 +2,37 @@
   <div>
     <h4>Ustawienia</h4>
     <div v-if="client != null">
-      <div>Imię: {{ client.name }}</div>
-      <div>Nazwisko: {{ client.surname }}</div>
-      <div>Adres: {{ client.address || "-" }}</div>
-      <div>Miasto: {{ client.city || "-" }}</div>
-      <div>Telefon: {{ client.phone || "-" }}</div>
-      <div>Data urodzenia: {{ client.birthday || "-" }}</div>
-      <div>
-        Email: {{ client.user && client.user.email ? client.user.email : "-" }}
+      <div class="user_settings">
+        <span>Imię: <span class="user_data">{{ client.name }}</span></span>
+        <span>Nazwisko: <span class="user_data">{{ client.surname }}</span></span>
+        <span>Adres: <span class="user_data">{{ client.address || "-" }}</span></span>
+        <span>Miasto: <span class="user_data">{{ client.city || "-" }}</span></span>
+        <span>Telefon: <span class="user_data">{{ client.phone || "-" }}</span></span>
+        <span>Data urodzenia: <span class="user_data">{{ client.birthday || "-" }}</span></span>
+        <span>Email: <span class="user_data">{{ client.user && client.user.email ? client.user.email : "-" }}</span></span>
       </div>
-      <div>
-        <b-form @submit.prevent="onSubmit">
-          <b-form-input
-            type="password"
-            v-model="form.pass_old"
-            placeholder="Poprzednie hasło"
-            class="pass"
-          />
-          <b-form-input
-            type="password"
-            v-model="form.pass_new"
-            placeholder="Nowe hasło"
-            class="pass"
-          />
-          <b-form-input
-            type="password"
-            v-model="form.pass_new_second"
-            placeholder="Powtórz hasło"
-            class="pass"
-          />
-          <b-button type="submit" variant="primary">Zmień hasło</b-button>
-        </b-form>
-      </div>
+      <h6>Zmiana Hasła</h6>
+      <b-form @submit.prevent="onSubmit" class="user_password">
+        <b-form-input
+          type="password"
+          v-model="form.pass_old"
+          placeholder="Poprzednie hasło"
+          class="pass"
+        />
+        <b-form-input
+          type="password"
+          v-model="form.pass_new"
+          placeholder="Nowe hasło"
+          class="pass"
+        />
+        <b-form-input
+          type="password"
+          v-model="form.pass_new_second"
+          placeholder="Powtórz hasło"
+          class="pass"
+        />
+        <b-button type="submit" variant="primary">Zmień hasło</b-button>
+      </b-form>
     </div>
   </div>
 </template>

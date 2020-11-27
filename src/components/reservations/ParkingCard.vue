@@ -18,11 +18,15 @@
       <section slot="pdf-content">
         <section class="pdf-item">
           <h4>Karta parkingowa</h4>
-          <div>Nr rej.: {{ card.car.plate }}</div>
-          <div>Parking: {{ card.zone.name }}</div>
+          <div>Nr rej.: {{ card.subscription.car.plate }}</div>
+          <div>Parking: {{ card.subscription.place.zone.name }}</div>
           <div>
-            Miejsce: {{ card.place.nr }}
-            {{ card.place.name ? "(" + card.place.name + ")" : "" }}
+            Miejsce: {{ card.subscription.place.nr }}
+            {{
+              card.subscription.place.name
+                ? "(" + card.subscription.place.name + ")"
+                : ""
+            }}
           </div>
           <div>Ważność: {{ convDateTime(card.subscription.end) }}</div>
           <div>
