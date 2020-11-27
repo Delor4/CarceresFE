@@ -27,21 +27,30 @@ export default {
   props: ["pin","subscriptions"],
   methods: {
     tooltipText(number){
-      var out = '<strong>Nr: ' + number
-      var dane = this.subscriptions.results;
-      var dataKonca;
-      dane.map(dana => {
-        let place = dana.place_id;
-        if(place == number){
-          dataKonca = dana.end
+      var out = '<strong>Nr: ' + number + '</strong>'
+      const subscription = this.subscriptions.results.find(x => x.place.occupied == true  && x.place_id == this.pin.id);
+      if(subscription != null){
+        let endDate = this.convDate(subscription.end)
+        let clientData = subscription.car.client.name + ' ' +  subscription.car.client.surname
+        let carData = subscription.car.brand
+        let carPlates = subscription.car.plate
+        if(endDate != null){
+          out+= '<br/>Rezerowacja do:<br/>' + '<strong>' + endDate 
         }
-      })    
-      if(this.pin.occupied){
-        return out + '</strong><br/>Zarezerowany do:<br/>' + '<strong>' + this.convDate(dataKonca) + '</strong>'
+        if(clientData != null){
+          out+= '<br/></strong>Klient: <strong><br/>'+ clientData 
+        }
+        if(carData != null){
+          out+=  '<br/></strong>Samochód: <strong><br/>'+ carData 
+        }
+        if(carPlates != null){
+          out +='<br/></strong>Numer rejestracyjny: <strong><br/>'+ carPlates 
+        }
+        return out 
       }
       else{
-        return out +  '<br/>Wolny</strong>'
-      }
+         return out +=  '<strong><br/>Wolny</strong>'
+       }
     },
   },
   mounted() {
