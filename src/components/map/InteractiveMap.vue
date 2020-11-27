@@ -24,27 +24,30 @@ export default {
   },
   props: ["map"],
   methods: {
-    checkUserRights() {
-      var current_access_rights = this.api.auth.user
+    async loadData() {
+      const self = this;
+      const current_access_rights = this.api.auth.user
         ? this.api.auth.user.user_type
         : 4;
-      return current_access_rights;
-    },
-    async loadData(id) {
-      if (id == 1 || id == 2) {
-        this.subscriptions = await this.api.getSubscriptions("desc(end)");
-      }
-      if (id == 3) {
-        this.subscriptions = await this.api.getOwnSubscriptions("desc(end)");
-      }
-      if (id == 4) {
+      if (current_access_rights <= 2) {
+        this.subscriptions = await this.api
+          .getSubscriptions("desc(end)")
+          .then(async (resp) => {
+            return await self.api.getRest(resp);
+          });
+      } else if (current_access_rights == 3) {
+        this.subscriptions = await this.api
+          .getOwnSubscriptions("desc(end)")
+          .then(async (resp) => {
+            return await self.api.getRest(resp);
+          });
+      } else {
         this.subscriptions = null;
       }
     },
   },
   mounted() {
-    var id = this.checkUserRights();
-    this.loadData(id);
+    this.loadData();
   },
   components: {
     "interactive-map-pin": IPin,
