@@ -301,11 +301,11 @@ class Api {
 
   /* Errors in methods this.get(), this.post(), ... */
   _errorHandle = function (error) {
-    if (error.response.status == 401) {
+    if (error.response && error.response.status == 401) {
       console.log('Refreshing token...');
       return api._refresh(error)
     }
-    this.err.showError("Błąd połączenia z serwerem.");
+    api.err.showError("Błąd połączenia z serwerem.");
     return Promise.reject(error);
   }
 
@@ -321,7 +321,7 @@ class Api {
       err.config.headers['x-access-tokens'] = getAccessToken();
       return api.api.request(err.config).then(api._getData)
     }).catch(error => {
-      this.err.showError("Błąd połączenia z serwerem.");
+      api.err.showError("Błąd połączenia z serwerem.");
       return Promise.reject(error);
     });
   }
