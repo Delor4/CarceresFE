@@ -23,13 +23,22 @@ export default {
     },
   props: ['map'],
   methods: {
-        async loadData(){
-        this.subscriptions = await this.api.getSubscriptions("desc(end)")
-      
-    }
+        checkUserRights(){
+          var current_access_rights = this.api.auth.user ? this.api.auth.user.user_type : 4;
+          return current_access_rights;
+        },
+        async loadData(id){  
+          if(id == 1 || id ==2){
+            this.subscriptions = await this.api.getSubscriptions("desc(end)")
+          }
+          if(id == 4 || id == 3){
+            this.subscriptions = await this.api.getOwnSubscriptions("desc(end)");
+          }
+        },
   },
   mounted () {
-    this.loadData()
+    var id =  this.checkUserRights();
+    this.loadData(id)
   },
   components: {
     'interactive-map-pin': IPin,

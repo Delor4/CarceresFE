@@ -49,8 +49,13 @@ export default {
         return out 
       }
       else{
-         return out +=  '<strong><br/>Wolny</strong>'
+        if(this.pin.occupied){
+           return out +=  '<strong><br/>Zajęte</strong>'
        }
+        
+         return out +=  '<strong><br/>Wolne</strong>'
+       
+      }
     },
   },
   mounted() {
