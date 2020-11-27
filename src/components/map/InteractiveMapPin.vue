@@ -27,9 +27,10 @@ export default {
   props: ["pin","subscriptions"],
   methods: {
     tooltipText(number){
-      var out = '<strong>Nr: ' + number + '</strong>'
-      const subscription = this.subscriptions.results.find(x => x.place.occupied == true  && x.place_id == this.pin.id);
-      if(subscription != null){
+      var out = '<strong>Nr: ' + number + '</strong>' 
+      
+        const subscription = this.subscriptions ? this.subscriptions.results.find(x => x.place.occupied == true  && x.place_id == this.pin.id) : null;
+       if(subscription != null){
         let endDate = this.convDate(subscription.end)
         let clientData = subscription.car.client.name + ' ' +  subscription.car.client.surname
         let carData = subscription.car.brand
@@ -47,15 +48,13 @@ export default {
           out +='<br/></strong>Numer rejestracyjny: <strong><br/>'+ carPlates 
         }
         return out 
-      }
-      else{
-        if(this.pin.occupied){
+        }
+        else{
+          if(this.pin.occupied){
            return out +=  '<strong><br/>Zajęte</strong>'
-       }
-        
-         return out +=  '<strong><br/>Wolne</strong>'
-       
-      }
+          }
+          return out +=  '<strong><br/>Wolne</strong>'
+        }
     },
   },
   mounted() {

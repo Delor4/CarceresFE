@@ -31,8 +31,11 @@ export default {
           if(id == 1 || id ==2){
             this.subscriptions = await this.api.getSubscriptions("desc(end)")
           }
-          if(id == 4 || id == 3){
+          if(id == 3){
             this.subscriptions = await this.api.getOwnSubscriptions("desc(end)");
+          }
+          if(id == 4){
+            this.subscriptions = null;
           }
         },
   },
