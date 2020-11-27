@@ -7,9 +7,8 @@
       top: '' + pin.pos_y + '%',
     }"
     role="button"
-    v-b-tooltip.hover.html="{ variant: 'primary'}"
-    :title= "tooltipText(this.pin.nr)"
-    
+    v-b-tooltip.hover.html="{ variant: 'primary' }"
+    :title="tooltipText(this.pin.nr)"
   >
     <img v-if="pin.occupied" src="pin_red.png" /><img
       v-else
@@ -21,45 +20,46 @@
 <script>
 export default {
   data: function () {
-    return {
-    };
+    return {};
   },
-  props: ["pin","subscriptions"],
+  props: ["pin", "subscriptions"],
   methods: {
-    tooltipText(number){
-      var out = '<strong>Nr: ' + number + '</strong>' 
-      
-        const subscription = this.subscriptions ? this.subscriptions.results.find(x => x.place.occupied == true  && x.place_id == this.pin.id) : null;
-       if(subscription != null){
-        let endDate = this.convDate(subscription.end)
-        let clientData = subscription.car.client.name + ' ' +  subscription.car.client.surname
-        let carData = subscription.car.brand
-        let carPlates = subscription.car.plate
-        if(endDate != null){
-          out+= '<br/>Rezerowacja do:<br/>' + '<strong>' + endDate 
+    tooltipText(number) {
+      var out = "<strong>Nr: " + number + "</strong>";
+
+      const subscription = this.subscriptions
+        ? this.subscriptions.results.find(
+            (x) => x.place.occupied == true && x.place_id == this.pin.id
+          )
+        : null;
+      if (subscription != null) {
+        let endDate = this.convDate(subscription.end);
+        let clientData =
+          subscription.car.client.name + " " + subscription.car.client.surname;
+        let carData = subscription.car.brand;
+        let carPlates = subscription.car.plate;
+        if (endDate != null) {
+          out += "<br/>Rezerowacja do:<br/>" + "<strong>" + endDate;
         }
-        if(clientData != null){
-          out+= '<br/></strong>Klient: <strong><br/>'+ clientData 
+        if (clientData != null) {
+          out += "<br/></strong>Klient: <strong><br/>" + clientData;
         }
-        if(carData != null){
-          out+=  '<br/></strong>Samochód: <strong><br/>'+ carData 
+        if (carData != null) {
+          out += "<br/></strong>Samochód: <strong><br/>" + carData;
         }
-        if(carPlates != null){
-          out +='<br/></strong>Numer rejestracyjny: <strong><br/>'+ carPlates 
+        if (carPlates != null) {
+          out += "<br/></strong>Numer rejestracyjny: <strong><br/>" + carPlates;
         }
-        return out 
+        return out;
+      } else {
+        if (this.pin.occupied) {
+          return (out += "<strong><br/>Zajęte</strong>");
         }
-        else{
-          if(this.pin.occupied){
-           return out +=  '<strong><br/>Zajęte</strong>'
-          }
-          return out +=  '<strong><br/>Wolne</strong>'
-        }
+        return (out += "<strong><br/>Wolne</strong>");
+      }
     },
   },
-  mounted() {
-    
-  },
+  mounted() {},
   components: {},
 };
 </script>
