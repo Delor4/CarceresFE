@@ -17,6 +17,7 @@
     </div>
 
     <div ref="subcomponent" class="container-wrapper">
+      <errors></errors>
       <router-view></router-view>
     </div>
   </div>
@@ -25,6 +26,7 @@
 <script>
 import LoginUser from "@/components/LoginUser.vue";
 import CarceresNav from "@/components/CarceresNav.vue";
+import Errors from "@/components/common/Errors.vue";
 
 export default {
   data: function () {
@@ -44,6 +46,7 @@ export default {
   components: {
     "login-user": LoginUser,
     "carceres-nav": CarceresNav,
+    errors: Errors,
   },
 };
 </script>
