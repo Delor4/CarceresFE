@@ -16,7 +16,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.config.productionTip = false
 /* API */
 import api from "./api";
-import err from "./errors";
 
 Vue.mixin({
   data: function () {
@@ -25,7 +24,7 @@ Vue.mixin({
         return api;
       },
       get err() {
-        return err;
+        return api.err;
       },
     }
   },

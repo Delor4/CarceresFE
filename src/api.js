@@ -1,5 +1,5 @@
 import Axios from "axios"
-
+import err from "./errors";
 
 const getAccessToken = () => localStorage.getItem("access_token");
 const getRefreshToken = () => localStorage.getItem("refresh_token");
@@ -40,6 +40,7 @@ class Api {
       return config;
     });
     this._updateAuthorizedStatus()
+    this.err = err
   }
 
   /* login */
@@ -304,7 +305,7 @@ class Api {
       console.log('Refreshing token...');
       return api._refresh(error)
     }
-    console.log('Http error: ', error);
+    this.err.showError("Błąd połączenia z serwerem.");
     return Promise.reject(error);
   }
 
@@ -319,6 +320,9 @@ class Api {
       /* rerun request with new token */
       err.config.headers['x-access-tokens'] = getAccessToken();
       return api.api.request(err.config).then(api._getData)
+    }).catch(error => {
+      this.err.showError("Błąd połączenia z serwerem.");
+      return Promise.reject(error);
     });
   }
 
