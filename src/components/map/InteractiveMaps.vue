@@ -21,32 +21,15 @@ export default {
 
   methods: {
     onZoneChange() {
-      this.maps[this.curr_map] = this.map;
-      var next_curr = -1;
-      var get_next = false;
-      for (var i in this.maps) {
-        if (get_next) {
-          next_curr = i;
-          get_next = false;
-          break;
-        }
-        if (i == this.curr_map) {
-          get_next = true;
-        }
+      this.curr_map++;
+      if (this.curr_map >= this.maps.length) {
+        this.curr_map = 0;
       }
-      if (next_curr == -1) next_curr = 1;
-
-      this.curr_map = next_curr;
       this.map = this.maps[this.curr_map];
     },
 
     async loadMaps() {
-      var zones = await this.api.getZones();
-      this.maps = zones.results;
-      while (zones.hasNext()) {
-        zones = await this.api.getNext(zones);
-        this.maps.push(...zones.results);
-      }
+      this.maps = await this.api.getAll(this.api.getZones);
       this.map = this.maps[this.curr_map];
     },
   },
