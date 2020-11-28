@@ -146,12 +146,6 @@ export default {
       this.receipt.subscription = await this.api.getSubscription(
         model.subscription_id
       );
-      this.receipt.car = await this.api.getCar(
-        this.receipt.subscription.car_id
-      );
-      this.receipt.client = await this.api.getClient(
-        this.receipt.car.client_id
-      );
       this.$refs.payment_pdf.generateReport();
     },
     async saveModel() {
