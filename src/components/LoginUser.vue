@@ -3,7 +3,7 @@
   <div class="user_login">
     <div class="input_forms_group">
       <b-form
-        v-on:submit.prevent="login()"
+        v-on:submit.prevent="login"
         :hidden="auth.authorized"
         class="login_form"
       >
@@ -12,15 +12,17 @@
           v-model="name"
           placeholder="Login"
           class="login"
+          @keydown.enter.native="login"
         />
         <b-form-input
           type="password"
           v-model="pass"
           placeholder="Hasło"
           class="pass"
+          @keydown.enter.native="login"
         />
         <div class="login_btn">
-          <b-button variant="success" @click="login()"> Zaloguj </b-button>
+          <b-button variant="success" @click="login"> Zaloguj </b-button>
         </div>
       </b-form>
       <span :hidden="!auth.authorized" class="user_notify">
