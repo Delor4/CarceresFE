@@ -35,11 +35,11 @@ export default {
   methods: {
     onLoginUser: function (data) {
       this.api.login(data.name, data.pass);
-      this.$router.push({ path: "/" });
+      if (this.$route.path !== "/") this.$router.push("/");
     },
     onLogoutUser: function () {
       this.api.logout();
-      this.$router.push({ path: "/" });
+      if (this.$route.path !== "/") this.$router.push("/");
     },
   },
   mounted() {},
