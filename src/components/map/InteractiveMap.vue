@@ -26,9 +26,7 @@ export default {
   methods: {
     async loadData() {
       const self = this;
-      const current_access_rights = this.api.auth.user
-        ? this.api.auth.user.user_type
-        : 4;
+      const current_access_rights = this.getCurrentAccessRights();
       if (current_access_rights <= 2) {
         this.subscriptions = await this.api
           .getSubscriptions("desc(end)")

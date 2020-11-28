@@ -51,6 +51,9 @@ Vue.mixin({
       var newD = newDate.toISOString().split("T");
       return newD[0] + ' ' + newD[1].split(".")[0]
     },
+    getCurrentAccessRights() {
+      return this.api.auth.user ? this.api.auth.user.user_type : 4;
+    },
   }
 })
 new Vue({
