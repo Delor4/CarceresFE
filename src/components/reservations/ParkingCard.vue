@@ -16,28 +16,45 @@
       ref="html2Pdf"
     >
       <section slot="pdf-content">
-        <section class="pdf-item">
-          <h4>Karta parkingowa</h4>
-          <div>Nr rej.: {{ card.subscription.car.plate }}</div>
-          <div>Parking: {{ card.subscription.place.zone.name }}</div>
-          <div>
-            Miejsce: {{ card.subscription.place.nr }}
-            {{
-              card.subscription.place.name
-                ? "(" + card.subscription.place.name + ")"
-                : ""
-            }}
+        <section class="pdf-item page1">
+          <div class="idcodes">
+            <div class="codescontainer" id="container">
+              <barcode
+                :value="barcode_value"
+                width="3"
+                class="barcode"
+                textPosition="bottom"
+              >
+                {{ "#" + barcode_value }}
+              </barcode>
+              <qrcode-vue
+                :value="qrcode_value"
+                :size="qrcode_size"
+                level="H"
+                class="qrcode"
+              ></qrcode-vue>
+            </div>
           </div>
-          <div>Ważność: {{ convDateTime(card.subscription.end) }}</div>
-          <div>
-            <qrcode-vue
-              :value="qrcode_value"
-              :size="qrcode_size"
-              level="H"
-            ></qrcode-vue>
-            <barcode :value="barcode_value" width="3">
-              {{ "#" + barcode_value }}
-            </barcode>
+          <div class="card_content">
+            <h2>Carceres</h2>
+            <h4>Karta parkingowa</h4>
+            <div>Nr rej.: {{ card.subscription.car.plate }}</div>
+            <div>Parking: {{ card.subscription.place.zone.name }}</div>
+            <div>
+              Miejsce: {{ card.subscription.place.nr }}
+              {{
+                card.subscription.place.name
+                  ? "(" + card.subscription.place.name + ")"
+                  : ""
+              }}
+            </div>
+            <div>Ważność: {{ convDateTime(card.subscription.end) }}</div>
+            <div>
+              <small
+                >Wydrukuj kartę lub pobierz na urządzenie mobilne. Okaż kartę
+                pracownikowi lub zeskanuj przy wjeździe na parking.
+              </small>
+            </div>
           </div>
         </section>
         <div class="html2pdf__page-break" />
@@ -55,14 +72,14 @@ export default {
   data: function () {
     return {
       htmlOptions: {
-        margin: 2.5,
+        margin: 5.5,
         filename: "ParkingCard.pdf",
         image: {
           type: "jpeg",
           quality: 0.98,
         },
       },
-      qrcode_size: 300,
+      qrcode_size: 100,
     };
   },
   methods: {
@@ -85,11 +102,38 @@ export default {
       );
     },
     barcode_value() {
-      return "#" + this.card.subscription.id;
+      return "#" + String(this.card.subscription.id).padStart(5, "0");
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
+#container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
+  padding-right: 85px;
+}
+.qrcode {
+  display: inline-block;
+  vertical-align: top;
+}
+.barcode {
+  display: inline-block;
+  vertical-align: top;
+  transform-origin: right top;
+  transform: rotate(270deg) translate(-105px, -10px);
+  -ms-transform: rotate(270deg) translate(-105px, -10px);
+  -moz-transform: rotate(270deg) translate(-105px, -10px);
+  -webkit-transform: rotate(270deg) translate(-105px, -10px);
+  -o-transform: rotate(270deg) translate(-105px, -10px);
+}
+.idcodes {
+  float: right;
+}
+.card_content {
+  max-width: 75%;
+}
 </style>
