@@ -2,7 +2,7 @@
   <div class="carceres_list">
     <b-card-group deck>
       <b-card class="payments_list">
-        <b-card-title>Płatności</b-card-title>
+        <b-card-title>Moje płatności</b-card-title>
         <own-payments-dialog
           :model="formModel"
           :modal_id="modal_dialog_id"

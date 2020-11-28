@@ -2,7 +2,7 @@
   <div class="carceres_list">
     <b-card-group deck>
       <b-card class="reservation_list">
-        <b-card-title>Rezerwacje</b-card-title>
+        <b-card-title>Moje rezerwacje</b-card-title>
         <b-card-sub-title>
           <b-button
             role="button"
@@ -30,12 +30,17 @@
             </span>
             Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
             {{ model.car.brand || "-" }} ({{ model.car.plate }}),
-            <span :class="{ 'd-none': model.payment && model.payment.paid }">
+            <span v-if="!(model.payment && model.payment.paid)">
               Do zapłaty
               {{
                 model.payment ? "" + model.payment.value / 100 + "zł" : "(?)"
               }}
               {{ "(netto: " + model.payment.price / 100 + "zł)" }}
+              <span>
+                <router-link to="/ownpayments">
+                  <b-button>Płatności</b-button>
+                </router-link>
+              </span>
             </span>
           </span>
           <span

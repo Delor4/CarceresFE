@@ -48,6 +48,12 @@
             >
               <b-icon-file-earmark-text></b-icon-file-earmark-text>
             </span>
+            <router-link
+              v-if="!(model.payment && model.payment.paid)"
+              to="/payments"
+            >
+              <b-button>Płatności</b-button>
+            </router-link>
             <b-collapse :id="collapse_id(model.id)">
               <b-card>
                 <div>Start: {{ convDateTime(model.start) }}</div>
