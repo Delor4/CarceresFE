@@ -23,11 +23,9 @@
           v-on:remove-model="onRemoveModel($event)"
         ></reservations-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
-          <span role="button" @click.prevent="onEditModel(model.id)">
-            <span v-b-toggle="collapse_id(model.id)">
-              <b-icon-caret-down class="when-open"></b-icon-caret-down>
-              <b-icon-caret-right class="when-closed"></b-icon-caret-right>
-            </span>
+          <span role="button" v-b-toggle="collapse_id(model.id)">
+            <b-icon-caret-down class="when-open"></b-icon-caret-down>
+            <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
             {{ model.car.brand || "-" }} ({{ model.car.plate }}),
             <span
@@ -39,28 +37,29 @@
               {{ model.payment ? model.payment.value / 100 + "zł" : "?" }}
               {{ "(netto: " + model.payment.price / 100 + "zł)" }}
             </span>
-            <span
-              v-if="
-                model.payment && model.payment.paid && isDateInFuture(model.end)
-              "
-              role="button"
-              @click.prevent="onShowParkingCard(model)"
-            >
-              <b-icon-file-earmark-text></b-icon-file-earmark-text>
-            </span>
-            <router-link
-              v-if="!(model.payment && model.payment.paid)"
-              to="/payments"
-            >
-              <b-button>Płatności</b-button>
-            </router-link>
-            <b-collapse :id="collapse_id(model.id)">
-              <b-card>
-                <div>Start: {{ convDateTime(model.start) }}</div>
-                <div>Koniec: {{ convDateTime(model.end) }}</div>
-              </b-card>
-            </b-collapse>
           </span>
+          <b-button
+            v-if="
+              model.payment && model.payment.paid && isDateInFuture(model.end)
+            "
+            title="Karta parkingowa"
+            @click.prevent="onShowParkingCard(model)"
+          >
+            <b-icon-file-earmark-text></b-icon-file-earmark-text>
+          </b-button>
+          <router-link
+            v-if="!(model.payment && model.payment.paid)"
+            to="/payments"
+          >
+            <b-button>Płatności</b-button>
+          </router-link>
+          <b-button @click="onEditModel(model.id)">Edycja</b-button>
+          <b-collapse :id="collapse_id(model.id)">
+            <b-card>
+              <div>Start: {{ convDateTime(model.start) }}</div>
+              <div>Koniec: {{ convDateTime(model.end) }}</div>
+            </b-card>
+          </b-collapse>
         </b-list-group-item>
       </b-card>
     </b-card-group>

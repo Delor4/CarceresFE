@@ -12,11 +12,9 @@
           v-on:unpaid-model="onUnpaidModel($event)"
         ></own-payments-dialog>
         <b-list-group-item v-for="model in models" v-bind:key="model.id">
-          <span v-b-toggle="collapse_id(model.id)">
+          <span v-b-toggle="collapse_id(model.id)" role="button">
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
-          </span>
-          <span role="button" @click.prevent="onEditModel(model.id)">
             Miejsce:
             {{ subscriptions[model.subscription_id].place.zone.name }}/{{
               subscriptions[model.subscription_id].place.nr
@@ -31,13 +29,16 @@
               {{ "(netto: " + model.price / 100 + "zł)" }}
             </span>
           </span>
-          <span
+          <b-button
             v-if="model.paid"
-            role="button"
             @click.prevent="onShowReceipt(model)"
+            title="Paragon"
           >
             <b-icon-file-earmark-text></b-icon-file-earmark-text>
-          </span>
+          </b-button>
+          <b-button v-if="!model.paid" @click="onEditModel(model.id)">
+            Zapłać
+          </b-button>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
               <div>
@@ -199,4 +200,7 @@ export default {
 };
 </script>
 <style scoped>
+:focus {
+  outline: none;
+}
 </style>
