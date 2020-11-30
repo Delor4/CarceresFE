@@ -26,6 +26,7 @@ Vue.mixin({
       get err() {
         return api.err;
       },
+      currencyFormat : new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }),
     }
   },
   methods: {
@@ -54,6 +55,9 @@ Vue.mixin({
     getCurrentAccessRights() {
       return this.api.auth.user ? this.api.auth.user.user_type : 4;
     },
+    formatCurrency(currency) {
+      return this.currencyFormat.format(currency);
+    }
   }
 })
 new Vue({

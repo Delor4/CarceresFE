@@ -27,13 +27,17 @@
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
 
-            Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}
+            <span>
+              Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}
+            </span>
             <span v-if="!(model.payment && model.payment.paid)">
-              Do zapłaty
+              Do zapłaty:
               {{
-                model.payment ? "" + model.payment.value / 100 + "zł" : "(?)"
+                model.payment
+                  ? formatCurrency(model.payment.value / 100)
+                  : "(?)"
               }}
-              {{ "(netto: " + model.payment.price / 100 + "zł)" }}
+              (netto: {{ formatCurrency(model.payment.price / 100) }})
             </span>
           </span>
           <router-link to="/ownpayments">

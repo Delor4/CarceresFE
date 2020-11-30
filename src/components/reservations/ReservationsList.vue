@@ -34,8 +34,10 @@
                 'subs-unpaid': !(model.payment && model.payment.paid),
               }"
             >
-              {{ model.payment ? model.payment.value / 100 + "zł" : "?" }}
-              {{ "(netto: " + model.payment.price / 100 + "zł)" }}
+              {{
+                model.payment ? formatCurrency(model.payment.value / 100) : "?"
+              }}
+              {{ "(netto: " + formatCurrency(model.payment.price / 100) + ")" }}
             </span>
           </span>
           <b-button

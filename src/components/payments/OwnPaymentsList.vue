@@ -15,18 +15,20 @@
           <span v-b-toggle="collapse_id(model.id)" role="button">
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
-            Miejsce:
-            {{ subscriptions[model.subscription_id].place.zone.name }}/{{
-              subscriptions[model.subscription_id].place.nr
-            }}
+            <span>
+              Miejsce:
+              {{ subscriptions[model.subscription_id].place.zone.name }}/{{
+                subscriptions[model.subscription_id].place.nr
+              }}
+            </span>
             <span
               :class="{
                 'payment-paid': model.paid,
                 'payment-unpaid': !model.paid,
               }"
             >
-              {{ model.value / 100 + "zł" }}
-              {{ "(netto: " + model.price / 100 + "zł)" }}
+              {{ formatCurrency(model.value / 100) }}
+              (netto: {{ formatCurrency(model.price / 100) }})
             </span>
           </span>
           <b-button
