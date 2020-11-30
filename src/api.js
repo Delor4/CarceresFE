@@ -231,6 +231,9 @@ class Api {
   getZone = async function (id) {
     return await this.get("/api/zones/" + id);
   }
+  getZoneInfo = async function (id) {
+    return await this.get("/api/zones/" + id + '/info');
+  }
   createZone = async function (zone) {
     return await this.post("/api/zones", zone);
   }

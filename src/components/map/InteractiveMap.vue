@@ -1,6 +1,10 @@
 <template>
   <div>
     <h2 role="button" v-on:click="$emit('zone-change')">{{ map.name }}</h2>
+    <div v-if="info != null">
+      Wszystkich miejsc: {{ info.all }}, zajętych: {{ info.occupied }}, wolnych:
+      {{ info.free }}.
+    </div>
     <div class="map-zone">
       <img class="map-zone-img" :src="map.bkg_file" />
       <interactive-map-pin
@@ -22,7 +26,7 @@ export default {
       subscriptions: null,
     };
   },
-  props: ["map"],
+  props: ["map", "info"],
   methods: {
     async loadData() {
       const self = this;
