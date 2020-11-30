@@ -26,38 +26,34 @@ Vue.mixin({
       get err() {
         return api.err;
       },
-      currencyFormat : new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }),
+      currencyFormat: new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }),
+      dateFormat: new Intl.DateTimeFormat('pl-PL'),
+      dateTimeFormat: new Intl.DateTimeFormat('pl-PL', {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+      }),
+      timeFormat: new Intl.DateTimeFormat('pl-PL', { hour: 'numeric', minute: 'numeric', second: 'numeric', }),
     }
   },
   methods: {
-    convDate: function (d) {
+    formatDate: function (d) {
       if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      return newDate.toISOString().split("T")[0];
+      return this.dateFormat.format(new Date(d))
     },
-    convTime: function (d) {
+    formatTime: function (d) {
       if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      return newDate.toISOString().split("T")[1].split(".")[0];
+      return this.timeFormat.format(new Date(d))
     },
-    convDateTime: function (d) {
+    formatDateTime: function (d) {
       if (!d) return "";
-      d = new Date(d);
-      const offset = d.getTimezoneOffset();
-      var newDate = new Date(d.getTime() - offset * 60 * 1000);
-      var newD = newDate.toISOString().split("T");
-      return newD[0] + ' ' + newD[1].split(".")[0]
+      return this.dateTimeFormat.format(new Date(d))
+    },
+    formatCurrency(currency) {
+      return this.currencyFormat.format(currency);
     },
     getCurrentAccessRights() {
       return this.api.auth.user ? this.api.auth.user.user_type : 4;
     },
-    formatCurrency(currency) {
-      return this.currencyFormat.format(currency);
-    }
   }
 })
 new Vue({

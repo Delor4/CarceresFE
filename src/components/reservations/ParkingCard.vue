@@ -48,7 +48,7 @@
                   : ""
               }}
             </div>
-            <div>Ważność: {{ convDateTime(card.subscription.end) }}</div>
+            <div>Ważność: {{ formatDateTime(card.subscription.end) }}</div>
             <div>
               <small
                 >Wydrukuj kartę lub pobierz na urządzenie mobilne. Okaż kartę

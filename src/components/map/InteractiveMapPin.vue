@@ -29,7 +29,7 @@
           <div v-if="subscription != null">
             <div>Rezerwacja do:</div>
             <div>
-              <strong>{{ convDate(subscription.end) }}</strong>
+              <strong>{{ formatDate(subscription.end) }}</strong>
             </div>
             <div>
               Klient:

@@ -50,11 +50,11 @@
               </div>
               <div>
                 Start:
-                {{ convDateTime(subscriptions[model.subscription_id].start) }}
+                {{ formatDateTime(subscriptions[model.subscription_id].start) }}
               </div>
               <div>
                 Koniec:
-                {{ convDateTime(subscriptions[model.subscription_id].end) }}
+                {{ formatDateTime(subscriptions[model.subscription_id].end) }}
               </div>
             </b-card>
           </b-collapse>

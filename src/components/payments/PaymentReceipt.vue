@@ -21,7 +21,7 @@
 
           <div>
             Data sprzedaży:
-            <span>{{ convDate(receipt.payment.sale_date) }}</span>
+            <span>{{ formatDate(receipt.payment.sale_date) }}</span>
           </div>
           <div>
             <span>Opłata parkingowa</span>
@@ -47,7 +47,7 @@
           </div>
           <div>
             Data transakcji:
-            <span>{{ convDate(receipt.payment.paid_date) }}</span>
+            <span>{{ formatDate(receipt.payment.paid_date) }}</span>
           </div>
         </section>
         <div class="html2pdf__page-break" />

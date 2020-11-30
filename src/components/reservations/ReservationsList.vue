@@ -58,8 +58,8 @@
           <b-button @click="onEditModel(model.id)">Edycja</b-button>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
-              <div>Start: {{ convDateTime(model.start) }}</div>
-              <div>Koniec: {{ convDateTime(model.end) }}</div>
+              <div>Start: {{ formatDateTime(model.start) }}</div>
+              <div>Koniec: {{ formatDateTime(model.end) }}</div>
             </b-card>
           </b-collapse>
         </b-list-group-item>

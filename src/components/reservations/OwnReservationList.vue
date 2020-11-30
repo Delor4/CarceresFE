@@ -58,8 +58,8 @@
               <div>
                 Samochód: {{ model.car.brand || "-" }} ({{ model.car.plate }})
               </div>
-              <div>Start: {{ convDateTime(model.start) }}</div>
-              <div>Koniec: {{ convDateTime(model.end) }}</div>
+              <div>Start: {{ formatDateTime(model.start) }}</div>
+              <div>Koniec: {{ formatDateTime(model.end) }}</div>
             </b-card>
           </b-collapse>
         </b-list-group-item>
