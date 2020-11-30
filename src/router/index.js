@@ -5,9 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: '/main',
+    name: 'Main',
     component: () => import(/* webpackChunkName: "index" */ "@/components/index/Index.vue"),
+  },
+  {
+    path: '/',
+    redirect: '/main',
+    name: 'Home',
   },
   {
     path: '/map',
