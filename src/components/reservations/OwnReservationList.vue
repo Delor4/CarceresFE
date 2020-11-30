@@ -28,8 +28,7 @@
               <b-icon-caret-down class="when-open"></b-icon-caret-down>
               <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             </span>
-            Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
-            {{ model.car.brand || "-" }} ({{ model.car.plate }}),
+            Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}
             <span v-if="!(model.payment && model.payment.paid)">
               Do zapłaty
               {{
@@ -54,6 +53,9 @@
           </span>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
+              <div>
+                Samochód: {{ model.car.brand || "-" }} ({{ model.car.plate }})
+              </div>
               <div>Start: {{ convDateTime(model.start) }}</div>
               <div>Koniec: {{ convDateTime(model.end) }}</div>
             </b-card>

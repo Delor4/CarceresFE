@@ -20,10 +20,7 @@
             Miejsce:
             {{ subscriptions[model.subscription_id].place.zone.name }}/{{
               subscriptions[model.subscription_id].place.nr
-            }}, Samochód:
-            {{ subscriptions[model.subscription_id].car.brand || "-" }} ({{
-              subscriptions[model.subscription_id].car.plate
-            }}),
+            }}
             <span
               :class="{
                 'payment-paid': model.paid,
@@ -43,6 +40,11 @@
           </span>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
+              <div>
+                Samochód:
+                {{ subscriptions[model.subscription_id].car.brand || "-" }}
+                ({{ subscriptions[model.subscription_id].car.plate }})
+              </div>
               <div>
                 Start:
                 {{ convDateTime(subscriptions[model.subscription_id].start) }}
