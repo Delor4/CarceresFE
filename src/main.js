@@ -26,30 +26,30 @@ Vue.mixin({
       get err() {
         return api.err;
       },
-      currencyFormat: new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }),
-      dateFormat: new Intl.DateTimeFormat('pl-PL'),
-      dateTimeFormat: new Intl.DateTimeFormat('pl-PL', {
+      intlCurrencyFormat: new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }),
+      intlDateFormat: new Intl.DateTimeFormat('pl-PL'),
+      intlDateTimeFormat: new Intl.DateTimeFormat('pl-PL', {
         year: 'numeric', month: 'numeric', day: 'numeric',
         hour: 'numeric', minute: 'numeric', second: 'numeric',
       }),
-      timeFormat: new Intl.DateTimeFormat('pl-PL', { hour: 'numeric', minute: 'numeric', second: 'numeric', }),
+      intlTimeFormat: new Intl.DateTimeFormat('pl-PL', { hour: 'numeric', minute: 'numeric', second: 'numeric', }),
     }
   },
   methods: {
     formatDate: function (d) {
       if (!d) return "";
-      return this.dateFormat.format(new Date(d))
+      return this.intlDateFormat.format(new Date(d))
     },
     formatTime: function (d) {
       if (!d) return "";
-      return this.timeFormat.format(new Date(d))
+      return this.intlTimeFormat.format(new Date(d))
     },
     formatDateTime: function (d) {
       if (!d) return "";
-      return this.dateTimeFormat.format(new Date(d))
+      return this.intlDateTimeFormat.format(new Date(d))
     },
     formatCurrency(currency) {
-      return this.currencyFormat.format(currency);
+      return this.intlCurrencyFormat.format(currency);
     },
     getCurrentAccessRights() {
       return this.api.auth.user ? this.api.auth.user.user_type : 4;
