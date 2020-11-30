@@ -29,7 +29,7 @@ const hasPrevious = function () {
 class Api {
   constructor() {
     this.api = Axios.create({
-      baseURL: "http://localhost:43343", //TODO: change this before send to production
+      //baseURL: "http://localhost:43343", //TODO: change this before send to production
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
