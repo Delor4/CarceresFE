@@ -308,7 +308,7 @@ class Api {
       console.log('Refreshing token...');
       return api._refresh(error)
     }
-    api.err.showError("Błąd połączenia z serwerem.");
+    error.response && api._showError(error.response);
     return Promise.reject(error);
   }
 
@@ -324,11 +324,18 @@ class Api {
       err.config.headers['x-access-tokens'] = getAccessToken();
       return api.api.request(err.config).then(api._getData)
     }).catch(error => {
-      api.err.showError("Błąd połączenia z serwerem.");
+      error.response && api._showError(error.response);
       return Promise.reject(error);
     });
   }
+  _showError = function (error_resp) {
+    switch (error_resp.status) {
+      case 400: api.err.showError("Błąd: " + error_resp.data.message);
+        break;
+      default: api.err.showError("Błąd połączenia z serwerem.");
+    }
 
+  }
   auth = {
     authorized: false,
     user: null,
