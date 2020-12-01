@@ -179,13 +179,22 @@ export default {
       this.card.subscription = model;
       this.$refs.parking_card_pdf.generateReport();
     },
+    validateModel(model) {
+      model.start = null;
+      if (!model.end) {
+        this.err.showError("Błąd. Brak daty końca rezerwacji.");
+        return false;
+      }
+      model.end = new Date(Date.parse(model.end)).toISOString();
+      return true;
+    },
     async saveModel(model) {
       /* Send new client's data to api */
-      model.start = null;
-      model.end = new Date(Date.parse(model.end)).toISOString();
-      var created = await this.api.createSubscription(model);
-      /* Add to list */
-      this.models.push(created);
+      if (this.validateModel(model)) {
+        var created = await this.api.createSubscription(model);
+        /* Add to list */
+        this.models.push(created);
+      }
       this.loading = false;
       this.resetDialog();
     },
