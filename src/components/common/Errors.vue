@@ -5,7 +5,7 @@
       :key="index"
       dismissible
       fade
-      variant="danger"
+      :variant="error.variant"
       :show="error.elapsedTime"
     >
       {{ error.msg }}
