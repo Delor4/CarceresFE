@@ -60,6 +60,10 @@
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
               <div>
+                Klient:
+                {{ subscriptions[model.subscription_id].car.client.name }} {{ subscriptions[model.subscription_id].car.client.surname }}
+              </div>
+              <div>
                 Start:
                 {{ formatDateTime(subscriptions[model.subscription_id].start) }}
               </div>
