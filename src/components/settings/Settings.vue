@@ -51,26 +51,25 @@ export default {
   },
   methods: {
     async onSubmit() {
-      //TODO: show alerts
       if (!this.form.pass_old) {
-        alert('Previous password not provided.');
+        this.err.showError("Nie podano poprzedniego hasła.", "warning")
         return;
       }
       if (
         !this.form.pass_new ||
         this.form.pass_new !== this.form.pass_new_second
       ) {
-        alert('New passwords not match or not provided.')
+        this.err.showError("Brak nowego hasła lub nieidentyczne hasła.", "warning")
         return;
       }
       if (!(await this.api.checkPass(this.form.pass_old))) {
-        alert('Password checking failed.')
+        this.err.showError("Niewłaściwe hasło.")
         return;
       }
       this.form.pass_old = null;
       await this.api.updateCurrUser({ password: this.form.pass_new });
       this.form.pass_new = this.form.pass_new_second = null;
-      alert('Password updated.')
+      this.err.showError("Hasło zmienione.", "success")
     },
     async loadResources() {
       this.loading = true;
