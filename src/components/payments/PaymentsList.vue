@@ -11,7 +11,20 @@
           v-on:hide-modal="resetDialog()"
           v-on:unpaid-model="onUnpaidModel($event)"
         ></payments-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id">
+        <b-form-select v-model="filtered_client">
+          <b-form-select-option :value="null"> Wszyscy </b-form-select-option>
+          <b-form-select-option
+            v-for="client in clients"
+            v-bind:key="client.id"
+            :value="client.id"
+          >
+            Płatności: {{ client.name }} {{ client.surname }}
+          </b-form-select-option>
+        </b-form-select>
+        <b-list-group-item
+          v-for="model in filtered(models)"
+          v-bind:key="model.id"
+        >
           <span v-b-toggle="collapse_id(model.id)" role="button">
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
@@ -80,6 +93,8 @@ export default {
       formModel: {},
       modal_dialog_id: "payments-dialog-modal",
       subscriptions: {},
+      clients: {},
+      filtered_client: null,
       receipt: {
         payment: {
           price: -1,
@@ -95,6 +110,17 @@ export default {
   methods: {
     collapse_id(id) {
       return "collapse-" + id;
+    },
+    filtered: function (models) {
+      if (this.filtered_client == null) return models;
+      var self = this;
+      return models.filter(function (model) {
+        return (
+          self.subscriptions[model.subscription_id] &&
+          self.subscriptions[model.subscription_id].car.client.id ==
+            self.filtered_client
+        );
+      });
     },
     _newModel() {
       return {
@@ -182,6 +208,7 @@ export default {
       this.dialogFormVisible = false;
     },
     async loadModels() {
+      this.clients = await this.api.getAll(this.api.getClients);
       var subscriptions = await this.api.getAll(this.api.getSubscriptions);
       for (var subs of subscriptions) {
         this.subscriptions[subs.id] = subs;

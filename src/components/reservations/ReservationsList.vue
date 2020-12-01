@@ -22,7 +22,20 @@
           v-on:hide-modal="resetDialog()"
           v-on:remove-model="onRemoveModel($event)"
         ></reservations-dialog>
-        <b-list-group-item v-for="model in models" v-bind:key="model.id">
+        <b-form-select v-model="filtered_client">
+          <b-form-select-option :value="null"> Wszyscy </b-form-select-option>
+          <b-form-select-option
+            v-for="client in clients"
+            v-bind:key="client.id"
+            :value="client.id"
+          >
+            Rezerwacje: {{ client.name }} {{ client.surname }}
+          </b-form-select-option>
+        </b-form-select>
+        <b-list-group-item
+          v-for="model in filtered(models)"
+          v-bind:key="model.id"
+        >
           <span role="button" v-b-toggle="collapse_id(model.id)">
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
@@ -87,6 +100,7 @@ export default {
       formModel: {},
       modal_dialog_id: "reservations-dialog-modal",
       clients: {},
+      filtered_client: null,
       card: {
         subscription: {
           id: -1,
@@ -118,6 +132,13 @@ export default {
         car_id: -1,
         place_id: -1,
       };
+    },
+    filtered: function (models) {
+      if (this.filtered_client == null) return models;
+      var self = this;
+      return models.filter(function (model) {
+        return model.car.client.id == self.filtered_client;
+      });
     },
     _cloneModel(model) {
       var _model = this._newModel();
@@ -178,15 +199,10 @@ export default {
       this.dialogFormVisible = false;
     },
     async loadModels() {
+      this.loading = true;
       this.clients = await this.api.getAll(this.api.getClients);
       var page = await this.api.getSubscriptions("desc(end)");
-      var pages = page.results;
-      while (page.hasNext()) {
-        page = await this.api.getNext(page);
-        pages.push(...page.results);
-      }
-      this.models = pages;
-
+      this.models = await this.api.getRest(page);
       this.loading = false;
     },
     isDateInFuture(d) {
@@ -194,7 +210,6 @@ export default {
     },
   },
   mounted() {
-    this.loading = true;
     this.loadModels();
     this.resetDialog();
   },
