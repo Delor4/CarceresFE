@@ -185,6 +185,10 @@ export default {
         this.err.showError("Błąd. Brak daty końca rezerwacji.");
         return false;
       }
+      if (!this.isDateInFuture(model.end)) {
+        this.err.showError("Błąd. Data poza dozwolonym zakresem.");
+        return false;
+      }
       model.end = new Date(Date.parse(model.end)).toISOString();
       return true;
     },
