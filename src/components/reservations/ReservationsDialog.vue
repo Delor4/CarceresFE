@@ -24,7 +24,7 @@
               v-bind:key="car.id"
               :value="car.id"
             >
-              {{car.brand}} ({{ car.plate }})
+              {{ car.brand }} ({{ car.plate }})
             </b-form-select-option>
           </b-form-select-option-group>
         </b-form-select>
@@ -66,6 +66,7 @@
           width="300px"
           v-model="model.end"
         ></datetime>
+        <div v-if="model.end">Koszt: {{ currValue }}</div>
       </b-form-group>
     </b-form>
 
@@ -98,14 +99,36 @@ export default {
       zones: {},
       clients: {},
       loading: false,
+      price_by_days: {
+        365: 1800,
+        182: 1000,
+        28: 22 * 9,
+        7: 6 * 9,
+        1: 9,
+      },
     };
   },
   computed: {
     modalTitle() {
       return `${this.model.id == -1 ? "Tworzenie" : "Edycja"} rezerwacji`;
     },
+    currValue() {
+      var val = this.calc_price(new Date(this.model.end)) / 100;
+      return val > 0 ? this.formatCurrency(val) : "-";
+    },
   },
   methods: {
+    _calc_price(days) {
+      for (var _time in this.price_by_days)
+        if (days >= _time)
+          return Math.ceil(days / _time) * this.price_by_days[_time];
+      return this.price_by_days[1];
+    },
+    calc_price(end_date, start_date = new Date()) {
+      var diff = end_date - start_date;
+      diff = Math.floor(diff / 1000 / 60 / 60 / 24);
+      return diff > 0 ? this._calc_price(diff) * 100 : -1;
+    },
     ok() {
       this.$emit("submit-edit", this.model);
       this.$bvModal.hide(this.modal_id);
