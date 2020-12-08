@@ -60,7 +60,7 @@
           width="300px"
           v-model="model.end"
         ></datetime>
-        <div v-if="model.end">Koszt: {{ currValue }}</div>
+        <div v-if="model.end">Koszt (netto): {{ currValue }}</div>
       </b-form-group>
     </b-form>
 
@@ -121,7 +121,7 @@ export default {
     calc_price(end_date, start_date = new Date()) {
       var diff = end_date - start_date;
       diff = Math.floor(diff / 1000 / 60 / 60 / 24);
-      return diff > 0 ? this._calc_price(diff) * 100 : -1;
+      return diff >= 0 ? this._calc_price(diff) * 100 : -1;
     },
     ok() {
       this.$emit("submit-edit", this.model);

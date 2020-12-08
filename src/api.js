@@ -328,14 +328,15 @@ class Api {
       return Promise.reject(error);
     });
   }
+
   _showError = function (error_resp) {
     switch (error_resp.status) {
       case 400: api.err.showError("Błąd: " + error_resp.data.message);
         break;
       default: api.err.showError("Błąd połączenia z serwerem.");
     }
-
   }
+
   auth = {
     authorized: false,
     user: null,
