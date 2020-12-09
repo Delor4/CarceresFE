@@ -33,9 +33,26 @@ Vue.mixin({
         hour: 'numeric', minute: 'numeric', second: 'numeric',
       }),
       intlTimeFormat: new Intl.DateTimeFormat('pl-PL', { hour: 'numeric', minute: 'numeric', second: 'numeric', }),
+      price_by_days: {
+        365: 1800,
+        182: 1000,
+        28: 22 * 9,
+        7: 6 * 9,
+        1: 9,
+      },
     }
   },
   methods: {
+    _calcPrice(days) {
+      for (const _time in this.price_by_days)
+        if (days >= _time)
+          return Math.ceil(days / _time) * this.price_by_days[_time];
+      return this.price_by_days[1];
+    },
+    calcReservationPrice(end_date, start_date = new Date()) {
+      const diff = Math.floor((end_date - start_date) / 1000 / 60 / 60 / 24);
+      return diff >= 0 ? this._calcPrice(diff) * 100 : -1;
+    },
     formatDate: function (d) {
       if (!d) return "";
       return this.intlDateFormat.format(new Date(d))
