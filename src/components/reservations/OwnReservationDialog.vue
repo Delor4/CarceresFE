@@ -60,7 +60,9 @@
           width="300px"
           v-model="model.end"
         ></datetime>
-        <div v-if="model.end">Koszt (netto): {{ currPrice }}</div>
+        <div v-if="model.end">
+          Koszt (netto): {{ currPrice }} (brutto): {{ currPriceTax }}
+        </div>
       </b-form-group>
     </b-form>
 
@@ -102,6 +104,12 @@ export default {
     currPrice() {
       var val = this.calcReservationPrice(new Date(this.model.end)) / 100;
       return val > 0 ? this.formatCurrency(val) : "-";
+    },
+    currPriceTax() {
+      var val = this.calcReservationPrice(new Date(this.model.end)) / 100;
+      return val > 0
+        ? this.formatCurrency(val * (1 + this.calcTax() / 100))
+        : "-";
     },
   },
   methods: {

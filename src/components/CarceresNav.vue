@@ -23,6 +23,12 @@ export default {
           min_rights: 4,
         },
         {
+          name: "Informacje",
+          path: "/main",
+          min_rights: 4,
+        },
+
+        {
           name: "Użytkownicy",
           path: "/users",
           min_rights: 1,
@@ -58,12 +64,12 @@ export default {
           min_rights: 3,
         },
         {
-          name: "Informacje",
-          path: "/main",
+          name: "Cennik",
+          path: "/pricelist",
           min_rights: 4,
         },
       ],
-      };
+    };
   },
   methods: {},
   mounted() {},
