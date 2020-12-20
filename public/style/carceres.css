@@ -187,7 +187,6 @@ form.user_password input {
 .card_content h2 {
   font-weight: bold;
   width: 450px;
-  /* border: 1px solid black; */
   margin-left: 80px;
   margin-right: 40px;
   display: table-cell;
@@ -208,5 +207,4 @@ form.user_password input {
   width: 80px;
   padding: 5px 5px 5px 5px;
   display: inline;
-  /* border: 1px solid black; */
 }
