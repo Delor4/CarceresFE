@@ -1,6 +1,7 @@
 <template>
   <div class="carceres_main">
     <header>
+      <img src="/logo_carceres.png" class="main_logo"/>
       <h1>Carceres</h1>
     </header>
 

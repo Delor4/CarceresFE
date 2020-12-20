@@ -26,8 +26,8 @@
         </div>
       </b-form>
       <span :hidden="!auth.authorized" class="user_notify">
-        <div>Witaj {{ user_name }}.</div>
-        <div style="text-align: center">
+        <div style="float: left; padding-right: 5px;">Witaj {{ user_name }}.</div>
+        <div style="text-align: center; float: right;">
           <router-link :to="{ path: '/settings' }">
             <b-icon-gear></b-icon-gear>
           </router-link>

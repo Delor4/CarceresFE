@@ -179,17 +179,12 @@ form.user_password input {
   text-align: left;
 }
 
-.card_content {
-  border: 1px solid black;
-  display: block;
-}
-
 .card_content h2 {
   font-weight: bold;
   width: 450px;
   margin-left: 80px;
   margin-right: 40px;
-  display: table-cell;
+  display: inline;
   float: right;
 }
 
@@ -198,6 +193,9 @@ form.user_password input {
   width: 600px;
   border: 1px solid black;
   text-align: center;
+  background-color: black;
+  color: white;
+  font-weight: bold;
 }
 
 .card_content .logo {
@@ -206,5 +204,38 @@ form.user_password input {
   height: 79px;
   width: 80px;
   padding: 5px 5px 5px 5px;
-  display: inline;
+  display: block;
+}
+
+.main_logo {
+  text-align: left;
+  float: left;
+  height: 79px;
+  width: 80px;
+  padding: 5px 5px 5px 5px;
+  display: block;
+}
+
+header h1 {
+  float: left;
+  margin-top: 13px;
+}
+
+.card_content .footer {
+  bottom: 0;
+}
+
+h6.card-subtitle {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.list-group-item .btn {
+  margin: -7px 2px 0px 2px;
+  float: right;
+  display: inline-block;
+}
+
+.list-group-item {
+  text-align: left;
 }
