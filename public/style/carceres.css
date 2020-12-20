@@ -173,8 +173,40 @@ div.user_settings span.user_data {
   text-align: left;
 }
 
-form.user_password input{
+form.user_password input {
   display: block;
   margin-right: 30px;
   text-align: left;
+}
+
+.card_content {
+  border: 1px solid black;
+  display: block;
+}
+
+.card_content h2 {
+  font-weight: bold;
+  width: 450px;
+  /* border: 1px solid black; */
+  margin-left: 80px;
+  margin-right: 40px;
+  display: table-cell;
+  float: right;
+}
+
+.card_content h4 {
+  clear: right;
+  width: 600px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.card_content .logo {
+  text-align: left;
+  float: left;
+  height: 79px;
+  width: 80px;
+  padding: 5px 5px 5px 5px;
+  display: inline;
+  /* border: 1px solid black; */
 }

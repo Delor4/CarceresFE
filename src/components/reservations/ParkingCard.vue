@@ -36,11 +36,12 @@
             </div>
           </div>
           <div class="card_content">
-            <h2>Carceres</h2>
+            <img class="logo" src="logo_bw.png" />
+            <h2>Carceres - Parking strzeżony</h2>
             <h4>Karta parkingowa</h4>
-            <div>Nr rej.: {{ card.subscription.car.plate }}</div>
-            <div>Parking: {{ card.subscription.place.zone.name }}</div>
-            <div>
+            <div class="car-plate">Nr rej.: {{ card.subscription.car.plate }}</div>
+            <div class="zone">Parking: {{ card.subscription.place.zone.name }}</div>
+            <div class="place">
               Miejsce: {{ card.subscription.place.nr }}
               {{
                 card.subscription.place.name
@@ -48,10 +49,10 @@
                   : ""
               }}
             </div>
-            <div>Ważność: {{ formatDateTime(card.subscription.end) }}</div>
-            <div>
-              <small
-                >Wydrukuj kartę lub pobierz na urządzenie mobilne. Okaż kartę
+            <div class="subscription">Ważność: {{ formatDateTime(card.subscription.end) }}</div>
+            <div class="footer">
+              <small>
+              Wydrukuj kartę lub pobierz na urządzenie mobilne. Okaż kartę
                 pracownikowi lub zeskanuj przy wjeździe na parking.
               </small>
             </div>

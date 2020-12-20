@@ -6,7 +6,7 @@
       :enable-download="false"
       :preview-modal="true"
       :paginate-elements-by-height="1400"
-      filename="Receipt"
+      filename="Paragon"
       :pdf-quality="2"
       :manual-pagination="false"
       pdf-format="a4"
@@ -28,7 +28,7 @@
             <span>1 * {{ receipt.payment.price / 100 }}</span>
           </div>
           <div>
-            <span>tax: {{ receipt.payment.tax }}%</span>
+            <span>VAT: {{ receipt.payment.tax }}%</span>
           </div>
           <div>
             <span>Suma PLN: {{ receipt.payment.value / 100 }}</span>
@@ -64,7 +64,7 @@ export default {
     return {
       htmlOptions: {
         margin: 2.5,
-        filename: "Receipt.pdf",
+        filename: "Potwierdzenie.pdf",
         image: {
           type: "jpeg",
           quality: 0.98,
