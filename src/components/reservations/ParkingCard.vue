@@ -17,6 +17,10 @@
     >
       <section slot="pdf-content">
         <section class="pdf-item page1">
+          <img class="logo" src="logo_bw.png" />
+
+          <h2>Carceres</h2>
+
           <div class="idcodes">
             <div class="codescontainer" id="container">
               <barcode
@@ -35,9 +39,8 @@
               ></qrcode-vue>
             </div>
           </div>
+
           <div class="card_content">
-            <img class="logo" src="logo_bw.png" />
-            <h2>Carceres - Parking strzeżony</h2>
             <h4>Karta parkingowa</h4>
             <div class="car-plate">Nr rej.: {{ card.subscription.car.plate }}</div>
             <div class="zone">Parking: {{ card.subscription.place.zone.name }}</div>

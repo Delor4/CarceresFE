@@ -179,36 +179,39 @@ form.user_password input {
   text-align: left;
 }
 
-.card_content {
-  border-right: 1px dashed black;
+.pdf-item h2 {
+  font-weight: bold;
+  font-style: italic;
+  width: 580px;
+  margin-left: 20px;
+  display: inline-block;
+  float: left;
+  position: absolute;
+  margin-top: 20px;
 }
 
-.card_content h2 {
-  font-weight: bold;
-  width: 450px;
-  margin-left: 80px;
-  margin-right: 40px;
-  display: inline;
-  float: right;
+img.pdf-item {
+  position: static;
+  float: left;
+  width: 80px;
+  height: 79px;
+  padding: 0px 5px 0px 5px;
+}
+
+.card_content {
+  position: relative;
 }
 
 .card_content h4 {
-  clear: right;
-  width: 600px;
   border: 1px solid black;
   text-align: center;
   background-color: black;
   color: white;
   font-weight: bold;
-}
-
-.card_content .logo {
-  text-align: left;
-  float: left;
-  height: 79px;
-  width: 80px;
-  padding: 5px 5px 5px 5px;
-  display: block;
+  width: 600px;
+  position: absolute;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 .main_logo {
@@ -229,7 +232,9 @@ header h1 {
 }
 
 .card_content .footer {
-  bottom: 0;
+  margin-top: 130px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 h6.card-subtitle {
@@ -245,4 +250,28 @@ h6.card-subtitle {
 
 .list-group-item {
   text-align: left;
+}
+
+.parking_card_subtitle {
+  display: block;
+}
+
+.car-plate {
+  top: 50px;
+  position: absolute;
+}
+
+.zone {
+  top: 70px;
+  position: absolute;
+}
+
+.place {
+  top: 90px;
+  position: absolute;
+}
+
+.subscription {
+  top: 110px;
+  /* position: absolute; */
 }
