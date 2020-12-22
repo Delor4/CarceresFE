@@ -29,7 +29,7 @@
         <div style="float: left; padding-right: 5px;">Witaj {{ user_name }}.</div>
         <div style="text-align: center; float: right;">
           <router-link :to="{ path: '/settings' }">
-            <b-icon-gear></b-icon-gear>
+            <b-icon-gear style="color:#fca311"></b-icon-gear>
           </router-link>
         </div>
       </span>

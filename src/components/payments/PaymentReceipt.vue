@@ -10,21 +10,21 @@
       :pdf-quality="2"
       :manual-pagination="false"
       pdf-format="a4"
-      pdf-orientation="landscape"
+      pdf-orientation="portrait"
       pdf-content-width="800px"
       :html-to-pdf-options="htmlOptions"
       ref="html2Pdf"
     >
       <section slot="pdf-content">
-        <section class="pdf-item">
+        <section class="pdf-item" style="border:1px solid black;">
           <h4>Paragon niefiskalny</h4>
 
           <div>
-            Data sprzedaży:
+            <span>Data sprzedaży: </span>
             <span>{{ formatDate(receipt.payment.sale_date) }}</span>
           </div>
           <div>
-            <span>Opłata parkingowa</span>
+            <span>Opłata parkingowa: </span>
             <span>1 * {{ receipt.payment.price / 100 }}</span>
           </div>
           <div>
@@ -34,19 +34,17 @@
             <span>Suma PLN: {{ receipt.payment.value / 100 }}</span>
           </div>
           <div>
-            <span
-              >{{
+            <span>{{
                 receipt.payment.paid_type == 1
                   ? "Gotówka"
                   : receipt.payment.paid_type == 2
                   ? "Przelew zewnętrzny"
                   : "Inna wpłata"
               }}
-              PLN: {{ receipt.payment.value / 100 }}</span
-            >
+              PLN: {{ receipt.payment.value / 100 }}</span>
           </div>
           <div>
-            Data transakcji:
+            <span>Data transakcji: </span>
             <span>{{ formatDate(receipt.payment.paid_date) }}</span>
           </div>
         </section>
