@@ -232,9 +232,10 @@ header h1 {
 }
 
 .card_content .footer {
-  margin-top: 130px;
+  top: 255px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  position: absolute;
 }
 
 h6.card-subtitle {
@@ -273,5 +274,5 @@ h6.card-subtitle {
 
 .subscription {
   top: 110px;
-  /* position: absolute; */
+  position: relative;
 }
