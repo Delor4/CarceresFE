@@ -51,16 +51,18 @@ table.pricelist {
 }
 
 .pricelist td, .pricelist th {
-    border: 1px solid #ddd;
+    border: 1px solid #fff;
     text-align: left;
     padding: 8px;
 }
 
-.pricelist tr:nth-child(even){background-color: #f2f2f2}
+.pricelist tr:nth-child(even){background-color: #e5e5e5}
 
 .pricelist td:first-child{
   font-weight: bold;
 }
+
+.pricelist tr:hover{background-color: #fca311}
 
 .pricelist td {
   text-align: right;
@@ -69,7 +71,7 @@ table.pricelist {
 .pricelist th {
     padding-top: 11px;
     padding-bottom: 11px;
-    background-color: #4CAF50;
+    background-color: #14213d;
     color: white;
 }
 </style>
