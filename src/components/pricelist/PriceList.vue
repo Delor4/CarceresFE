@@ -42,4 +42,34 @@ export default {
 </script>
 
 <style scoped>
+table.pricelist {
+    font-size:16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+}
+
+.pricelist td, .pricelist th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.pricelist tr:nth-child(even){background-color: #f2f2f2}
+
+.pricelist td:first-child{
+  font-weight: bold;
+}
+
+.pricelist td {
+  text-align: right;
+}
+
+.pricelist th {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background-color: #4CAF50;
+    color: white;
+}
 </style>
