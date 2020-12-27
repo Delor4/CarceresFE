@@ -55,8 +55,7 @@
             <div class="subscription">Ważność: {{ formatDateTime(card.subscription.end) }}</div>
             <div class="footer">
               <small>
-              Wydrukuj kartę lub pobierz na urządzenie mobilne. Okaż kartę
-                pracownikowi lub zeskanuj przy wjeździe na parking.
+              Wydrukuj kartę lub pobierz na urządzenie mobilne. Zeskanuj lub okaż obsłudze przy wjeździe na parking.
               </small>
             </div>
           </div>
