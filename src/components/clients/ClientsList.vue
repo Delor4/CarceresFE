@@ -26,14 +26,13 @@
           <span v-b-toggle="collapse_id(model.id)">
             <b-icon-caret-down class="when-open"></b-icon-caret-down>
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
-          </span>
-          <span role="button" @click.prevent="onEditModel(model.id)">
             {{ model.name }} {{ model.surname }}
           </span>
+          <b-button @click="onEditModel(model.id)">Edycja</b-button>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
-              Adres: {{ model.address || "-" }} Miasto: {{ model.city || "-" }}
-              Tel: {{ model.phone || "(Brak)"}}
+              Adres: {{ model.address || "-" }} Miasto:
+              {{ model.city || "-" }} Tel: {{ model.phone || "(Brak)" }}
             </b-card>
           </b-collapse>
         </b-list-group-item>
