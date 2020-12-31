@@ -276,3 +276,17 @@ h6.card-subtitle {
   top: 110px;
   position: relative;
 }
+
+.pdf-item h4 {
+  font-weight: bold;
+  margin-top: 50px;
+  text-align: center;s
+}
+
+.pdf-item span {
+  display: inline;
+}
+.pdf-item .pdf-date {
+  text-align:right;
+  margin-right: 45px;
+}

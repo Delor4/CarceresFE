@@ -16,37 +16,56 @@
       ref="html2Pdf"
     >
       <section slot="pdf-content">
-        <section class="pdf-item" style="border:1px solid black;">
-          <h4>Paragon niefiskalny</h4>
+        <section class="pdf-item">
+          <div class="pdf-date">
+            <div>
+              <span>Data sprzedaży: </span>
+              <span>{{ formatDate(receipt.payment.sale_date) }}</span>
+            </div>
+            <div>
+              <span>Data transakcji: </span>
+              <span>{{ formatDate(receipt.payment.paid_date) }}</span>
+            </div>
+          </div>
 
-          <div>
-            <span>Data sprzedaży: </span>
-            <span>{{ formatDate(receipt.payment.sale_date) }}</span>
-          </div>
-          <div>
-            <span>Opłata parkingowa: </span>
-            <span>1 * {{ receipt.payment.price / 100 }}</span>
-          </div>
-          <div>
-            <span>VAT: {{ receipt.payment.tax }}%</span>
-          </div>
-          <div>
-            <span>Suma PLN: {{ receipt.payment.value / 100 }}</span>
-          </div>
-          <div>
+          <h4>Paragon niefiskalny NR/RRRR</h4>
+
+          <!---TABELA--->
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Lp.</th>
+                <th scope="col">Nazwa usługi</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Kwota</th>
+                <th scope="col">Vat</th>
+                <th scope="col">Wartość</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Opłata parkingowa</td>
+                <td>1</td>
+                <td>{{ receipt.payment.price / 100 }}</td>
+                <td>{{ receipt.payment.tax }}%</td>
+                <td>{{ receipt.payment.value / 100 }} zł</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="text-align: left; margin-top: 50px;">
+            <span style="display: inline-block;">Sposób płatności: </span>
             <span>{{
                 receipt.payment.paid_type == 1
-                  ? "Gotówka"
+                  ? " Gotówka"
                   : receipt.payment.paid_type == 2
-                  ? "Przelew zewnętrzny"
-                  : "Inna wpłata"
+                  ? " Przelew zewnętrzny"
+                  : " Inna wpłata"
               }}
-              PLN: {{ receipt.payment.value / 100 }}</span>
+              PLN:</span>
           </div>
-          <div>
-            <span>Data transakcji: </span>
-            <span>{{ formatDate(receipt.payment.paid_date) }}</span>
-          </div>
+
         </section>
         <div class="html2pdf__page-break" />
       </section>
