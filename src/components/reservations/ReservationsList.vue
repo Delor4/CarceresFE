@@ -68,7 +68,7 @@
           >
             <b-button>Płatności</b-button>
           </router-link>
-          <b-button @click="onEditModel(model.id)">Edycja</b-button>
+          <!--<b-button @click="onEditModel(model.id)">Edycja</b-button>-->
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
               <div>
