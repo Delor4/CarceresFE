@@ -28,7 +28,11 @@
             </div>
           </div>
 
-          <h4>Paragon niefiskalny NR/RRRR</h4>
+          <h4>
+            Paragon niefiskalny {{ receipt.payment.id }}/{{
+              new Date(receipt.payment.paid_date).getUTCFullYear()
+            }}
+          </h4>
 
           <!---TABELA--->
           <table class="table table-striped">
@@ -47,25 +51,25 @@
                 <th scope="row">1</th>
                 <td>Opłata parkingowa</td>
                 <td>1</td>
-                <td>{{ receipt.payment.price / 100 }}</td>
+                <td>{{ formatCurrency(receipt.payment.price / 100) }}</td>
                 <td>{{ receipt.payment.tax }}%</td>
-                <td>{{ receipt.payment.value / 100 }} zł</td>
+                <td>{{ formatCurrency(receipt.payment.value / 100) }}</td>
               </tr>
             </tbody>
           </table>
 
-          <div style="text-align: left; margin-top: 50px;">
-            <span style="display: inline-block;">Sposób płatności: </span>
-            <span>{{
+          <div style="text-align: left; margin-top: 50px">
+            <span>Sposób płatności: </span>
+            <span>
+              {{
                 receipt.payment.paid_type == 1
-                  ? " Gotówka"
+                  ? "Gotówka"
                   : receipt.payment.paid_type == 2
-                  ? " Przelew zewnętrzny"
-                  : " Inna wpłata"
+                  ? "Przelew zewnętrzny"
+                  : "Inna wpłata"
               }}
-              PLN:</span>
+            </span>
           </div>
-
         </section>
         <div class="html2pdf__page-break" />
       </section>
@@ -103,5 +107,15 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.pdf-item h4 {
+  font-weight: bold;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.pdf-item .pdf-date {
+  text-align: right;
+  margin-right: 45px;
+}
 </style>
