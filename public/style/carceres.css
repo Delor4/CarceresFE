@@ -120,8 +120,8 @@ input.pass {
 
 .list-group-item:hover, .list-group-item:hover div {
   background-color: #fca311;
-  text-decoration: underline;
-  width: 100%;
+  /*text-decoration: underline;*/
+  /*width: 100%;*/
   color: #14213d;
 }
 button.close, button.close:hover {
@@ -196,6 +196,10 @@ img.pdf-item {
   width: 80px;
   height: 79px;
   padding: 0px 5px 0px 5px;
+}
+
+.card {
+  border: 0 !important;
 }
 
 .card_content {
