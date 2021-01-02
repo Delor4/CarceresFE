@@ -118,7 +118,7 @@ input.pass {
   width: auto;
 }
 
-.users_list:hover {
+.list-group-item:hover, .list-group-item:hover div {
   background-color: #fca311;
   text-decoration: underline;
   width: 100%;
