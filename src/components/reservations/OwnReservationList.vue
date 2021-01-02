@@ -41,7 +41,10 @@
             </span>
           </span>
           <router-link to="/ownpayments">
-            <b-button>Płatności</b-button>
+            <b-button variant="secondary">
+              <b-icon-link></b-icon-link>
+              Płatności
+            </b-button>
           </router-link>
           <b-button
             v-if="

@@ -38,7 +38,11 @@
           >
             <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </b-button>
-          <b-button v-if="!model.paid" @click="onEditModel(model.id)">
+          <b-button
+            variant="outline-secondary"
+            v-if="!model.paid"
+            @click="onEditModel(model.id)"
+          >
             Zapłać
           </b-button>
           <b-collapse :id="collapse_id(model.id)">

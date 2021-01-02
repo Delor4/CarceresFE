@@ -56,7 +56,7 @@
           >
             <b-icon-file-earmark-text></b-icon-file-earmark-text>
           </b-button>
-          <b-button @click="onEditModel(model.id)">Edycja</b-button>
+          <b-button variant="outline-secondary" @click="onEditModel(model.id)">Edycja</b-button>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
               <div>

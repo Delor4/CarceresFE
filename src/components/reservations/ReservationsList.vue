@@ -66,7 +66,10 @@
             v-if="!(model.payment && model.payment.paid)"
             to="/payments"
           >
-            <b-button>Płatności</b-button>
+            <b-button variant="secondary">
+              <b-icon-link></b-icon-link>
+              Płatności
+            </b-button>
           </router-link>
           <!--<b-button @click="onEditModel(model.id)">Edycja</b-button>-->
           <b-collapse :id="collapse_id(model.id)">

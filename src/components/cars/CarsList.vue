@@ -28,7 +28,7 @@
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             {{ model.plate }}
           </span>
-          <b-button @click="onEditModel(model.id)">Edycja</b-button>
+          <b-button variant="outline-secondary" @click="onEditModel(model.id)">Edycja</b-button>
           <b-collapse :id="collapse_id(model.id)">
             <b-card>
               <div>Marka: {{ model.brand || "-" }}</div>
