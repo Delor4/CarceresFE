@@ -24,7 +24,7 @@
       >
         Nieopłacono
       </b-button>
-      <b-button variant="success" @click="ok()">
+      <b-button v-if="!model.paid" variant="success" @click="ok()">
         <b-icon-cash></b-icon-cash>
         {{ model.id != -1 ? "Opłacono" : "Stwórz" }}
       </b-button>

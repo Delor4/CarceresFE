@@ -131,6 +131,7 @@ export default {
         id: -1,
         paid_date: "",
         paid_type: 0,
+        paid: false,
         price: 0,
         value: 0,
         sale_date: "",
@@ -143,6 +144,7 @@ export default {
       _model.id = model.id;
       _model.paid_date = model.paid_date;
       _model.paid_type = model.paid_type;
+      _model.paid = model.paid;
       _model.price = model.price;
       _model.value = model.value;
       _model.sale_date = model.sale_date;
