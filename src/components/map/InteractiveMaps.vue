@@ -1,10 +1,18 @@
 <template>
   <div>
-    <interactive-map
-      :map="map"
-      :info="info"
-      v-on:zone-change="onZoneChange()"
-    ></interactive-map>
+    <b-form-select v-model="curr_map" @change="updateMap()">
+      <b-form-select-option :value="null" disabled>
+        Wybierz strefę:
+      </b-form-select-option>
+      <b-form-select-option
+        v-for="map in maps"
+        v-bind:key="map.id"
+        :value="map.id"
+      >
+        {{ map.name }}
+      </b-form-select-option>
+    </b-form-select>
+    <interactive-map :map="map" :info="info"></interactive-map>
   </div>
 </template>
 
@@ -14,7 +22,7 @@ import IMap from "@/components/map/InteractiveMap.vue";
 export default {
   data: function () {
     return {
-      curr_map: 0,
+      curr_map: 1,
       maps: {},
       map: {},
       info: null,
@@ -22,19 +30,16 @@ export default {
   },
 
   methods: {
-    async onZoneChange() {
-      this.curr_map++;
-      if (this.curr_map >= this.maps.length) {
-        this.curr_map = 0;
-      }
-      this.map = this.maps[this.curr_map];
-      this.info = await this.api.getZoneInfo(this.map.id)
+    updateMap() {
+      var self = this;
+      this.map = this.maps.find(function (el) {
+        return el.id == self.curr_map;
+      });
     },
-
     async loadMaps() {
       this.maps = await this.api.getAll(this.api.getZones);
-      this.map = this.maps[this.curr_map];
-      this.info = await this.api.getZoneInfo(this.map.id)
+      this.updateMap();
+      this.info = await this.api.getZoneInfo(this.map.id);
     },
   },
 
