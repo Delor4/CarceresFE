@@ -98,7 +98,7 @@ export default {
 <style scoped>
 .pin img {
   height: auto;
-  width: 5vw;
-  max-width: 5vh;
+  width: calc(5vw*0.75);
+  max-width: calc(5vh*0.75);
 }
 </style>

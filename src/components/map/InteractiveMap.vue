@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="info != null">
-      Wszystkich miejsc: {{ info.all }}, zajętych: {{ info.occupied }}, wolnych:
-      {{ info.free }}.
+      Wszystkich miejsc:<strong> {{ info.all }}</strong>, zajętych:<strong> {{ info.occupied }}</strong>, wolnych:
+      <strong>{{ info.free }}</strong>.<br><br>     
     </div>
     <div class="map-zone">
       <img class="map-zone-img" :src="map.bkg_file" />
@@ -59,10 +59,11 @@ export default {
 <style>
 .map-zone {
   position: relative;
-  max-width: 100vh;
+  max-width: 75vh;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  
 }
 .map-zone-img {
   width: 100%;
