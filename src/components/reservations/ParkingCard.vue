@@ -17,7 +17,7 @@
     >
       <section slot="pdf-content">
         <section class="pdf-item page1">
-          <img class="logo" src="logo_bw.png" />
+          <img class="logo" src="logo_bw.svg" />
 
           <h2>Carceres</h2>
 
@@ -79,7 +79,7 @@ export default {
         filename: "ParkingCard.pdf",
         image: {
           type: "jpeg",
-          quality: 0.98,
+          quality: 2,
         },
       },
       qrcode_size: 100,
@@ -138,5 +138,8 @@ export default {
 }
 .card_content {
   max-width: 75%;
+}
+.logo {
+  height: 85px;
 }
 </style>
