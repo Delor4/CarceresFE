@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/main',
     name: 'Main',
-    component: () => import(/* webpackChunkName: "index" */ "@/components/index/Index.vue"),
+    component: () => import(/* webpackChunkName: "common" */ "@/components/index/Index.vue"),
   },
   {
     path: '/',
@@ -17,12 +17,12 @@ const routes = [
   {
     path: '/map',
     name: 'Map',
-    component: () => import(/* webpackChunkName: "map" */ "@/components/map/InteractiveMaps.vue"),
+    component: () => import(/* webpackChunkName: "common" */ "@/components/map/InteractiveMaps.vue"),
   },
   {
     path: '/users',
     name: 'Users',
-    component: () => import(/* webpackChunkName: "users" */ "@/components/users/UsersList.vue"),
+    component: () => import(/* webpackChunkName: "clients" */ "@/components/users/UsersList.vue"),
   },
   {
     path: '/clients',
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/cars',
     name: 'Cars',
-    component: () => import(/* webpackChunkName: "cars" */ "@/components/cars/CarsList.vue"),
+    component: () => import(/* webpackChunkName: "clients" */ "@/components/cars/CarsList.vue"),
   },
   {
     path: '/reservations',
@@ -44,27 +44,27 @@ const routes = [
     path: '/ownreservations',
     name: 'OwnReservations',
     component: () =>
-      import(/* webpackChunkName: "ownreservations" */ "@/components/reservations/OwnReservationList.vue"),
+      import(/* webpackChunkName: "reservations" */ "@/components/reservations/OwnReservationList.vue"),
   },
   {
     path: '/payments',
     name: 'Payments',
-    component: () => import(/* webpackChunkName: "payments" */ "@/components/payments/PaymentsList.vue"),
+    component: () => import(/* webpackChunkName: "reservations" */ "@/components/payments/PaymentsList.vue"),
   },
   {
     path: '/ownpayments',
     name: 'OwnPayments',
-    component: () => import(/* webpackChunkName: "ownpayments" */ "@/components/payments/OwnPaymentsList.vue"),
+    component: () => import(/* webpackChunkName: "reservations" */ "@/components/payments/OwnPaymentsList.vue"),
   },
   {
     path: '/settings',
     name: 'Settings',
-    component: () => import(/* webpackChunkName: "settings" */ "@/components/settings/Settings.vue"),
+    component: () => import(/* webpackChunkName: "clients" */ "@/components/settings/Settings.vue"),
   },
   {
     path: '/pricelist',
     name: 'PriceList',
-    component: () => import(/* webpackChunkName: "pricelist" */ "@/components/pricelist/PriceList.vue"),
+    component: () => import(/* webpackChunkName: "common" */ "@/components/pricelist/PriceList.vue"),
   },
 ]
 
