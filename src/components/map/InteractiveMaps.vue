@@ -26,6 +26,7 @@ export default {
       maps: {},
       map: {},
       info: null,
+      timer_update_map: null,
     };
   },
 
@@ -41,10 +42,29 @@ export default {
       this.updateMap();
       this.info = await this.api.getZoneInfo(this.map.id);
     },
+    setTimer: function () {
+      this.timer_update_map = setInterval(
+        async function () {
+          var info = await this.api.getZoneInfo(this.map.id);
+          // check for last changes on map
+          // TODO: check some timestamp (not value)
+          if (info.free != this.info.free) {
+            this.loadMaps();
+          } else {
+            this.info = info;
+          }
+        }.bind(this),
+        60000
+      );
+    },
   },
 
   mounted() {
     this.loadMaps();
+    this.setTimer();
+  },
+  beforeDestroy() {
+    clearInterval(this.timer_update_map);
   },
   components: {
     "interactive-map": IMap,
