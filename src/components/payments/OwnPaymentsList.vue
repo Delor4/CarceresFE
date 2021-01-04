@@ -21,6 +21,7 @@
                 subscriptions[model.subscription_id].place.nr
               }}
             </span>
+            Kwota:
             <span
               :class="{
                 'payment-paid': model.paid,

@@ -136,11 +136,14 @@ button.close, button.close:hover {
   display: none !important;
 }
 
+/*
 .payment-paid, .subs-paid {
   background-color: greenyellow;
 }
+*/
+
 .payment-unpaid, .subs-unpaid {
-  background-color: #f77;
+  color: red;
 }
 
 nav a.router-link-active {

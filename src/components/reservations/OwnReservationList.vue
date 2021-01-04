@@ -32,12 +32,14 @@
             </span>
             <span v-if="!(model.payment && model.payment.paid)">
               Do zapłaty:
+              <span class="subs-unpaid">
               {{
                 model.payment
                   ? formatCurrency(model.payment.value / 100)
                   : "(?)"
               }}
               (netto: {{ formatCurrency(model.payment.price / 100) }})
+              </span>
             </span>
           </span>
           <router-link to="/ownpayments">

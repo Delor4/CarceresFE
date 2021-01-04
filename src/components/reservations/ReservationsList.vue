@@ -41,6 +41,7 @@
             <b-icon-caret-right class="when-closed"></b-icon-caret-right>
             Miejsce: {{ model.place.zone.name }}/{{ model.place.nr }}, Samochód:
             {{ model.car.brand || "-" }} ({{ model.car.plate }}),
+            Kwota:
             <span
               :class="{
                 'subs-paid': model.payment && model.payment.paid,

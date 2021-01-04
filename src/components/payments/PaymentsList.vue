@@ -39,6 +39,7 @@
               {{ subscriptions[model.subscription_id].car.brand || "-" }}
               ({{ subscriptions[model.subscription_id].car.plate }}),
             </span>
+            Kwota:
             <span
               :class="{
                 'payment-paid': model.paid,
