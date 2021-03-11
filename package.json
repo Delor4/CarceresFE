@@ -1,6 +1,9 @@
 {
   "name": "carceres",
   "version": "1.0.0",
+  "homepage": "http://carceres.noweb.provided",
+  "description": "Parking Management System",
+  "author" : "SKS Team",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

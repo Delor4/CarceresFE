@@ -55,4 +55,22 @@ module.exports = {
         }
     },
     productionSourceMap: false,
+    pluginOptions: {
+        electronBuilder: {
+            builderOptions: {
+                // options placed here will be merged with default configuration and passed to electron-builder
+
+                linux: {
+                    maintainer: "SKS Team",
+                    category: "Office",
+                },
+                win: {
+                    target: [{
+                        target: "nsis",
+                        arch: ["x64", "ia32"]
+                    }]
+                }
+            }
+        }
+    }
 }
