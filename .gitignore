@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 .browserslistrc
 .eslintrc.js
+
+#Electron-builder output
+/dist_electron
