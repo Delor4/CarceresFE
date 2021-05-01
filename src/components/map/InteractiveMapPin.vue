@@ -3,9 +3,9 @@
     :is="getCurrentAccessRights() <= 3 ? 'router-link' : 'span'"
     :to="
       getCurrentAccessRights() <= 2
-        ? '/reservations'
+        ? ('/reservations/' + pin.id)
         : getCurrentAccessRights() == 3
-        ? '/ownreservations'
+        ? ('/ownreservations/' + pin.id)
         : undefined
     "
   >
