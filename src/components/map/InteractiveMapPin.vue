@@ -3,9 +3,9 @@
     :is="getCurrentAccessRights() <= 3 ? 'router-link' : 'span'"
     :to="
       getCurrentAccessRights() <= 2
-        ? '/reservations'
+        ? ('/reservations' + routed_place_id(pin))
         : getCurrentAccessRights() == 3
-        ? '/ownreservations'
+        ? ('/ownreservations' + routed_place_id(pin))
         : undefined
     "
   >
@@ -86,6 +86,10 @@ export default {
             (x) => x.place.occupied == true && x.place_id == this.pin.id
           )
         : null;
+    },
+    routed_place_id(pin) {
+      if(!pin.occupied) return '/' + pin.id;
+      return '';
     },
   },
   mounted() {

@@ -158,8 +158,9 @@ export default {
       _model.place_id = model.place_id;
       return _model;
     },
-    onCreateModel() {
+    onCreateModel(place = -1) {
       this.formModel = this._newModel();
+      this.formModel.place_id = place;
       this.dialogFormVisible = true;
       this.$bvModal.show(this.modal_dialog_id);
     },
@@ -229,10 +230,16 @@ export default {
     isDateInFuture(d) {
       return new Date(Date.parse(d)).getTime() - new Date().getTime() > 0;
     },
+    checkRouting() {
+      if(this.$route.params.place) {
+        this.onCreateModel(this.$route.params.place);
+      }
+    },
   },
   mounted() {
     this.loadModels();
     this.resetDialog();
+    this.checkRouting();
   },
   props: ["shared_data"],
 };

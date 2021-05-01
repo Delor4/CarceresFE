@@ -41,8 +41,20 @@ const routes = [
       import(/* webpackChunkName: "reservations" */ "@/components/reservations/ReservationsList.vue"),
   },
   {
+    path: '/reservations/:place',
+    name: 'Reservations dynamic',
+    component: () =>
+      import(/* webpackChunkName: "reservations" */ "@/components/reservations/ReservationsList.vue"),
+  },
+  {
     path: '/ownreservations',
     name: 'OwnReservations',
+    component: () =>
+      import(/* webpackChunkName: "reservations" */ "@/components/reservations/OwnReservationList.vue"),
+  },
+  {
+    path: '/ownreservations/:place',
+    name: 'OwnReservations dynamic',
     component: () =>
       import(/* webpackChunkName: "reservations" */ "@/components/reservations/OwnReservationList.vue"),
   },
