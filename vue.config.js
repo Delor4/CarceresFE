@@ -1,7 +1,8 @@
 module.exports = {
+    publicPath: process.env.NODE_ENV  ===  'production'  ?  './'  :  '/',
     runtimeCompiler: true,
     configureWebpack: (config) => {
-
+       
     }, //(Object | Function)
     chainWebpack: (config) => {
         // Because it is multi page, cancel chunks, and each page only corresponds to a separate JS / CSS
@@ -26,7 +27,7 @@ module.exports = {
         // See https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#Configuration agent
         proxy: {
             '/api': {
-                target: `http://localhost:43343`,
+                target: `http://127.0.0.1:43343`,
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: {
@@ -59,7 +60,6 @@ module.exports = {
         electronBuilder: {
             builderOptions: {
                 // options placed here will be merged with default configuration and passed to electron-builder
-
                 linux: {
                     maintainer: "SKS Team",
                     category: "Office",

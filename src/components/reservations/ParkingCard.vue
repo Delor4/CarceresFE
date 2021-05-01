@@ -17,7 +17,7 @@
     >
       <section slot="pdf-content">
         <section class="pdf-item page1">
-          <img class="logo" src="logo_bw.svg" />
+          <img class="logo" src="/static/logo_bw.svg" />
 
           <h2>Carceres</h2>
 

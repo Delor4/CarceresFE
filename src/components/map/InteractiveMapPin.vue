@@ -18,9 +18,9 @@
       }"
       :id="pin_id(pin.id)"
     >
-      <img v-if="pin.occupied && subscription != null" src="pin_blue.png" />
-      <img v-else-if="pin.occupied" src="pin_red.png" />
-      <img v-else src="pin_green.png" />
+      <img v-if="pin.occupied && subscription != null" src="/static/pin_blue.png" />
+      <img v-else-if="pin.occupied" src="/static/pin_red.png" />
+      <img v-else src="/static/pin_green.png" />
       <b-tooltip :target="pin_id(pin.id)" variant="primary">
         <div>
           <strong>Miejsce nr: {{ this.pin.nr }}</strong>

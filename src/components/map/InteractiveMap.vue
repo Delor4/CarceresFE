@@ -5,7 +5,7 @@
       <strong>{{ info.free }}</strong>.<br><br>     
     </div>
     <div class="map-zone">
-      <img class="map-zone-img" :src="map.bkg_file" />
+      <img class="map-zone-img" :src="map.bkg_file ? ('/static/' + map.bkg_file): ''" />
       <interactive-map-pin
         v-for="pin in map.places"
         v-bind:key="pin.id"
